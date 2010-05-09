@@ -1,0 +1,36 @@
+.CTabDiv {
+	CLEAR: none; MARGIN-TOP: 0px; BACKGROUND-COLOR: #ffffff
+}
+.CTabPrimaryRow {
+	FLOAT: right; MARGIN: 0px 10px 0px 0px; LIST-STYLE-TYPE: none
+}
+.CTabPrimaryRowSelected {
+	PADDING-RIGHT: 0px; BACKGROUND-POSITION: left top; PADDING-LEFT: 0px; FLOAT: left; BACKGROUND-IMAGE: url(Images/PrimayTabSelectedBackgroundImageLeft.jpg); PADDING-BOTTOM: 0px; MARGIN: 0px 1px 0px 0px; PADDING-TOP: 0px; BACKGROUND-REPEAT: no-repeat; LIST-STYLE-TYPE: none; TEXT-ALIGN: center; TEXT-DECORATION: none
+}
+.CTabPrimaryRowSelected A {
+	PADDING-RIGHT: 20px; PADDING-LEFT: 20px; FONT-WEIGHT: bolder; FONT-SIZE: 12px; BACKGROUND: url(Images/PrimayTabSelectedBackgroundImageRight.jpg) no-repeat right top; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; COLOR: #ffffff; LINE-HEIGHT: 30px; PADDING-TOP: 0px; FONT-STYLE: normal; TEXT-ALIGN: left; TEXT-DECORATION: none
+}
+.CTabPrimaryRowSelected A:hover {
+	COLOR: #ffcc00
+}
+.CTabPrimaryRowNotSelected {
+	PADDING-RIGHT: 0px; BACKGROUND-POSITION: left top; PADDING-LEFT: 0px; FLOAT: left; BACKGROUND-IMAGE: url(Images/PrimayTabNotSelectedBackgroundImageLeft.jpg); PADDING-BOTTOM: 0px; MARGIN: 0px 1px 0px 0px; PADDING-TOP: 0px; BACKGROUND-REPEAT: no-repeat; LIST-STYLE-TYPE: none; TEXT-ALIGN: center; TEXT-DECORATION: none
+}
+.CTabPrimaryRowNotSelected A {
+	PADDING-RIGHT: 20px; BACKGROUND-POSITION: right top; PADDING-LEFT: 20px; FONT-WEIGHT: bolder; FONT-SIZE: 12px; FLOAT: left; BACKGROUND-IMAGE: url(Images/PrimayTabNotSelectedBackgroundImageRight.jpg); PADDING-BOTTOM: 0px; MARGIN: 0px; COLOR: #ffffff; LINE-HEIGHT: 30px; PADDING-TOP: 0px; BACKGROUND-REPEAT: no-repeat; FONT-STYLE: normal; TEXT-ALIGN: left; TEXT-DECORATION: none
+}
+.CTabPrimaryRowNotSelected A:hover {
+	COLOR: #ffcc00
+}
+.CTabSecondaryRow {
+	CLEAR: both; PADDING-RIGHT: 10px; PADDING-LEFT: 0px; FONT-SIZE: 11px; MIN-HEIGHT: 19px; BACKGROUND: url(Images/SecondBarBackground.gif); FLOAT: right; PADDING-BOTTOM: 6px; MARGIN: 0px auto; OVERFLOW: auto; WIDTH: 100%; PADDING-TOP: 0px
+}
+.CTabSecondaryRow LI {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 15px; FLOAT: right; COLOR: #ffffff; PADDING-TOP: 5px; LIST-STYLE-TYPE: none
+}
+.CTabSecondaryRow A {
+	FONT-WEIGHT: normal; COLOR: #ffffff; TEXT-DECORATION: none
+}
+.CTabSecondaryRow A:hover {
+	COLOR: #ffcc00
+}

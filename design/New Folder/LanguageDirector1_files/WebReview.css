@@ -1,0 +1,81 @@
+.CWebReviewTable {
+	BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #eef4f4
+}
+.CWebReviewTable TH {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-WEIGHT: normal; BORDER-LEFT: #cccccc 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #cccccc 1px solid; BACKGROUND-COLOR: #007a85
+}
+.CWebReviewTable TD {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; VERTICAL-ALIGN: top; PADDING-TOP: 5px
+}
+.CTagEdit {
+	FONT-SIZE: small; OVERFLOW: visible; WIDTH: 98%; COLOR: #000000; FONT-FAMILY: Verdana, Sans-Serif; HEIGHT: 100%; BACKGROUND-COLOR: #ffffff
+}
+.CTagError {
+	FONT-SIZE: small; OVERFLOW: visible; WIDTH: 98%; COLOR: #ffffff; FONT-FAMILY: Verdana, Sans-Serif; HEIGHT: 100%; BACKGROUND-COLOR: #aa0000
+}
+.CHide {
+	VISIBILITY: hidden
+}
+.CShow {
+	VISIBILITY: visible
+}
+.COptionsBar {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid; BACKGROUND-COLOR: #eef4f4
+}
+.CStandard {
+	FONT-SIZE: x-small; COLOR: #ffffff; BACKGROUND-COLOR: #000000
+}
+.CMemoryMatched {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-SIZE: x-small; BORDER-LEFT: #cccccc 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #cccccc 1px solid; BACKGROUND-COLOR: #0170ff
+}
+.CNewContent {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-SIZE: x-small; BORDER-LEFT: #cccccc 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #cccccc 1px solid; BACKGROUND-COLOR: #ff0101
+}
+.CSmartMatch {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-SIZE: x-small; BORDER-LEFT: #cccccc 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #cccccc 1px solid; BACKGROUND-COLOR: #57b50b
+}
+.CSourceText {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; WIDTH: 30%; BORDER-BOTTOM: #cccccc 1px solid
+}
+.CTargetText {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; WIDTH: 30%; BORDER-BOTTOM: #cccccc 1px solid
+}
+.CComparisonText {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; WIDTH: 30%; BORDER-BOTTOM: #cccccc 1px solid
+}
+.CSmartReviewBorder {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid
+}
+.CBadSpelling {
+	FONT-WEIGHT: bold; COLOR: #aa0000; BORDER-BOTTOM: #ee0000 1px dotted
+}
+.CSpellCheck {
+	BORDER-RIGHT: #e5df77 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #e5df77 1px solid; DISPLAY: block; PADDING-LEFT: 5px; VISIBILITY: visible; MARGIN-BOTTOM: 10px; PADDING-BOTTOM: 5px; BORDER-LEFT: #e5df77 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #e5df77 1px solid; BACKGROUND-COLOR: #f5f4cf
+}
+.CSideOptions {
+	PADDING-LEFT: 0px; MARGIN-LEFT: 0px
+}
+.CSideOptions LI {
+	PADDING-LEFT: 5px; MARGIN-BOTTOM: 15px; LIST-STYLE-TYPE: none
+}
+.CUnmatchedError {
+	BORDER-RIGHT: #e5df77 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #e5df77 1px solid; MARGIN-TOP: 5px; DISPLAY: block; PADDING-LEFT: 5px; FONT-WEIGHT: bold; VISIBILITY: visible; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 5px; BORDER-LEFT: #e5df77 1px solid; COLOR: #770000; PADDING-TOP: 5px; BORDER-BOTTOM: #e5df77 1px solid; BACKGROUND-COLOR: #f5f4cf
+}
+.DiffResult {
+	DISPLAY: block; VISIBILITY: visible; MARGIN-BOTTOM: 10px; CURSOR: pointer; BACKGROUND-COLOR: #ffffff
+}
+.ReplacedSource {
+	COLOR: #aaaaaa; TEXT-DECORATION: line-through
+}
+.ReplacedWith {
+	COLOR: #005599
+}
+.AddedDestination {
+	COLOR: #990000
+}
+.DeletedSource {
+	COLOR: #ddaaaa; TEXT-DECORATION: line-through
+}
+.GrayedText {
+	COLOR: #aaaaaa
+}

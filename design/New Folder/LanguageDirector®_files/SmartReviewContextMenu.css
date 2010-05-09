@@ -1,0 +1,21 @@
+.CContextMenu {
+	BORDER-RIGHT: #808080 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #808080 1px solid; PADDING-LEFT: 5px; Z-INDEX: 100; VISIBILITY: hidden; PADDING-BOTTOM: 5px; MARGIN: 0px; BORDER-LEFT: #808080 1px solid; WIDTH: 150px; CURSOR: pointer; PADDING-TOP: 5px; BORDER-BOTTOM: #808080 1px solid; FONT-FAMILY: verdana, sans-serif; POSITION: absolute; BACKGROUND-COLOR: #d4d0c8
+}
+.CContextMenu A {
+	FONT-SIZE: small; COLOR: #000000; TEXT-DECORATION: none
+}
+.CContextMenu LI {
+	MARGIN-LEFT: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.CContextMenu LI:hover {
+	CURSOR: pointer; COLOR: #ffffff; BACKGROUND-COLOR: #0a246a; TEXT-DECORATION: none
+}
+.CContextMenu A:hover {
+	CURSOR: pointer; COLOR: #ffffff; BACKGROUND-COLOR: #0a246a; TEXT-DECORATION: none
+}
+UNKNOWN {
+	MARGIN-TOP: 0px; MARGIN-BOTTOM: 5px; CURSOR: pointer; COLOR: #ffffff; BACKGROUND-COLOR: #0a246a
+}
+.CContextMenuDisabled {
+	DISPLAY: none; VISIBILITY: hidden; HEIGHT: 0px
+}

@@ -1,0 +1,15 @@
+#SearchForm {
+	WIDTH: 500px
+}
+INPUT.CShowHide {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; PADDING-TOP: 2px
+}
+.CFileInformation {
+	MARGIN-TOP: 20px
+}
+.CPager {
+	OVERFLOW: auto; WIDTH: 400px
+}
+#pager_Controls {
+	
+}

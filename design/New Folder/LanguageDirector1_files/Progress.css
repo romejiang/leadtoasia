@@ -1,0 +1,18 @@
+.StageDisplay {
+	OVERFLOW: auto
+}
+.StageId {
+	FONT-SIZE: 2em; FLOAT: left; MARGIN-RIGHT: 10px; FONT-FAMILY: garamond, times new roman, serif
+}
+.StageIdActive {
+	COLOR: green
+}
+.Stage {
+	BORDER-RIGHT: #efefff 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #efefff 1px solid; PADDING-LEFT: 10px; FLOAT: left; BACKGROUND-IMAGE: url(../../Images/ProgressBackground.png); PADDING-BOTTOM: 5px; BORDER-LEFT: #efefff 1px solid; MARGIN-RIGHT: 5px; PADDING-TOP: 5px; BORDER-BOTTOM: #efefff 1px solid; BACKGROUND-REPEAT: repeat-x
+}
+.ActiveStage {
+	BACKGROUND-IMAGE: url(../../Images/ProgressBackgroundActive.png)
+}
+.StageDescription {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 5px; PADDING-TOP: 7px
+}

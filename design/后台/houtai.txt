@@ -1,0 +1,18 @@
+﻿1.邮箱信息
+info@leadtoasia.com
+POP服务器地址：pop.xinnetdns.com
+SMTP服务器地址：smtp.xinnetdns.com
+还需要，邮箱的密码，因为发信也需要权限验证
+leadtoasia770310
+
+2.PO 中添加 Match // 这个已经添加
+
+3.不同角色应该只能看到自己权限内的界面和内容 //本来就是这样的，可能你使用admin用户进入系统，admin用户可以看到所有信息。
+
+4.译者注册中添加CV附件的功能，skill中应能够按照 Service Type 报价//skill 功能已经添加，CV附件是什么意思？？
+
+5. 目前 rate 字段导致无法创建 Project，//这个问题是你升级了我正在开发的程序，所以...，呵呵
+
+6. 最好生成给客户的invoice，参见模板 //这个功能已经有了，见Project And PO界面的PDF连接
+
+7. 目前创建项目出错，参见抓图 // 同 5

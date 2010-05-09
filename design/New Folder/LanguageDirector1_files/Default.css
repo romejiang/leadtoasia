@@ -1,0 +1,471 @@
+BODY {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 14px; PADDING-BOTTOM: 0px; MARGIN: 0px; COLOR: #000000; PADDING-TOP: 0px; BACKGROUND-REPEAT: repeat-x; FONT-FAMILY: Tahoma, arial, Sans-Serif; BACKGROUND-COLOR: #ffffff
+}
+H1 {
+	FONT-WEIGHT: normal; FONT-SIZE: 36px; MARGIN-BOTTOM: 10px; COLOR: #1f626a; FONT-FAMILY: Tahoma, Arial, sans-serif; LETTER-SPACING: -0.05em
+}
+H2 {
+	FONT-WEIGHT: normal; FONT-SIZE: 24px; MARGIN-BOTTOM: 10px; COLOR: #1f626a; FONT-FAMILY: Tahoma, Arial, sans-serif; LETTER-SPACING: -0.05em
+}
+A {
+	COLOR: #0000ff; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #550000; TEXT-DECORATION: underline
+}
+FIELDSET {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: bolder; PADDING-BOTTOM: 0px; WIDTH: 96%; BORDER-TOP-STYLE: none; PADDING-TOP: 0px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.CTable {
+	CLEAR: both; DISPLAY: block; FLOAT: none; MARGIN-BOTTOM: 20px; WIDTH: auto
+}
+.CTR {
+	CLEAR: both; MARGIN-TOP: 5px; DISPLAY: block
+}
+.CFloatLeft {
+	FLOAT: left
+}
+.CTDLeft {
+	DISPLAY: inline; TEXT-ALIGN: left
+}
+.CTDRight {
+	DISPLAY: inline; TEXT-ALIGN: right
+}
+.CError {
+	COLOR: #990000
+}
+.CDownloaded {
+	BACKGROUND-COLOR: #eeeeee
+}
+.CCompleted {
+	BACKGROUND-COLOR: #eeeeee; TEXT-DECORATION: line-through
+}
+#tblUpload {
+	BORDER-RIGHT: #333333 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #333333 1px solid; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; BORDER-LEFT: #333333 1px solid; WIDTH: 400px; PADDING-TOP: 10px; BORDER-BOTTOM: #333333 1px solid; BACKGROUND-COLOR: #e1ecfd
+}
+#LoginTable {
+	BORDER-RIGHT: #333333 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #333333 1px solid; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; BORDER-LEFT: #333333 1px solid; WIDTH: 400px; PADDING-TOP: 10px; BORDER-BOTTOM: #333333 1px solid; BACKGROUND-COLOR: #eef4f4
+}
+.CTR {
+	MARGIN: 0px
+}
+#ForgottenPasswordTable {
+	BORDER-RIGHT: #333333 1px solid; PADDING-RIGHT: 10px; BORDER-TOP: #333333 1px solid; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; BORDER-LEFT: #333333 1px solid; WIDTH: 400px; PADDING-TOP: 10px; BORDER-BOTTOM: #333333 1px solid; BACKGROUND-COLOR: #eeeeee
+}
+#PageContainer {
+	BORDER-TOP-WIDTH: 0px; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+#SiteContent {
+	CLEAR: both; PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 10px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.TopLogo {
+	PADDING-LEFT: 5px; FLOAT: left; PADDING-TOP: 5px
+}
+.BrandingLogo {
+	FLOAT: left; LINE-HEIGHT: 90px; PADDING-TOP: 5px
+}
+#PageHeader_TopLogoGraphic {
+	PADDING-LEFT: 8px; BORDER-TOP-STYLE: none; PADDING-TOP: 5px; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BACKGROUND-COLOR: #6895ce! important; BORDER-BOTTOM-STYLE: none
+}
+#TopLogoGraphic {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BACKGROUND-COLOR: #6895ce! important; BORDER-BOTTOM-STYLE: none
+}
+#Menu {
+	FLOAT: left; VERTICAL-ALIGN: top; TEXT-ALIGN: right
+}
+#PageHeader {
+	MARGIN: 0px; WIDTH: 100%; HEIGHT: 67px; BACKGROUND-COLOR: #6895ce! important
+}
+#PageHeader_PageHeaderMenu {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 0px; PADDING-BOTTOM: 5px; MARGIN: 0px; WIDTH: 100%; PADDING-TOP: 5px; BACKGROUND-COLOR: #eeeeee! important
+}
+#PageHeader_PageHeaderMenu LI {
+	PADDING-RIGHT: 15px; DISPLAY: inline; PADDING-LEFT: 5px; WIDTH: 79px; BACKGROUND-REPEAT: no-repeat; WHITE-SPACE: nowrap; LIST-STYLE-TYPE: none
+}
+#PageHeader_PageHeaderMenu A {
+	COLOR: #000088! important; TEXT-DECORATION: underline
+}
+#PageHeader_PageHeaderMenu A:hover {
+	COLOR: #ff0000; TEXT-DECORATION: underline
+}
+.CErrorPage {
+	BORDER-RIGHT: #990000 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #990000 1px solid; DISPLAY: block; PADDING-LEFT: 5px; MARGIN-BOTTOM: 10px; PADDING-BOTTOM: 5px; BORDER-LEFT: #990000 1px solid; COLOR: #550000; PADDING-TOP: 5px; BORDER-BOTTOM: #990000 1px solid; BACKGROUND-COLOR: #fdf7dd; TEXT-ALIGN: left
+}
+.CTH {
+	BORDER-RIGHT: 1px solid; BORDER-TOP: 1px solid; FONT-WEIGHT: bold; BORDER-LEFT: 1px solid; COLOR: #ffffff; BORDER-BOTTOM: 1px solid; BACKGROUND-COLOR: #007a85; TEXT-ALIGN: center; WORD-WRAP: break-word
+}
+.CTD {
+	BORDER-RIGHT: #d3d3d3 1px solid; BORDER-TOP: #d3d3d3 1px solid; BORDER-LEFT: #d3d3d3 1px solid; BORDER-BOTTOM: #d3d3d3 1px solid; BACKGROUND-COLOR: #eef4f4
+}
+.CTDTotal {
+	BORDER-RIGHT: #d3d3d3 1px solid; BORDER-TOP: #d3d3d3 1px solid; FONT-WEIGHT: bold; BORDER-LEFT: #d3d3d3 1px solid; BORDER-BOTTOM: #d3d3d3 1px solid
+}
+.CLoginLabel {
+	FLOAT: left; WIDTH: 150px; WHITE-SPACE: nowrap! important
+}
+.CHidden {
+	DISPLAY: none
+}
+.CVisible {
+	DISPLAY: block; VISIBILITY: visible
+}
+.CReferenceFiles UL {
+	PADDING-LEFT: 30px
+}
+.CReferenceFiles LI {
+	MARGIN-TOP: 0px; LINE-HEIGHT: normal; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.CReferenceFilesHeader {
+	FONT-SIZE: x-small; MARGIN-LEFT: 15px; PADDING-TOP: 5px
+}
+.CReferenceFiles TD {
+	BACKGROUND-COLOR: #ffffee
+}
+.CReferenceFiles TR {
+	BACKGROUND-COLOR: #ffffee
+}
+.CAcceptFiles {
+	BORDER-RIGHT: #d3d3d3 1px solid; BORDER-TOP: #d3d3d3 1px solid; BORDER-LEFT: #d3d3d3 1px solid; BORDER-BOTTOM: #d3d3d3 1px solid; BACKGROUND-COLOR: #ffffee
+}
+.CAcceptFilesHeading {
+	PADDING-RIGHT: 10px; FONT-WEIGHT: bold; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: right
+}
+#txtPassword {
+	WIDTH: 150px
+}
+#txtUserName {
+	WIDTH: 150px
+}
+IMG {
+	BORDER-TOP-STYLE: none; BORDER-RIGHT-STYLE: none; BORDER-LEFT-STYLE: none; BORDER-BOTTOM-STYLE: none
+}
+.COptionsTable {
+	WIDTH: 98%; COLOR: #ffffff
+}
+.COptionsTable TD {
+	BORDER-RIGHT: #d6ccbd 1px solid; PADDING-RIGHT: 1px; BORDER-TOP: #d6ccbd 1px solid; PADDING-LEFT: 1px; FONT-WEIGHT: bold; PADDING-BOTTOM: 1px; MARGIN: 0px; BORDER-LEFT: #d6ccbd 1px solid; PADDING-TOP: 1px; BORDER-BOTTOM: #d6ccbd 1px solid; BACKGROUND-COLOR: #007a85
+}
+.CComments {
+	BACKGROUND-COLOR: #ffffee
+}
+.CFileName {
+	FONT-WEIGHT: bold; COLOR: #3abf23; BORDER-BOTTOM: #3abf23 1px dashed
+}
+.CWarning {
+	BORDER-RIGHT: #aa0000 1px solid; PADDING-RIGHT: 10px; BACKGROUND-POSITION: 10px center; BORDER-TOP: #aa0000 1px solid; PADDING-LEFT: 40px; BACKGROUND-IMAGE: url(../../Images/Warning.gif); PADDING-BOTTOM: 10px; BORDER-LEFT: #aa0000 1px solid; WIDTH: 500px; PADDING-TOP: 10px; BORDER-BOTTOM: #aa0000 1px solid; BACKGROUND-REPEAT: no-repeat; BACKGROUND-COLOR: #ffeeee
+}
+.CJob {
+	BACKGROUND-COLOR: #eeeeff
+}
+.CTaskFile {
+	BORDER-RIGHT: #d3d3d3 1px solid; BORDER-TOP: #d3d3d3 1px solid; BORDER-LEFT: #d3d3d3 1px solid; BORDER-BOTTOM: #d3d3d3 1px solid; BACKGROUND-COLOR: #ffffee
+}
+.CPotentialJobsTable {
+	BORDER-RIGHT: #c0c0c0 1px solid; BORDER-TOP: #c0c0c0 1px solid; BORDER-LEFT: #c0c0c0 1px solid; WIDTH: 100%; BORDER-BOTTOM: #c0c0c0 1px solid; BORDER-COLLAPSE: collapse; BACKGROUND-COLOR: #eef4f4
+}
+.CPotentialJobsTable TD {
+	PADDING-RIGHT: 3px; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; PADDING-TOP: 3px
+}
+.CDataGrid {
+	BORDER-TOP-WIDTH: 1px; PADDING-RIGHT: 4px; PADDING-LEFT: 4px; BORDER-LEFT-WIDTH: 1px; BORDER-LEFT-COLOR: #545454; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #545454; PADDING-BOTTOM: 4px; WIDTH: 100%; BORDER-TOP-COLOR: #545454; PADDING-TOP: 4px; BACKGROUND-COLOR: #ffffff; TEXT-ALIGN: center; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #545454
+}
+.CDataGrid TH {
+	BORDER-TOP-WIDTH: 1px; PADDING-RIGHT: 4px; PADDING-LEFT: 4px; FONT-WEIGHT: bold; BORDER-LEFT-WIDTH: 1px; BORDER-LEFT-COLOR: #545454; BORDER-BOTTOM-WIDTH: 1px; BORDER-BOTTOM-COLOR: #545454; PADDING-BOTTOM: 4px; COLOR: #ffffff; BORDER-TOP-COLOR: #545454; PADDING-TOP: 4px; BACKGROUND-COLOR: #007a85; TEXT-ALIGN: center; BORDER-RIGHT-WIDTH: 1px; BORDER-RIGHT-COLOR: #545454
+}
+.CDataGrid TD {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+.CDataGridHeaderStyle {
+	FONT-WEIGHT: bold; BACKGROUND-COLOR: #eeeeee
+}
+.CDataGridAlternateItemStyle {
+	BACKGROUND-COLOR: #eeeeff
+}
+IMG {
+	BORDER-TOP-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-RIGHT-WIDTH: 0px
+}
+.CClear {
+	CLEAR: both
+}
+.CFloatLeft {
+	FLOAT: left
+}
+UNKNOWN {
+	DISPLAY: inline
+}
+.CFloatRight {
+	FLOAT: left
+}
+.CInputFormMinimised {
+	PADDING-RIGHT: 10px; MARGIN-TOP: 10px; PADDING-LEFT: 10px; BACKGROUND-IMAGE: url(../../Images/SearchBarHeader.gif); PADDING-BOTTOM: 10px; WIDTH: 480px; PADDING-TOP: 10px; BORDER-BOTTOM: #c6c6c6 1px solid
+}
+.CInputFormStandard {
+	BORDER-RIGHT: #c6c6c6 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #c6c6c6 0px solid; PADDING-LEFT: 5px; FLOAT: left; PADDING-BOTTOM: 5px; BORDER-LEFT: #c6c6c6 1px solid; WIDTH: 488px; PADDING-TOP: 5px; BORDER-BOTTOM: #c6c6c6 1px solid
+}
+.CInputForm {
+	CLEAR: both; BORDER-RIGHT: #c6c6c6 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #c6c6c6 0px solid; PADDING-LEFT: 5px; FLOAT: left; PADDING-BOTTOM: 5px; BORDER-LEFT: #c6c6c6 1px solid; WIDTH: 488px; PADDING-TOP: 5px; BORDER-BOTTOM: #c6c6c6 1px solid
+}
+.CDownloadButton {
+	PADDING-RIGHT: 10px; MARGIN-TOP: 10px; PADDING-LEFT: 10px; FLOAT: right; BACKGROUND-IMAGE: url(../../Images/DownloadButton.gif); MARGIN-BOTTOM: 10px; PADDING-BOTTOM: 10px; WIDTH: 380px; PADDING-TOP: 10px; BORDER-BOTTOM: #c6c6c6 1px solid
+}
+.CDownloadButton2 {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; FLOAT: right; BACKGROUND-IMAGE: url(../../Images/DownloadButton.gif); PADDING-BOTTOM: 10px; WIDTH: 300px; MARGIN-RIGHT: 20px; PADDING-TOP: 10px; BORDER-BOTTOM: #c6c6c6 1px solid
+}
+DIV.CHeader {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; BACKGROUND-COLOR: #dddddd
+}
+DIV.CHeaderAlt {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; BACKGROUND-COLOR: #eeeeee
+}
+DIV.CHeaderQuote {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; BACKGROUND-COLOR: #ffffde
+}
+DIV.CHeaderQuoteAlt {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; BACKGROUND-COLOR: #ffffef
+}
+SPAN.CHeader {
+	MARGIN-RIGHT: 20px
+}
+DIV.CTasks {
+	DISPLAY: block; PADDING-LEFT: 10px; PADDING-BOTTOM: 5px; MARGIN-LEFT: 15px
+}
+SPAN.CTasks {
+	MARGIN-RIGHT: 20px
+}
+.CTask {
+	CLEAR: both
+}
+.CFiles {
+	DISPLAY: block; PADDING-LEFT: 10px; PADDING-BOTTOM: 5px; MARGIN-LEFT: 15px
+}
+.CFile {
+	CLEAR: both
+}
+.CClearLeft {
+	CLEAR: left
+}
+.CFileInput {
+	WIDTH: 300px
+}
+.CPager {
+	CLEAR: both; FLOAT: right
+}
+.CLabel {
+	FONT-WEIGHT: normal
+}
+.CLabelled {
+	FONT-WEIGHT: bold; MARGIN-RIGHT: 20px
+}
+.CLabelledLessImportant {
+	FONT-WEIGHT: normal; MARGIN-RIGHT: 20px
+}
+.CHidden {
+	DISPLAY: none
+}
+.CVisible {
+	DISPLAY: block
+}
+.CFileDownload {
+	FLOAT: left
+}
+.CFileInformation {
+	BORDER-RIGHT: #8f8f8f 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #8f8f8f 1px solid; MARGIN-TOP: 5px; DISPLAY: none; PADDING-LEFT: 5px; Z-INDEX: 10; LEFT: 100px; PADDING-BOTTOM: 5px; BORDER-LEFT: #8f8f8f 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #8f8f8f 1px solid; FONT-FAMILY: Verdana; POSITION: absolute; BACKGROUND-COLOR: #fdffef
+}
+.CQuote {
+	BACKGROUND-POSITION: 0% 50%; MARGIN-TOP: 3px; PADDING-LEFT: 18px; BACKGROUND-IMAGE: url(../../Images/star.gif); BACKGROUND-REPEAT: no-repeat
+}
+.CSubmittedBy {
+	PADDING-LEFT: 25px
+}
+#errorMessage {
+	COLOR: red
+}
+#itemsPerPage {
+	WIDTH: auto; MARGIN-RIGHT: 10px
+}
+#itemsPerPageTwo {
+	WIDTH: auto; MARGIN-RIGHT: 10px
+}
+#btnSearch {
+	FLOAT: right
+}
+#javaDownloadAreaTwo {
+	BACKGROUND-POSITION: 0% 100%; BORDER-TOP: #c6c6c6 1px solid; BACKGROUND-IMAGE: url(../../Images/DownloadButtonTwo.gif); BORDER-BOTTOM-STYLE: none
+}
+.reqfield {
+	COLOR: #ff0000
+}
+.CHighlighted {
+	PADDING-RIGHT: 3px; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; COLOR: #ffffff; PADDING-TOP: 3px; BORDER-BOTTOM: #ffffff 1px dashed; BACKGROUND-COLOR: #ff0000
+}
+.errormessage {
+	COLOR: red
+}
+.CShowHide {
+	CURSOR: hand
+}
+.CFile {
+	FONT-SIZE: medium; FONT-FAMILY: monospace
+}
+.CInputRow {
+	CLEAR: both; MARGIN: 3px 0px 6px 10px; PADDING-TOP: 4px
+}
+.CInputLabel {
+	PADDING-RIGHT: 10px; FLOAT: left; WIDTH: 155px
+}
+.CTooltip {
+	BORDER-RIGHT: #dfdfb5 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #dfdfb5 1px solid; PADDING-LEFT: 5px; FONT-SIZE: x-small; PADDING-BOTTOM: 5px; BORDER-LEFT: #dfdfb5 1px solid; WIDTH: 150px; PADDING-TOP: 5px; BORDER-BOTTOM: #dfdfb5 1px solid; BACKGROUND-COLOR: #ffffdf
+}
+#litDateTime {
+	MARGIN-RIGHT: 5px
+}
+.CDataTable {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; BORDER-LEFT-COLOR: #ffffff; BORDER-BOTTOM-COLOR: #ffffff; PADDING-BOTTOM: 4px; BORDER-TOP-COLOR: #ffffff; PADDING-TOP: 4px; BACKGROUND-COLOR: #eef4f4; TEXT-ALIGN: center; BORDER-RIGHT-COLOR: #ffffff
+}
+.CDataTableTh {
+	FONT-WEIGHT: bold; BORDER-LEFT-COLOR: #545454; BORDER-BOTTOM-COLOR: #545454; COLOR: #ffffff; BORDER-TOP-COLOR: #545454; BACKGROUND-COLOR: #007a85; TEXT-ALIGN: center; BORDER-RIGHT-COLOR: #545454
+}
+.CDataTable TD {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+.CHelp {
+	BORDER-RIGHT: #cecf74 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #cecf74 1px solid; MARGIN-TOP: 10px; DISPLAY: none; PADDING-LEFT: 5px; MARGIN-BOTTOM: 10px; PADDING-BOTTOM: 5px; BORDER-LEFT: #cecf74 1px solid; WIDTH: 400px; PADDING-TOP: 5px; BORDER-BOTTOM: #cecf74 1px solid; BACKGROUND-COLOR: #ffffdf
+}
+.CHelp P {
+	MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px
+}
+.viewheader {
+	FONT-SIZE: small; MARGIN: 0px; FONT-FAMILY: Verdana, Arial, Sans-Serif
+}
+.CTR LABEL {
+	DISPLAY: block; FLOAT: left; WIDTH: 150px
+}
+LABEL.LabelWide {
+	DISPLAY: block; FLOAT: left; WIDTH: 3000px
+}
+.CRecentlyUpdated {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; FONT-WEIGHT: bold; PADDING-BOTTOM: 10px; COLOR: #550000; PADDING-TOP: 10px
+}
+.CPanel {
+	BORDER-RIGHT: #bbbbbb 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #bbbbbb 1px solid; MARGIN-TOP: 10px; PADDING-LEFT: 5px; MARGIN-BOTTOM: 10px; PADDING-BOTTOM: 5px; BORDER-LEFT: #bbbbbb 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #bbbbbb 1px solid; BACKGROUND-COLOR: #f2f6fb
+}
+.CPanel UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 5px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.CPanel LI {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px
+}
+.CPanel LI:hover {
+	BACKGROUND-COLOR: #e0e7ef
+}
+.CPanel A {
+	COLOR: #333355
+}
+.CCompletedAction {
+	BORDER-RIGHT: #dfdfb5 1px solid; PADDING-RIGHT: 10px; BACKGROUND-POSITION: 10px center; BORDER-TOP: #dfdfb5 1px solid; PADDING-LEFT: 60px; FONT-WEIGHT: bold; MIN-HEIGHT: 30px; BACKGROUND-IMAGE: url(../../Images/Globe.png); MARGIN-BOTTOM: 20px; PADDING-BOTTOM: 10px; VERTICAL-ALIGN: middle; BORDER-LEFT: #dfdfb5 1px solid; WIDTH: 500px; PADDING-TOP: 10px; BORDER-BOTTOM: #dfdfb5 1px solid; BACKGROUND-REPEAT: no-repeat; BACKGROUND-COLOR: #ffffdf
+}
+.CIntroduction {
+	CLEAR: both; BORDER-RIGHT: #ffec9b 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #ffec9b 1px solid; PADDING-LEFT: 64px; BACKGROUND-IMAGE: url(../../Images/OrangeGradient.png); MARGIN-BOTTOM: 15px; PADDING-BOTTOM: 5px; VERTICAL-ALIGN: top; OVERFLOW: auto; BORDER-LEFT: #ffec9b 1px solid; WIDTH: 500px; PADDING-TOP: 5px; BORDER-BOTTOM: #ffec9b 1px solid
+}
+.CIntroductionImage {
+	FLOAT: left; MARGIN-LEFT: -54px; MARGIN-RIGHT: 15px
+}
+.CIntroductionText {
+	MARGIN-TOP: 0px; PADDING-TOP: 4px
+}
+.CProjectQuote {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; BACKGROUND-COLOR: #ffffde
+}
+.CProjectQuoteMouseOver {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; BACKGROUND-COLOR: #eff6ff
+}
+.CProjectJob {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; BACKGROUND-COLOR: #eef4f4
+}
+.CProjectJobMouseOver {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; MARGIN-BOTTOM: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; BACKGROUND-COLOR: #eff6ff
+}
+.CViewProjectsColumn1 {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; FLOAT: left; PADDING-BOTTOM: 6px; MARGIN: 0px 20px 6px; PADDING-TOP: 6px
+}
+.CViewProjectsColumn2 {
+	PADDING-RIGHT: 6px; PADDING-LEFT: 6px; FLOAT: right; PADDING-BOTTOM: 6px; MARGIN: 10px 20px 6px; WIDTH: 30%; PADDING-TOP: 6px
+}
+.CViewProjectsPagingItemsDiv {
+	CLEAR: both; FLOAT: right; WIDTH: 100%; TEXT-ALIGN: right
+}
+.CAdvancedSearchPanel {
+	CLEAR: both; BORDER-RIGHT: #cccccc 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #cccccc 1px solid; PADDING-LEFT: 5px; MARGIN-BOTTOM: 5px; PADDING-BOTTOM: 5px; OVERFLOW: auto; BORDER-LEFT: #cccccc 1px solid; PADDING-TOP: 5px; BORDER-BOTTOM: #cccccc 1px solid
+}
+.CViewProjectsAdvSearchCol1 {
+	WIDTH: 40%
+}
+.CViewProjectsAdvSearchCol2 {
+	FLOAT: right
+}
+.CDropdownlist {
+	MARGIN-BOTTOM: 3px
+}
+.CInputRowNoClear {
+	MARGIN-TOP: 3px; MARGIN-BOTTOM: 6px; PADDING-TOP: 4px
+}
+.CPageHeader {
+	BACKGROUND-COLOR: #ffffff
+}
+.CMainContent {
+	PADDING-RIGHT: 5px; MARGIN-TOP: 5px; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px
+}
+.CHomePanel {
+	BORDER-RIGHT: #609ca3 1px solid; BACKGROUND-POSITION: left top; BORDER-TOP: #609ca3 1px solid; BACKGROUND-IMAGE: url(Images/HomePanelBackground.jpg); MARGIN-BOTTOM: 8px; PADDING-BOTTOM: 7px; OVERFLOW: auto; BORDER-LEFT: #609ca3 1px solid; WIDTH: 690px; PADDING-TOP: 0px; BORDER-BOTTOM: #609ca3 1px solid; BACKGROUND-REPEAT: repeat-x; BACKGROUND-COLOR: #277983
+}
+.CHomePanelImage {
+	FLOAT: left; MARGIN: 8px; BACKGROUND-COLOR: transparent
+}
+.CHomePanelDescription {
+	CLEAR: right; FONT-SIZE: 13px; FLOAT: left; WIDTH: 600px; COLOR: #ffffff
+}
+.CHomePanelCloseButton {
+	FLOAT: right; MARGIN: 5px 5px 0px 0px
+}
+.CHomePanelHeading {
+	MARGIN-BOTTOM: 5px; VERTICAL-ALIGN: middle
+}
+.CHomePanelHeadingNoDescription {
+	MARGIN-TOP: 20px; MARGIN-BOTTOM: 5px; VERTICAL-ALIGN: middle
+}
+.CHomePanelDescription A {
+	FONT-WEIGHT: normal; FONT-SIZE: 20px; COLOR: #ffffff; TEXT-DECORATION: none
+}
+.CHomePanelDescription A:hover {
+	COLOR: #ffcc00; TEXT-DECORATION: underline
+}
+#LanguageChoice {
+	
+}
+#LanguageChoiceDiv {
+	PADDING-RIGHT: 20px; FLOAT: right; PADDING-TOP: 0px; BACKGROUND-COLOR: #ffffff
+}
+#LanguageChoice A {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+#LanguageChoice LI {
+	PADDING-RIGHT: 5px; FLOAT: left; MARGIN-RIGHT: 10px; LIST-STYLE-TYPE: none
+}
+.CTabShadow {
+	CLEAR: both; HEIGHT: 2px; BACKGROUND-COLOR: #ffffff
+}
+.LanguageSelection {
+	MARGIN-TOP: 3px; FLOAT: right; MARGIN-RIGHT: 3px
+}
+.LanguageSelectionIcon {
+	BACKGROUND: url(Images/LanguageSelectionIcon.png) no-repeat 100% 0px; FLOAT: left; WIDTH: 35px; HEIGHT: 32px
+}
+.LanguageSelectionText {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 2px; FONT-SIZE: 13px; MIN-HEIGHT: 32px; BACKGROUND: url(Images/LanguageSelectionBackground.jpg) no-repeat 100% 0px; FLOAT: left; PADDING-BOTTOM: 4px; PADDING-TOP: 4px
+}
+.LanguageSelection SELECT {
+	MARGIN-LEFT: 3px; BACKGROUND-COLOR: #eef4f4
+}
+.InterpretingProjectDetailsHeaderColumn {
+	FONT-WEIGHT: bold; TEXT-ALIGN: left
+}

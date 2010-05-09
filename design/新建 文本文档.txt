@@ -1,0 +1,213 @@
+User
+
+内部
+	注册员工登录信息，
+	员工工作量单价，
+	员工月任务量
+外部
+	联系方式，
+	服务类型，
+	译者名称，
+	服务价格
+
+project
+	客户名称，
+	客户项目号，
+	项目日期（自动生成），
+	项目内容，
+	项目交付日期，
+	客户付款期选项。
+	客户付款方式选项。
+	项目状态 = open close paid processing
+
+projectOrder
+
+内部 PO：
+	读取项目号，
+	填写语言需求，
+	字数/页数/小时数，
+	服务需求（翻译／编辑／ＤＴＰ），
+	填写项目执行人（或者旁边有个按钮，点击选择译者），
+	交货日期，
+
+外部PO：
+	付款日期（菜单选项）。
+	单价，总价，
+	付款方式（菜单选项），
+???生成的PO直接存成word, excel或PDF格式到指定的路径。
+
+客户的账单
+	生成账单。
+	填写项目内容，
+	单价，
+	总价，
+	读取支付方式，
+	填写相关客户信息。
+	点击生成。生成的账单（invoice）直接存成word, excel或PDF格式到指定的路径。
+客户
+	客户名称，
+	国家，
+	相关联系方式，
+	以及新增服务价格
+	（比如说我们给google做的项目En-HK是0.08 USD每个字，
+	但是客户现在需要EN-SC了，就需要添加新的价格和服务类型）
+
+
+
+还有客户账单和统计功能没有设计，订单
+
+项目需要有个title字段，PO的state和项目的state应该有关系，po全部完成，出发project state的 改变
+
+联系人
+mail
+tel
+fax
+
+价格体系
+可选择欧元，美元，rmb，
+type，页，小时，字，min，
+
+
+客户需要
+cat CAT,100%
+No match --> 100% paid 
+50%-74%--> 100% paid 
+75% - 95%-->50% paid
+95% - 99% & 100% match & repetitions-->25% paid 
+
+po
+根据语言选择译者，语言和译者是多对多关系
+需求字段内容更多，允许上传文件，doc，txt，pdf，rar
+pay = payment 付款方式， 银行，paypal，moneybooker，西联
+unit cost
+total cost
+wordcount
+worktype ，t，e，te，tep，dtp
+po允许选择多个翻译来源
+
+译者提交后需要审核后才可以发送付款申请
+
+project
+pay = rate
+欧元，美元，rmb，
+项目经理只能看到自己的项目
+同样带有价格体系，但是可修改的
+
+译者，
+价格体系可选择欧元，美元，rmb，
+type，页，小时，字，min，
+
+
+注册，用户管理
+
+客户管理
+pricing
+项目
+PO
+
+mypo
+状态
+
+审核
+统计
+
+Pricing应该属于整个系统环境，而不是某个客户
+Project下有多个Localize任务，每个Localize可以分配给一个PO
+
+PO直到需要做那个Localize，是谁做，需要多少钱。
+
+上传，po的pdf，po的显示，和po的工作流
+界面优化，权限的设置
+mail 附件
+
+订单 邮件
+
+PO的状态，用不同的颜色显示
+
+给po加上match，但没有测试通过，可能是数据库没有update。还有po编辑页面没有match功能。
+
+
+project的状态改变
+
+pdf内容的确立
+
+订单邮件
+========= 未完成的 =====================
+提醒收款
+
+提醒完结项目
+
+多邮件发信
+
+邮件标题前加项目号
+
+译者po显示项目号
+
+
+
+===========2010/3/23=============================================
+
+po发新任务邮件时，报错
+建立用户属性不填时，提交报错
+所有邮件标题都是以项目号为开始。
+po的pdf页面显示报错
+flow完成后，会跳转到上次添加的Project页面。
+
+==============================================================
+项目任务时dtp需要页数，或者数量。（收取客户时的数量）
+每个月项目列表，包括 月总收入，月总费用 ，月利润
+
+中间汇率美金
+每个月1号，计算上月数字
+
+每个客户项目总价格超过多少会打折，同时对译者也会打折。
+
+这是针对项目还是针对客户和译者去开发。考虑一下！！？？？
+
+
+operating system:CentOS 5.4
+linux core: version 2.6.18-164.el5 
+cpu:4  Intel(R) Xeon(TM) CPU 3.40GHz
+memory: 4GB
+ 
+ip: 123.138.18.162
+ftp server : vsftp
+domain: leadtoasia.com
+这是针对项目还是针对客户和译者去开发。考虑一下！！？？？
+
+
+
+ProjectOrderNew  发给译者的，新po提醒
+ProjectOrderProcessing   发给leadtoasia的，确认任务
+ProjectOrderSubmit  发给leadtoasia的，完成任务
+ProjectOrderPass  发给译者的，检查任务，并通过的
+ProjectOrderInvoice 
+ProjectOrderFinished 
+
+ProjectInvoice 发给客户的invoice
+
+ProjectPay 该付款的
+ProjectReceiving 该收款的
+ProjectDeadline 该完结的项目
+
+pdf不能打开，
+译者的提交出错
+
+内部用户个人工作量统计
+//=========================
+Task没有读取价格
+想到没有生成Task
+上传文件不能打开，服务器上存在
+向导流程优化，先选择task，有word类型，在选着匹配率，其他类型需要填写数量
+po页面有些字段有问题
+po可以发信签view po view invoice
+吧各种po的管理放在project show页面，不要各种po list了。
+po完成按钮改为付款按钮，paid。
+
+统计功能
+按每月项目的总收入统计
+按每月项目的总支出统计
+计算利润/利润率
+
+货币统一到美元
+添加货币汇率对象。

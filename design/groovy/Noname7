@@ -1,0 +1,125 @@
+ 
+each  
+^!.each {  
+	^!
+} 
+each map
+^!.each { key, value ->
+	^!
+}
+ 
+
+eachWithIndex
+^!.eachWithIndex { elem, i ->
+	^!
+}
+ 
+
+any
+^!.any { elem -> 
+	^!
+}
+ 
+
+every
+ 
+^!.every { elem -> 
+	^!
+}
+ 
+grep
+^!.grep { elem ->
+	^!
+}
+ 
+
+grep reg
+^!.grep(~/../)
+ 
+
+grep collection
+^!.grep(['a', 'cde', 'ab'])
+ 
+
+join 
+^!.join('^!')
+ 
+
+sort
+^!.sort { e1, e2 ->
+  return e1 - e2
+}
+ 
+
+find
+^!.find { elem ->
+	^!
+}
+ 
+
+findAll
+^!.findAll { elem ->
+	^!
+}
+ 
+
+collect
+ 
+^!.collect { elem ->
+	^!
+}
+collect  map
+^!.collect { entry ->
+  "${entry.key} : ${entry.value}"
+}
+ 
+
+
+groupBy
+^!.groupBy { elem ->
+    ^!
+}
+ 
+
+
+inject
+ 
+list.inject('I') { sum, elem -> 
+  "$sum $elem "
+}
+ 
+
+reverse
+ 
+list.reverse()
+ 
+
+ 
+
+unique
+ 
+list.unique()
+ 
+
+
+max
+ 
+list.max()
+ 
+
+ 
+list.max { elem ->
+  elem.length()
+}
+
+#T=min 
+^!.min { elem ->
+  elem.length()
+}
+
+
+#T=count
+^!.count('a')
+
+#T=sum
+^!.sum() 
