@@ -409,3 +409,18 @@ th.desc a {
 .search input, select{
 	width: auto;
 }
+
+table.navigate {
+	margin: 3px 0;
+	background:#FBF7F0;
+	border:1px solid #EEE4D4; 
+}
+table.navigate td{ 
+	text-align: center; 
+}
+table.navigate td.now {
+	background:#E6FFDF;
+	border:1px solid #C9E6C1;
+	color:#6EA85F;
+	font-weight:bold;
+}

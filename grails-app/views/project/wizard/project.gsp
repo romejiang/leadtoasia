@@ -11,6 +11,8 @@
   
         <div class="body">
             <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+             <g:render template="navigate" model="['number': 1]" />
+
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -19,7 +21,6 @@
                 <g:renderErrors bean="${projectInstance}" as="list" />
             </div>
             </g:hasErrors>
-             
              <g:form action="wizard" method="post" >
                 <div class="dialog">
                     <table>

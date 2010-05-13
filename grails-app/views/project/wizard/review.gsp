@@ -14,6 +14,7 @@
         </div>
         <div class="body">
             <h1>Review</h1>
+             <g:render template="navigate" model="['number':5]" />
       
             <g:form action="wizard" method="post" >
   <div class="dialog">
@@ -99,7 +100,7 @@
                                  <ul> 
                                 <g:each in="${localizationInstanceList}" var="q">
                                     <g:if test="${q.price && q.price > 0}">
-                                    <li>${q?.encodeAsHTML()} ${q?.type} ${q?.price}${q?.unit}
+                                    <li>${q?.encodeAsHTML()} ${q?.type == 'word' ? '' : q?.amount} ${q?.type} ${q?.price}${q?.unit}
                                     </g:if>
                                     </g:each>   
                                  

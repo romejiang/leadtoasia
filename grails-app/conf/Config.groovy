@@ -87,7 +87,7 @@ environments {
             docs {
                 maxSize = 1000 * 1024 * 200 //4 mbytes
                 allowedExtensions = ["doc", "docx", "pdf", "rtf", "rar", "zip", "txt", "xml"]
-                path = "/tmp/docs/"
+                path = "/opt/fileuploader/"
             }
         } 
     }

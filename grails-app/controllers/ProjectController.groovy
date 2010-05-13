@@ -267,7 +267,8 @@ class ProjectController {
         def customer = Customer.get(params.cid)
         if (customer) {
             def result = customer?.quote.find{
-                log.info it.source + params.source + it.target + params.target +  it.type + params.type
+                log.info "db:" + it.source +  it.target +    it.type  
+                log.info "params:" +   params.source + params.target + params.type
 
                 it.source == params.source && it.target == params.target &&  it.type == params.type
             }
@@ -310,7 +311,7 @@ class ProjectController {
                 //1.project 
                 flow.projectInstance = new Project()
                 // 2.match
-                flow.matchs = [ new Match(discount: 100),new Match(discount: 100),new Match(discount: 50),new Match(discount: 25)]
+                flow.matchs = [ new Match(discount: 100),new Match(discount: 25),new Match(discount: 50),new Match(discount: 100)]
 
                 // 3.task
                 def languageCode = org.grails.plugins.lookups.Lookup.codeList('Language')

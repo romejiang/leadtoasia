@@ -15,6 +15,7 @@
         <div class="body">
             <h1>Match</h1>
         
+             <g:render template="navigate" model="['number':2]" />
 
             <g:form action="wizard" method="post" >
                 <div class="dialog">

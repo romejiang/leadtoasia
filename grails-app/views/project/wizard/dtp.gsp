@@ -14,6 +14,7 @@
         </div>
         <div class="body">
            <h1>DTP</h1>
+             <g:render template="navigate" model="['number':4]" />
             
             <g:form action="wizard" method="post" >
                             <div class="buttons">
