@@ -87,7 +87,7 @@
                                 <g:link controller="match" action="create" params="[pid : projectInstance.id,parentType:'project']">Add Match</g:link>
 								<ul>
                                 <g:each in="${projectInstance.matchs}" var="m">
-                                    <li><g:link controller="match" action="show" id="${m.id}"  params="[pid : projectInstance.id,parentType:'project']">${m?.encodeAsHTML()}</g:link></li>
+                                    <li><g:link controller="match" action="show" id="${m.id}"  params="['project.id' : projectInstance.id,parentType:'project']">${m?.encodeAsHTML()}</g:link></li>
                                 </g:each>
                                 </ul>
                             </td>
@@ -118,7 +118,7 @@
                                     
 									</g:if>
 									<g:else>
-									  <g:link controller="projectOrder" action="create" params="[pid : projectInstance.id,parentType:'project']">Add PO</g:link>
+									  <g:link controller="projectOrder" action="create" params="['project.id' : projectInstance.id, 'localization.id' : q.id ,parentType:'project']">Add PO</g:link>
 									</g:else>
                                  
                                     
@@ -158,7 +158,7 @@
                                     
 									</g:if>
 									<g:else>
-									  <g:link controller="dtpOrder" action="create" params="[pid : projectInstance.id,parentType:'project']">Add DTP</g:link>
+									  <g:link controller="dtpOrder" action="create" params="[pid : projectInstance.id, 'localization.id': q.id ,parentType:'project']">Add DTP</g:link>
 									</g:else>
                                   
                                     </td>

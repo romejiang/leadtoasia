@@ -6,6 +6,8 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
+		<g:javascript src="flowMatch.js"  />
+
     </head>
     <body>
         <div class="nav">
@@ -25,15 +27,15 @@
                             <g:each in="${matchs}" status="i" var="matchInstance">
 
                             <tr class="prop">
-                                <td valign="top" class="name">
+                                <td valign="top">
                                     <label for="wordcount"><g:message code="match.wordcount.label" default="Wordcount" /></label>
                                 </td>
                                 <td valign="top">
-                                    <g:textField name="wordcount" value="${fieldValue(bean: matchInstance, field: 'wordcount')}" size="10" />
+                                    <g:textField name="wordcount" class="wordcount" value="${fieldValue(bean: matchInstance, field: 'wordcount')}" size="10" />
 
                                 </td>
                           
-                                <td valign="top" class="name">
+                                <td valign="top">
                                     <label for="match"><g:message code="match.match.label" default="Match" /></label>
                                 </td>
                                 <td valign="top">
@@ -42,16 +44,32 @@
 
                                 </td>
                            
-                                <td valign="top" class="name">
+                                <td valign="top">
                                     <label for="discount"><g:message code="match.discount.label" default="Discount" /></label>
                                 </td>
                                 <td valign="top" >
-                                    <g:textField name="discount" value="${fieldValue(bean: matchInstance, field: 'discount')}"  size="10"/>%
+                                    <g:textField name="discount"   class="discount" value="${fieldValue(bean: matchInstance, field: 'discount')}"  size="5" />%
+                                </td>
+                                  <td valign="top">
+                                    <label for="Result">Result</label>
+                                </td>
+                                <td valign="top" >
+                                    <g:textField name="result" class="result" value=""  size="5" Disabled="true"/>word
                                 </td>
                             </tr>
 
                             </g:each>
- 
+                             <tr class="prop">
+                                <td valign="top" colspan=6>
+                                   
+                                </td>
+                                  <td valign="top">
+                                    <label for="total">Total:</label>
+                                </td>
+                                <td valign="top" >
+                                    <g:textField name="total" size="5" />word
+                                </td>
+                            </tr>
 
                         
                         </tbody>

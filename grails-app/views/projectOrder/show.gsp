@@ -34,13 +34,13 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="projectOrder.quote.label" default="Quote" /></td>
+                            <td valign="top" class="name"><g:message code="projectOrder.localization.label" default="Localization" /></td>
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
-                                <g:each in="${Localization.findAllByProjectOrder(projectOrderInstance)}" var="q">
-                                    <li><g:link controller="localization" action="show" id="${q.id}">${q?.encodeAsHTML()}</g:link></li>
-                                </g:each>
+                                
+                                    <li><g:link controller="localization" action="show" id="${projectOrderInstance?.localization?.id}">${projectOrderInstance?.localization?.encodeAsHTML()}</g:link></li>
+                                 
                                 </ul>
                             </td>
                             

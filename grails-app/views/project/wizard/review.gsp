@@ -88,6 +88,7 @@
                                     <li>${m?.encodeAsHTML()}
                                     </g:if>
                                 </g:each>
+                                    <li>Total: ${matchCount}
                                 </ul>
                             </td>
                             
@@ -100,7 +101,7 @@
                                  <ul> 
                                 <g:each in="${localizationInstanceList}" var="q">
                                     <g:if test="${q.price && q.price > 0}">
-                                    <li>${q?.encodeAsHTML()} ${q?.type == 'word' ? '' : q?.amount} ${q?.type} ${q?.price}${q?.unit}
+                                    <li class="${q?.checkDomain() ? '' : 'errors'}">${q?.encodeAsHTML()} ${q?.type == 'word' ? matchCount : q?.amount} ${q?.type} ${q?.price}${q?.unit}  
                                     </g:if>
                                     </g:each>   
                                  
@@ -114,7 +115,7 @@
                                  <ul>
                                 <g:each in="${DTPInstanceList}" var="q">
                                     <g:if test="${q.price && q.price > 0}">
-                                    <li>${q?.encodeAsHTML()} ${q?.type} ${q?.price}${q?.unit}
+                                    <li class="${q?.checkDomain() ? '' : 'errors'}">${q?.encodeAsHTML()} ${q?.type == 'word' ? matchCount : q?.amount} ${q?.type} ${q?.price}${q?.unit}
                                     </g:if>
                                 </g:each>   
                                  </ul>

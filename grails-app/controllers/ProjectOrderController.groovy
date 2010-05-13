@@ -51,37 +51,45 @@ class ProjectOrderController {
     def create = {
         def projectOrderInstance = new ProjectOrder()
         projectOrderInstance.properties = params
-
+ 
+        def vendors= User.withCriteria {
+            and{
+                eq('enabled' , true)
+                quote{
+                    eq('source',  projectOrderInstance.localization?.source)
+                    eq('target',  projectOrderInstance.localization?.target)
+                }
+            }
+        }
+  
         return [projectOrderInstance: projectOrderInstance,
-        pid : params.pid,parentType:params.parentType]
+         parentType:params.parentType , vendors : vendors]
     }
 
     def save = {
 		log.info "total: $params.total"
 		if(!params.total)params.total = 0
         def projectOrderInstance = new ProjectOrder(params)
-        if (params.pid) {
-            projectOrderInstance.project = Project.get(params.pid)
-        }
+ 
         log.info params.matchs?.size()
         if (projectOrderInstance.save(flush: true)) {
 
 
         // 将这个本地化任务，和当前po关联起来
-		if(params.localize) {
-		if(params.localize in String){
-			params.localize = [params.localize]
-		}
-		log.info "projectOrder.save $params.localize"         
-                params.localize?.each{
-                    def loc = Localization.get(it)
-                    if (loc) {
-                        loc.projectOrder = projectOrderInstance
-                        projectOrderInstance.localization = loc
-                        loc.save()
-                    }
-                }
-            }
+//		if(params.localize) {
+//		if(params.localize in String){
+//			params.localize = [params.localize]
+//		}
+//		log.info "projectOrder.save $params.localize"         
+//                params.localize?.each{
+//                    def loc = Localization.get(it)
+//                    if (loc) {
+//                        loc.projectOrder = projectOrderInstance
+//                        projectOrderInstance.localization = loc
+//                        loc.save()
+//                    }
+//                }
+//            }
             /// 保存给free lance 的报价和折扣
             // word计费方式才需要保持匹配率
             if (params.type == 'word') {
@@ -101,7 +109,7 @@ class ProjectOrderController {
             }
             projectOrderInstance.save()
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'projectOrder.label', default: 'ProjectOrder'), projectOrderInstance.id])}"
-            redirect(action: "show",controller: 'project', id :  params.pid)
+            redirect(action: "show",controller: 'project', id :  params.project.id)
         }
         else {
             render(view: "create", model: [projectOrderInstance: projectOrderInstance,

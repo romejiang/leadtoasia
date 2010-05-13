@@ -55,10 +55,10 @@
 							<td>${fieldValue(bean: projectInstance, field: "state")} 
                             
                             <g:if test="${projectInstance.state == 'finished'}"> 
-                                <g:link action="invoice" id="${projectInstance.id}">invoice</g:link>
+                                <g:link action="invoice" id="${projectInstance.id}">send invoice</g:link>
                             </g:if>
                             <g:else>
-                                <g:link action="finished" id="${projectInstance.id}">finished</g:link>
+                                <g:link action="finished" id="${projectInstance.id}">check finished</g:link>
                             </g:else>
                             </td>
 
@@ -68,7 +68,7 @@
 							dtp:${projectInstance?.dtp?.size()}  <br>
                             </td>
                             <td>
-                            <g:link uri="/project/pdf/${projectInstance?.id}" target="_blank">invoice</g:link>  
+                            <g:link uri="/project/pdf/${projectInstance?.id}" target="_blank">view invoice</g:link>  
  							</td>
                         </tr>
                     </g:each>

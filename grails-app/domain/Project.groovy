@@ -25,7 +25,8 @@ class Project implements Serializable{
     static hasMany = [task: Localization, dtp: Localization , matchs:Match, attachments :UFile]
 ////    orders: ProjectOrder
     SortedSet matchs
-//    SortedSet task
+    SortedSet task
+    SortedSet dtp
 
 
 
@@ -52,12 +53,13 @@ class Project implements Serializable{
 
          task joinTable:[name:'project_task']
          dtp joinTable:[name:'project_dtp']
+//         task sort : 'target' , order : 'asc'
+//         dtp sort : 'target' , order : 'asc'
+//         matchs sort : 'discount' , order : 'asc'
 
     }
 
-    String toString (){
-        def df = new SimpleDateFormat("MM/dd/yyyy")
-
+    String toString (){ 
         "$projectNo"
     }
 }

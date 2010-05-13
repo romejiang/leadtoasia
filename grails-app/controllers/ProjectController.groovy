@@ -9,6 +9,7 @@ class ProjectController {
 
     def authenticateService
     def emailerService
+    def projectService
 
     def index = {
         redirect(action: "list", params: params)
@@ -312,6 +313,7 @@ class ProjectController {
                 flow.projectInstance = new Project()
                 // 2.match
                 flow.matchs = [ new Match(discount: 100),new Match(discount: 25),new Match(discount: 50),new Match(discount: 100)]
+                flow.matchCount = 0
 
                 // 3.task
                 def languageCode = org.grails.plugins.lookups.Lookup.codeList('Language')
@@ -337,19 +339,16 @@ class ProjectController {
                 def projectInstance = new Project(params)
                 flow.projectInstance = projectInstance
                 if (!params.projectNo) {
-                    projectInstance.projectNo = new Date().format("yyyyMMdd-")
+                    projectInstance.projectNo = 'nothing'
                 }
               
                 projectInstance.manager = authenticateService.userDomain()
-                log.info projectInstance.manager
-
+ 
                 if (projectInstance.validate()) {
-//                    if (!params.projectNo) {
-//                        projectInstance.projectNo += new DecimalFormat("0000").format(projectInstance.id)
-//                    } 
+ 
                 }
                 else {
-                    projectInstance.projectNo = ''
+                     
                     return  error()
                 }
 
@@ -368,11 +367,13 @@ class ProjectController {
                     log.info params.match[i]
                     log.info params.discount[i] 
                     if (!wc)wc = 0
-                    upm.add(   new Match(wordcount : wc , match : params.match[i] ,discount :  params.discount[i] )         )
+                    upm.add(   new Match(wordcount : wc , match : params.match[i] ,discount :  params.discount[i] ) )
                     
                 }
                 flow.matchs  = upm 
-
+                flow.matchCount = params.total
+                log.info "project.wizard.match params.total  = ${params.total}"
+ 
             }.to "task"
         }
         task{
@@ -389,6 +390,7 @@ class ProjectController {
                         target : params.target[i],
                         price : obj , 
                         type : params.type[i] ,
+                        amount : params.amount[i] ,
                         unit : params.unit[i]
                     ))
                 }
@@ -412,6 +414,7 @@ class ProjectController {
                         target : params.target[i],
                         price : obj , 
                         type : params.type[i] ,
+                        amount : params.amount[i] ,
                         unit : params.unit[i]
                     ))
                 }
@@ -425,63 +428,19 @@ class ProjectController {
             on("previous").to "dtp"
             on("finished"){
                 // end ，完成
-                //1.project 
-                 log.info flow.projectInstance
-                if (flow.projectInstance.save(flush: true)) {
-                    if (!params.projectNo) {
-                        flow.projectInstance.projectNo += new DecimalFormat("0000").format(flow.projectInstance.id)
-                    } 
-                }
-                // 2.match
-                flow.matchs.each{
-                    if (it.wordcount && it.wordcount > 0) {
-                        if (it.save(flush: true)) {
-                            flow.projectInstance.addToMatchs(it)
-                        }
-                    }
-                }
-
-                // 3.task
-                 
-                flow.localizationInstanceList.each{
-                    if (it.price && it.price > 0) {
-//                    it.project = flow.projectInstance
-                    log.info "task ${it}"
-                        if (it.save(flush: true)) {
-                            flow.projectInstance.addToTask(it)
-                        }else{           
-//                            it.save()
-                            log.error "flow task save error"
-
-                        }
-                    }
-                }
-
-                // 4.dtp
-                flow.DTPInstanceList.each{
-                    if (it.price && it.price > 0) {
-                        log.info "DTP ${it}"
-//                    it.project = flow.projectInstance
-                        if (it.save(flush: true)) {
-//                            it.save()
-                            flow.projectInstance.addToDtp(it)
-                        }else{
-                            log.error "flow DTP save error"
-
-                        }
-                    }
-                }
-
-                // 5.file
-                flow.projectInstance.save(flush: true)
-                flow.projectId = flow.projectInstance.id
-                log.info "flow finished project id: ${flow.projectId} / ${flow.projectInstance.id}"
+          
+                projectService.finish(flow)
+           
+                //log.info "flow finished project id: ${flow.projectId} / ${flow.projectInstance.id}"
             }.to "finish"
+            on(Exception).to "review"
         }
         finish{
-            log.info "flow finish project id: ${flow.projectId} / ${flow.projectInstance.id}"
+            //log.info "flow finish project id: ${flow.projectId} / ${flow.projectInstance.id}"
 //            redirect(controller:"project", action:"show", id : flow.projectId)
             redirect(controller:"project", action:"list")
         }
+
+
     }
 }

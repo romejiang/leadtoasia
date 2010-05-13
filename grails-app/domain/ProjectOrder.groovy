@@ -21,9 +21,9 @@ class ProjectOrder implements Serializable{
  
 //	单价，总价，成本
  
-    float rate = 0.0
-    float total= 0.0
-    int wordcount
+    Float rate = 0.0
+    Float total= 0.0
+    Integer wordcount
     String type
 //	付款方式（菜单选项），
     //支付货币单位
@@ -32,7 +32,7 @@ class ProjectOrder implements Serializable{
 //	客户付款方式选项。
     String paymentSort
     //付款期限
-    String paymentTerms = '30 days after invoice'
+    Integer paymentTerms = 30
 //???生成的PO直接存成word, excel或PDF格式到指定的路径。
     String serviceType
     String state = 'new'
@@ -40,9 +40,7 @@ class ProjectOrder implements Serializable{
     static hasMany = [attachments :UFile ,matchs:Match]
     SortedSet matchs
     Localization localization
-    static belongsTo = [localization:Localization]
-
-
+   
 
     static constraints = {
          
@@ -81,5 +79,9 @@ class ProjectOrder implements Serializable{
     String toString (){
         def df = new SimpleDateFormat("MM/dd/yyyy")
         "${vendor}\n${df.format(deliveryDate)}"
+    }
+
+    String paymentTermsString(){
+        "${paymentTerms} days after invoice"
     }
 }

@@ -22,6 +22,8 @@
              <g:render template="navigate" model="['number':3]" />
              
             <g:form action="wizard" method="post" >
+
+            <input type="hidden" name="matchCount" id="matchCount" value="${matchCount}">
             <input type="hidden" name="cid" id="cid" value="${projectInstance?.customer?.id}">
                 <div class="buttons">
                     <span class="button"><g:submitButton name="previous" class="previous" value="previous" /></span>
@@ -32,19 +34,22 @@
                     <table>
                         <tbody>
                             <tr class="prop">
-                                <td valign="top" class="name">
+                                <td valign="top"  >
                                     <label for="source"><g:message code="localization.source.label" default="Source" />:</label>
                                 </td>
-                                <td valign="top" colspan=5 class="value ${hasErrors(bean: localizationInstance, field: 'source', 'errors')}">
+                                <td valign="top" colspan=5  >
                             
 									<g:lookupSelect  name="source" class="taskSource" realm="Language"
 								 value="${source}"/>
+                                 </td>
+                                <td valign="top" colspan=2 >
+                             
                                  <input type="button" name="addLocalization" class="addLocalization" id="addLocalization" value="Add Localization"  />
                                 </td>
                             </tr>
                             <g:each in="${localizationInstanceList}" var="localizationInstance" status="i">
                             
-                            <tr id="tr_${localizationInstance.target.replace(' ','')}" class="hide">
+                            <tr id="tr_${localizationInstance.target.replace(' ','')}" class="${localizationInstance.type ? '' : 'hide'}">
                                 <td valign="top" >
                                     <label for="target"><g:message code="localization.target.label" default="Target" />:</label>
                                 </td>
@@ -69,7 +74,7 @@
                                     <g:lookupSelect  name="unit" realm="Monetary Unit"
 								 value="${localizationInstance.unit}" class="taskUnit"/>
                                 </td>
-                                                                <td valign="top" >
+                                <td valign="top" >
                                     <label for="amount"><g:message code="localization.amount.label" default="Amount" />:</label>
                                 </td>
                                 <td valign="top" >
@@ -91,7 +96,7 @@
         <div id="dialog-select" class="hide" title="select localization">
         <ul  style="text-align:left">
         <g:each in="${localizationInstanceList}" var="localizationInstance" status="i">
-            <li><input type="checkbox" name="selectLocalization" class="selectLocalization" value="${localizationInstance.target.replace(' ','')}">${localizationInstance.target} 
+            <li><input type="checkbox" name="selectLocalization" class="selectLocalization" ${localizationInstance.type ? 'checked' : ''} value="${localizationInstance.target.replace(' ','')}">${localizationInstance.target} 
         </g:each>
         </ul>
         </div>

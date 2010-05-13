@@ -80,6 +80,7 @@ input:focus, select:focus, textarea:focus {
 input[type='radio'] ,input[type='button'] ,input[type='submit'] ,input[type='file'] ,input[type='checkbox']{
 	width:auto!important;
 }
+
  
 .body {
     float: left; 
@@ -164,22 +165,27 @@ td.errors select {
 td.errors input {
     border: 1px solid red;
 }
-
+li.errors{
+	color: #cc0000;
+}
 /* TABLES */
 
 table {
     border: 1px solid #ccc;
     width: 100%
 }
+label{
+	line-height: 35px;
+}
 tr {
     border: 0;
 }
 td, th {
     font: 12px verdana, arial, helvetica, sans-serif;
-    line-height: 20px;
-    padding: 5px 6px;
+    line-height: 35px; 
     text-align: left;
     vertical-align: top;
+
 }
 th {
     background: #fff url(../images/skin/shadow.jpg);

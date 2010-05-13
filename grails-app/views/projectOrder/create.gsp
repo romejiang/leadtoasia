@@ -23,8 +23,9 @@
             </div>
             </g:hasErrors>
             <g:form action="save" method="post" >
-			<input type="hidden" name="pid" id="pid" value="${pid}">
-
+			<input type="hidden" name="project.id" id="project.id" value="${projectOrderInstance.project?.id}">
+            <input type="hidden" name="localization.id" value="${projectOrderInstance.localization?.id}"/>
+            <input type="hidden" id="Localize" value="${projectOrderInstance.localization}"/>
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -33,11 +34,9 @@
                                     <label ><g:message code="projectOrder.localize.label" default="Localize" /></label>
                                 </td>
                                 <td valign="top" class="value " >
-                                  <g:each in="${Project.get(pid).task}" var="loc">
-                                  <g:if test="${!loc.projectOrder}">
-								  <input type="checkbox" name="localize" value="${loc.id}" String="${loc}" class="localize"   />${loc}<br>
-                                  </g:if>
-                                  </g:each>
+                                   
+								  ${projectOrderInstance.localization} 
+                              
                                 </td>
                             </tr>
                         
@@ -47,28 +46,29 @@
                                     <label for="vendor"><g:message code="projectOrder.vendor.label" default="Vendor" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'vendor', 'errors')}">
-								<div class="vendorSelect"></div>
+							 
+                                    <g:select  name="vendor.id" id="vendor.id" class="userSelected"  from="${vendors}" value="${projectOrderInstance.vendor}"
+                                                noSelection="['':'-Choose vendor-']" optionKey="id"  />
                                 </td>
                             </tr>
-
+                            <g:if test="${projectOrderInstance.project?.matchs}">
+                           
                             <tr class="prop matcharea">
                                 <td valign="top" class="name">
                                     <label for="matchs"><g:message code="project.match.label" default="Matchs" /></label>
                                 </td>
                                 <td valign="top" class="value"> 
-                                    <g:set var="totalwords" value="${0}" />
-
-									 <g:each in="${Project.get(pid)?.matchs}" var="m">
+ 
+									 <g:each in="${projectOrderInstance.project?.matchs}" var="m">
                                      ${m.wordcount} words Match ${m.match}, so <input type="text" name="matchs" value="${m.discount}" style="width:50px" class="matchs" size="4">% discount
                                      <input type="hidden" name="matchid" value="${m.id}">
                                       <div class="matchdiscount" style="display: none">${m.discount}</div>
                                       <div class="matchwordcount" style="display: none">${m.wordcount}</div>
                                       <br>
-                                      <g:set var="totalwords" value="${totalwords + m.wordcount}" />
-                                     </g:each>
+                                      </g:each>
                                 </td>
                             </tr>
-                            
+                             </g:if>
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="serviceType"><g:message code="projectOrder.serviceType.label" default="Service Type" /></label>
@@ -84,7 +84,7 @@
                                     <label for="wordcount"><g:message code="projectOrder.wordcount.label" default="Amount" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'wordcount', 'errors')}">
-                                    <g:textField name="wordcount" value="${totalwords == 0 ? projectOrderInstance.wordcount: totalwords }" /> <g:select name="type" from="${projectOrderInstance.constraints.type.inList}" value="${projectOrderInstance?.type}" valueMessagePrefix="projectOrder.type"  />
+                                    <g:textField name="wordcount" value="${projectOrderInstance.localization?.amount}" /> <g:select name="type" from="${projectOrderInstance.constraints.type.inList}" value="${projectOrderInstance.localization?.type}" valueMessagePrefix="projectOrder.type"  />
                                 </td>
                             </tr>
 
@@ -124,7 +124,7 @@
                                     <label for="paymentTerms"><g:message code="projectOrder.paymentTerms.label" default="Payment Terms" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'paymentTerms', 'errors')}">
-                                    <g:textField name="paymentTerms" maxlength="250" value="${projectOrderInstance?.paymentTerms}" />
+                                    <g:textField name="paymentTerms" maxlength="250" value="${projectOrderInstance?.paymentTerms}" /> days after invoice
                                 </td>
                             </tr>
 
@@ -162,14 +162,7 @@
                     <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
                 </div>
             </g:form>
-<textarea id="jtemplate" style="display:none">
-<select name="vendor.id" id="vendor.id" class="userSelected" >
-<option value="" >- Choose Vendor -</option>
-{#foreach $T as n} 
-<option value="{$T.n.id}" >{$T.n.userRealName} {#if $T.n.fullTime} &#60; {#else} &#62; {#/if} </option>
-{#/for}  
-</select>
-</textarea>
+ 
 		</div>
 
     </body>
