@@ -26,6 +26,8 @@
             <g:form method="post" >
                 <g:hiddenField name="id" value="${localizationInstance?.id}" />
                 <g:hiddenField name="version" value="${localizationInstance?.version}" />
+                <g:hiddenField name="parentType" value="${params.parentType}" />
+
 				<input type="hidden" name="pid"  id="pid" value="${pid}">
                 <div class="dialog">
                     <table>
@@ -36,8 +38,7 @@
                                   <label for="source"><g:message code="localization.source.label" default="Source" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: localizationInstance, field: 'source', 'errors')}">
-                                    <g:lookupSelect  name="source" realm="Language"
-								 value="${localizationInstance?.source}"/>
+                                     ${localizationInstance?.source} 
                                 </td>
                             </tr>
                         
@@ -46,8 +47,7 @@
                                   <label for="target"><g:message code="localization.target.label" default="Target" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: localizationInstance, field: 'target', 'errors')}">
-                                    <g:lookupSelect  name="target" realm="Language"
-								 value="${localizationInstance?.target}"/>
+                                     ${localizationInstance?.target} 
                                 </td>
                             </tr>
                         
@@ -73,16 +73,35 @@ ${it.radio}:${it.label}&nbsp;
 								 value="${localizationInstance.unit}"/>
                                 </td>
                             </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="amount"><g:message code="localization.amount.label" default="amount" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: localizationInstance, field: 'amount', 'errors')}">
+                                    <g:textField name="amount" value="${fieldValue(bean: localizationInstance, field: 'amount')}" /> 
+                                </td>
+                            </tr>
                           
                         </tbody>
                     </table>
                 </div>
                 <div class="buttons">
+                <g:if test="${!localizationInstance.projectOrder}"> 
                     <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                </g:if>
                 </div>
             </g:form>
-			<div class="pricing"></div>
+			 <table>
+            <tr>
+                <td>
+                <div class="pricing">
+			        &nbsp;
+			    </div>
+                </td>
+            </tr>
+            </table>
 			<textarea id="jtemplate" style="display:none">
 			<ol>
 			{#foreach $T as n} 

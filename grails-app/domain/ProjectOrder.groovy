@@ -15,7 +15,7 @@ class ProjectOrder implements Serializable{
     Date start = new Date()
 //	交货日期，
     Date deliveryDate   = new Date() + 1
-    Date invoiceDate  = new Date()
+    Date invoiceDate 
 //
 //外部PO：
  
@@ -40,7 +40,12 @@ class ProjectOrder implements Serializable{
     static hasMany = [attachments :UFile ,matchs:Match]
     SortedSet matchs
     Localization localization
-   
+
+   static mapping = {
+      matchs cascade:"all-delete-orphan"
+      attachments cascade:"all-delete-orphan"
+  }
+
 
     static constraints = {
          
@@ -73,6 +78,7 @@ class ProjectOrder implements Serializable{
         project()
  		requirement(blank: true, size:0..1000)
         localization(nullable: true)
+        invoiceDate(nullable: true)
        
     }
 

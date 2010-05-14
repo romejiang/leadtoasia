@@ -38,9 +38,9 @@
                             <td><g:link action="show" id="${projectOrderInstance.id}">${projectOrderInstance?.project?.projectNo}</g:link></td>
                             <td>${projectOrderInstance.serviceType}</td>
                         
-                            <td><g:each in="${Localization.findAllByProjectOrder(projectOrderInstance)}" var="q">
-                                   ${q?.encodeAsHTML()}<br>
-                                </g:each></td>
+                            <td> 
+                                   ${projectOrderInstance?.localization?.encodeAsHTML()} 
+                            </td>
                         
                          
                             <td>${fieldValue(bean: projectOrderInstance, field: "wordcount")}</td>

@@ -156,7 +156,7 @@ div.warning{
     background: #fff3f3;
     border: 1px solid red;
     color: #cc0000;
-    margin: 5px;
+    line-height: 20px;
     padding: 5px;
 }
 td.errors select {
@@ -175,14 +175,14 @@ table {
     width: 100%
 }
 label{
-	line-height: 35px;
+	line-height: 20px;
 }
 tr {
     border: 0;
 }
 td, th {
     font: 12px verdana, arial, helvetica, sans-serif;
-    line-height: 35px; 
+    line-height: 20px; 
     text-align: left;
     vertical-align: top;
 

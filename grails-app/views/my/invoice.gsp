@@ -30,10 +30,8 @@
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
-                                <g:each in="${Localization.findAllByProjectOrder(projectOrderInstance)}" var="q">
-                                    <li>${q?.encodeAsHTML()}</li>
-                                </g:each>
-                                </ul>
+                                     <li>${projectOrderInstance?.localization?.encodeAsHTML()}</li>
+                                 </ul>
                             </td>
                             
                         </tr>
@@ -101,7 +99,7 @@
             <div class="buttons">
                  <g:form>
                     <g:hiddenField name="id" value="${projectOrderInstance?.id}" /> 
-                    <span class="button"><g:actionSubmit class="edit" action="invoiced" value="invoiced"  onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+                    <span class="button"><g:actionSubmit class="edit" action="invoiced" value="send invoice"  onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
                  </g:form>
             </div>
         </div>

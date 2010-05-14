@@ -37,13 +37,6 @@
                         </tr>
                     
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="exchangeRate.target.label" default="Target" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: exchangeRateInstance, field: "target")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="exchangeRate.rate.label" default="Rate" /></td>
                             
                             <td valign="top" class="value">${fieldValue(bean: exchangeRateInstance, field: "rate")}</td>

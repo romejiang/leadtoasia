@@ -6,6 +6,8 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
+ 		<g:javascript src="enterEvent.js"  />
+
     </head>
     <body>
         <div class="nav">
@@ -129,7 +131,7 @@
    
                 <div class="buttons">
                     <span class="button"><g:submitButton name="previous" class="previous" value="previous" /></span>
-                    <span class="button"><g:submitButton name="finished" class="finished" value="finished" /></span>
+                    <span class="button"><g:submitButton name="finished" class="next" value="finished" /></span>
                </div>
             </g:form>
         </div>

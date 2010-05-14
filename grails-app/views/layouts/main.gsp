@@ -45,6 +45,7 @@
 		<li><g:link controller='requestmap'   action='index'>Request Map</g:link> 
 	    <li><g:link controller='noticeMail'   >NoticeMail Manage</g:link> 
 		<li><g:link controller='noticeMail'   action='create'>Create NoticeMail</g:link> 
+		<li><g:link controller='exchangeRate'   action='index'>Exchange Rate </g:link> 
 	 </ol>
 	</g:ifAnyGranted>
 
@@ -54,15 +55,14 @@
 		<li><g:link action="list" controller="customer">Client Manage</g:link>
 		<li><g:link action="create" controller="customer">New Client</g:link>
 		<li><g:link action="list" controller="customer">Client Rate</g:link>
-<!-- 		<li><g:link action="create" controller="project">Create Project</g:link> -->
- 		<li><g:link action="start" controller="project">New Project</g:link>
+  		<li><g:link action="start" controller="project">New Project</g:link>
  		<li><g:link action="list" controller="project">Project In Hands</g:link>
- 		<li><g:link action="list" controller="projectOrder">All PO List</g:link>
+ <!-- 			<li><g:link action="list" controller="projectOrder">All PO List</g:link>
  		<li><g:link action="list" controller="projectOrder" params="[state: 'new']">New PO List</g:link>
  		<li><g:link action="list" controller="projectOrder" params="[state: 'processing']">Processing PO List</g:link>
  		<li><g:link action="list" controller="projectOrder" params="[state: 'submit']">Submit PO List</g:link>
  		<li><g:link action="list" controller="projectOrder" params="[state: 'invoice']">Invoiced PO List</g:link>
- 		<li><g:link action="list" controller="projectOrder" params="[state: 'finished']">Finished PO List</g:link>
+ 		<li><g:link action="list" controller="projectOrder" params="[state: 'finished']">Finished PO List</g:link> -->
  	</ol>
 	</g:ifAnyGranted>
 			  <h1>My Task</h1>

@@ -70,6 +70,5 @@ $(function(){
                     );
         $("#addLocalization").click(function(){
                $("#dialog-select").dialog("open");
-        });
-
+        }); 
 });

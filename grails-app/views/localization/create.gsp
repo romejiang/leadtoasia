@@ -4,8 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'localization.label', default: 'Localization')}" />
-        <title><g:message code="default.create.label" args="[entityName]" /></title>
+         <title><g:message code="default.create.label" args="[parentType]" /></title>
 		<g:javascript src="jquery/jquery-jtemplates.js" > </g:javascript>		
 		<g:javascript src="localization.js" ></g:javascript>
     </head>
@@ -14,7 +13,7 @@
       
         </div>
         <div class="body">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+            <h1><g:message code="default.create.label" args="[parentType]" /></h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -25,6 +24,8 @@
             </g:hasErrors>
             <g:form action="save" method="post" >
 			<input type="hidden" name="pid" id="pid" value="${pid}">
+			<input type="hidden" name="total" id="total" value="${total}">
+			<input type="hidden" name="parentType" id="parentType" value="${parentType}">
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -56,10 +57,10 @@
                                     <label for="type"><g:message code="localization.type.label" default="Type" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: localizationInstance, field: 'type', 'errors')}">
-<g:radioGroup name="type" values="${localizationInstance.constraints.type.inList}" 
-									labels="${localizationInstance.constraints.type.inList}"  value="${localizationInstance.type}" >
-${it.radio}:${it.label}&nbsp;
-</g:radioGroup>
+                                    <g:radioGroup name="type" values="${localizationInstance.constraints.type.inList}" 
+                                                                        labels="${localizationInstance.constraints.type.inList}"  value="${localizationInstance.type}" >
+                                    ${it.radio}:${it.label}&nbsp;
+                                    </g:radioGroup>
                                 </td>
                             </tr>
                          
@@ -73,6 +74,15 @@ ${it.radio}:${it.label}&nbsp;
 								 value="${localizationInstance.unit}"/>
                                 </td>
                             </tr>
+
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="amount"><g:message code="localization.amount.label" default="amount" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: localizationInstance, field: 'amount', 'errors')}">
+                                    <g:textField name="amount" value="${fieldValue(bean: localizationInstance, field: 'amount')}" /> 
+                                </td>
+                            </tr>
                          
                         </tbody>
                     </table>
@@ -81,9 +91,16 @@ ${it.radio}:${it.label}&nbsp;
                     <span class="button"><g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" /></span>
                 </div>
             </g:form>
-			<div class="pricing">
+            <table>
+            <tr>
+                <td>
+                <div class="pricing">
+			        &nbsp;
+			    </div>
+                </td>
+            </tr>
+            </table>
 			
-			</div>
 			<textarea id="jtemplate" style="display:none">
 			<ol>
 			{#foreach $T as n} 

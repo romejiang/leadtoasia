@@ -10,6 +10,8 @@
         <g:javascript src="jquery/jquery-jtemplates.js" />
         <g:javascript src="jquery/jquery-ui-1.8.custom.min.js"/>
 		<g:javascript src="flowTask.js"  />
+ 		<g:javascript src="enterEvent.js"  />
+
 
     </head>
     <body>

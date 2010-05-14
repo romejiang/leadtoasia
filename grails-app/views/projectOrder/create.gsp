@@ -81,22 +81,13 @@
       
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="wordcount"><g:message code="projectOrder.wordcount.label" default="Amount" /></label>
+                                    <label for="wordcount"><g:message code="projectOrder.amount.label" default="Amount" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'wordcount', 'errors')}">
                                     <g:textField name="wordcount" value="${projectOrderInstance.localization?.amount}" /> <g:select name="type" from="${projectOrderInstance.constraints.type.inList}" value="${projectOrderInstance.localization?.type}" valueMessagePrefix="projectOrder.type"  />
                                 </td>
                             </tr>
 
-                             <tr class="prop outside">
-                                <td valign="top" class="name">
-                                    <label for="paymentSort"><g:message code="projectOrder.paymentSort.label" default="Payment Sort" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'paymentSort', 'errors')}">
-                                    <g:lookupSelect  name="paymentSort" realm="Payment Sort"
-								 value="${projectOrderInstance.paymentSort}"/>
-                                </td>
-                            </tr>
                           
                             <tr class="prop outside">
                                 <td valign="top" class="name">
@@ -118,6 +109,15 @@
                                 </td>
                             </tr>
                         
+                             <tr class="prop outside">
+                                <td valign="top" class="name">
+                                    <label for="paymentSort"><g:message code="projectOrder.paymentSort.label" default="Payment Sort" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'paymentSort', 'errors')}">
+                                    <g:lookupSelect  name="paymentSort" realm="Payment Sort"
+								 value="${projectOrderInstance.paymentSort}"/>
+                                </td>
+                            </tr>
                          
                             <tr class="prop outside">
                                 <td valign="top" class="name">

@@ -49,7 +49,10 @@ class Project implements Serializable{
     }
 
     static mapping = {
-       
+ 
+          matchs cascade:"all-delete-orphan"
+          attachments cascade:"all-delete-orphan"
+ 
 
          task joinTable:[name:'project_task']
          dtp joinTable:[name:'project_dtp']
@@ -61,5 +64,21 @@ class Project implements Serializable{
 
     String toString (){ 
         "$projectNo"
+    }
+
+    int totalMatchs(){
+        matchs?.sum{   it.total()   }
+    }
+
+    boolean compareToTask(obj){
+        task?.any{
+                    it.target.compareTo(obj.target) == 0 && it.source.compareTo(obj.source) == 0
+        }
+    }
+
+    boolean compareToDtp(obj){
+        dtp?.any{
+                    it.target.compareTo(obj.target) == 0 && it.source.compareTo(obj.source) == 0
+        }
     }
 }

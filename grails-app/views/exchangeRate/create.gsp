@@ -38,15 +38,6 @@
                         
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="target"><g:message code="exchangeRate.target.label" default="Target" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: exchangeRateInstance, field: 'target', 'errors')}">
-                                    <g:textField name="target" value="${exchangeRateInstance?.target}" />
-                                </td>
-                            </tr>
-                        
-                            <tr class="prop">
-                                <td valign="top" class="name">
                                     <label for="rate"><g:message code="exchangeRate.rate.label" default="Rate" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: exchangeRateInstance, field: 'rate', 'errors')}">

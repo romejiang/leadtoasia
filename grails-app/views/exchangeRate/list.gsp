@@ -24,8 +24,6 @@
                         
                             <g:sortableColumn property="currency" title="${message(code: 'exchangeRate.currency.label', default: 'Currency')}" />
                         
-                            <g:sortableColumn property="target" title="${message(code: 'exchangeRate.target.label', default: 'Target')}" />
-                        
                             <g:sortableColumn property="rate" title="${message(code: 'exchangeRate.rate.label', default: 'Rate')}" />
                         
                         </tr>
@@ -35,8 +33,6 @@
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
                             <td><g:link action="show" id="${exchangeRateInstance.id}">${fieldValue(bean: exchangeRateInstance, field: "currency")}</g:link></td>
-                        
-                            <td>${fieldValue(bean: exchangeRateInstance, field: "target")}</td>
                         
                             <td>${fieldValue(bean: exchangeRateInstance, field: "rate")}</td>
                         

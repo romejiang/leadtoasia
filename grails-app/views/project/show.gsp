@@ -98,37 +98,43 @@
                             <td valign="top" ><g:message code="project.task.label" default="Task" /></td>
                             
                             <td valign="top" style="text-align: left;" >
-							<g:link controller="localization" action="create" params="[pid : projectInstance.id,parentType:'project']">Add Localization</g:link>
-                                <ul>
-                                 <table> 
-                                
+							<g:link controller="localization" action="create" params="[pid : projectInstance.id,parentType:'task']">Add Localization</g:link>
+                                 
+                                 <table>  
                                 <g:each in="${projectInstance?.task}" var="q">
                                    <tr>
-                                    <td class="name"> 
-                                    <g:link controller="localization" action="show" id="${q.id}"  params="[pid : projectInstance.id,parentType:'project']">${q?.encodeAsHTML()} </g:link>
+                                    <td > 
+                                    <g:link controller="localization" action="show" id="${q.id}"  params="[pid : projectInstance.id,parentType:'task']">${q?.encodeAsHTML()} </g:link>
                                     </td>
-                                    <td><img src="${resource(dir:'images',file:'image_edit.png')}" border=0 alt="TEP">
+                                    <td>
+                                    
 									<g:if test="${q?.projectOrder}">
-                                 
-									<g:link controller="projectOrder" action="show" id="${q?.projectOrder?.id}"  params="[pid : projectInstance.id,parentType:'project']">${q?.projectOrder}</g:link>&nbsp;&nbsp;${q?.projectOrder?.state}
-                                    
-                                    <g:if test="${q?.projectOrder?.state ==  'new'}">
-                                        <g:link  action="notice" controller="projectOrder" id="${q?.projectOrder?.id}" params="[pid: projectInstance.id]" onclick="this.disabled = true;\$('#spinner').show();">Notice Now</g:link>
-                                    </g:if>
-                                    
+                                        <img src="${resource(dir:'images',file:'image_edit.png')}" border=0 alt="TEP">
+									    <g:link controller="projectOrder" action="show" id="${q?.projectOrder?.id}"  params="[pid : projectInstance.id]">${q?.projectOrder?.vendor}</g:link>&nbsp;&nbsp;${q?.projectOrder?.state}
 									</g:if>
-									<g:else>
-									  <g:link controller="projectOrder" action="create" params="['project.id' : projectInstance.id, 'localization.id' : q.id ,parentType:'project']">Add PO</g:link>
-									</g:else>
-                                 
-                                    
-
                                     </td>
-									</tr>
-                             
+                                    <td>
+									<g:if test="${q?.projectOrder}">
+                                        <g:if test="${q?.projectOrder?.state ==  'new'}">
+                                            <g:link  action="pdf" controller="my" id="${q?.projectOrder?.id}"  target="_blank">View PO</g:link> |
+                                            <g:link  action="notice" controller="projectOrder" id="${q?.projectOrder?.id}" params="[pid: projectInstance.id]" onclick="this.disabled = true;\$('#spinner').show();">Notice Now</g:link>
+                                        </g:if>
+                                        <g:if test="${q?.projectOrder?.state == 'submit' }">
+                                            <g:link controller="projectOrder" action="processing" id="${q?.projectOrder?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" >Back</g:link> |
+                                            <g:link controller="projectOrder" action="pass" id="${q?.projectOrder?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" >Pass</g:link>
+                                         </g:if>
+                                         <g:if test="${q?.projectOrder?.state == 'invoice'}">
+                                          <g:link controller="projectOrder" action="finished" id="${q?.projectOrder?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" >Paid</g:link>
+                                         </g:if>
+									</g:if>
+                                    <g:else>
+                                      	 <g:link controller="projectOrder" action="create" params="['project.id' : projectInstance.id, 'localization.id' : q.id ,parentType:'project']">Add PO</g:link>
+                                    </g:else>
+                                    </td> 
+									</tr> 
                                 </g:each>   
                                 </table>
-                                </ul>
+                                
                             </td>
                         </tr>
            
@@ -138,35 +144,42 @@
                             <td valign="top" >DTP</td>
                             
                             <td valign="top" style="text-align: left;" >
-							<g:link controller="dtp" action="create" params="[pid : projectInstance.id,parentType:'project']">Add DTP</g:link>
-                                <ul>
-                                 <table> 
-                                
-                                <g:each in="${projectInstance.dtp}" var="q">
-                                   <tr>
-                                    <td class="name"> 
-                                    <g:link controller="dtp" action="show" id="${q.id}"  params="[pid : projectInstance.id,parentType:'project']">${q?.encodeAsHTML()} </g:link>
-                                    </td>
-                                    <td><img src="${resource(dir:'images',file:'layout_content.png')}" border=0 alt="TEP">
-									<g:if test="${q?.projectOrder}">
+							<g:link controller="localization" action="create" params="[pid : projectInstance.id,parentType:'dtp']">Add DTP</g:link>
                                  
-									<g:link controller="dtpOrder" action="show" id="${q?.projectOrder?.id}"  params="[pid : projectInstance.id,parentType:'project']">${q?.projectOrder}</g:link>&nbsp;&nbsp;${q?.projectOrder?.state}
-                                    
-                                    <g:if test="${q?.projectOrder?.state ==  'new'}">
-                                        <g:link  action="notice" controller="dtpOrder" id="${q?.projectOrder?.id}" params="[pid: projectInstance.id]" onclick="this.disabled = true;\$('#spinner').show();">Notice Now</g:link>
-                                    </g:if>
-                                    
-									</g:if>
-									<g:else>
-									  <g:link controller="dtpOrder" action="create" params="[pid : projectInstance.id, 'localization.id': q.id ,parentType:'project']">Add DTP</g:link>
-									</g:else>
-                                  
+                               <table>  
+                                <g:each in="${projectInstance?.dtp}" var="q">
+                                   <tr>
+                                    <td > 
+                                    <g:link controller="localization" action="show" id="${q.id}"  params="[pid : projectInstance.id,parentType:'dtp']">${q?.encodeAsHTML()} </g:link>
                                     </td>
-									</tr>
-                             
+                                    <td>
+                                    
+									<g:if test="${q?.projectOrder}">
+                                        <img src="${resource(dir:'images',file:'layout_content.png')}" border=0 alt="TEP">
+									    <g:link controller="projectOrder" action="show" id="${q?.projectOrder?.id}"  params="[pid : projectInstance.id]">${q?.projectOrder?.vendor}</g:link>&nbsp;&nbsp;${q?.projectOrder?.state}
+									</g:if>
+                                    </td>
+                                    <td>
+									<g:if test="${q?.projectOrder}">
+                                        <g:if test="${q?.projectOrder?.state ==  'new'}">
+                                            <g:link  action="pdf" controller="my" id="${q?.projectOrder?.id}"  target="_blank">View PO</g:link> |
+                                            <g:link  action="notice" controller="projectOrder" id="${q?.projectOrder?.id}" params="[pid: projectInstance.id]" onclick="this.disabled = true;\$('#spinner').show();">Notice Now</g:link>
+                                        </g:if>
+                                        <g:if test="${q?.projectOrder?.state == 'submit' }">
+                                            <g:link controller="projectOrder" action="processing" id="${q?.projectOrder?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" >Back</g:link> |
+                                            <g:link controller="projectOrder" action="pass" id="${q?.projectOrder?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" >Pass</g:link>
+                                         </g:if>
+                                         <g:if test="${q?.projectOrder?.state == 'invoice'}">
+                                          <g:link controller="projectOrder" action="finished" id="${q?.projectOrder?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" >Paid</g:link>
+                                         </g:if>
+									</g:if>
+                                    <g:else>
+                                      	 <g:link controller="dtpOrder" action="create" params="['project.id' : projectInstance.id, 'localization.id' : q.id ,parentType:'project']">Add DTP</g:link>
+                                    </g:else>
+                                    </td> 
+									</tr> 
                                 </g:each>   
                                 </table>
-                                </ul>
                             </td>
                         </tr>
 
@@ -208,7 +221,7 @@
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${projectInstance?.id}" />
-                     <span class="button"><g:actionSubmit class="edit" action="finished" value="finished" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+                     <span class="button"><g:actionSubmit class="edit" action="finished" value="check finish" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                  
                     <g:if test="${projectInstance?.state == 'finished' }">
                         <g:link action="invoice" id="${projectInstance?.id}">send invoice</g:link>

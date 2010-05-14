@@ -14,6 +14,7 @@ $(function(){
 	$(".wordcount").change(calculate); 
 	$(".discount").change(calculate); 
 	calculate();
+ 
 }); 
 function  cheng(num,n)  {
 	var  dd=1;  

@@ -24,24 +24,41 @@ class LocalizationController {
     def create = {
         def localizationInstance = new Localization()
         localizationInstance.properties = params
+        def project = Project.get(params.pid)
+        
         log.info "loaclization.create $params.pid"
-        return [localizationInstance: localizationInstance , pid : params.pid]
+        return [localizationInstance: localizationInstance , pid : params.pid , total : project?.totalMatchs() , parentType:params.parentType,]
     }
 
     def save = {
         def localizationInstance = new Localization(params)
-        if (params.pid) {
-            //localizationInstance.project = Project.get(params.pid)
-            def project = Project.get(params.pid)
-            project.addToTask(localizationInstance)
- 
-            if (localizationInstance.save(flush: true)) {
-                project.save()
-                flash.message = "${message(code: 'default.created.message', args: [message(code: 'localization.label', default: 'Localization'), localizationInstance.id])}"
-                redirect(action: "show", controller: 'project', id: params.pid)
+        def project = Project.get(params.pid)
+        if (project) {
+            //localizationInstance.project = Project.get(params.pid) 
+            def duplicate = false
+            if (params.parentType == "task") {
+                duplicate = project.compareToTask(localizationInstance)
+            }else if(params.parentType == "dtp"){
+                duplicate = project.compareToDtp(localizationInstance)
+            }
+            if (duplicate) {
+                    flash.message = "${localizationInstance} localization duplicate"
+            }else{
+                 if (localizationInstance.save(flush: true)) { 
+                    if (params.parentType == "task") {
+                        project.addToTask(localizationInstance)
+                        project.save()
+                    }else if(params.parentType == "dtp"){
+                        project.addToDtp(localizationInstance)
+                        project.save()
+                    }
+                    
+                    flash.message = "${message(code: 'default.created.message', args: [message(code: 'localization.label', default: 'Localization'), localizationInstance.id])}"
+                    redirect(action: "show", controller: 'project', id: params.pid)
+                }
             }
         }
-            render(view: "create", model: [localizationInstance: localizationInstance , pid : params.pid, parentType:params.parentType])
+        render(view: "create", model: [localizationInstance: localizationInstance , pid : params.pid, parentType:params.parentType, total : params.total])
      
     }
 
@@ -104,9 +121,14 @@ class LocalizationController {
             }
             try {
                 def project = Project.get(params.pid)
-                project.removeFromTask(localizationInstance)
+                if ("task" == params.parentType) {
+                    project.removeFromTask(localizationInstance)
+                }else if ("dtp" == params.parentType){
+                    project.removeFromDtp(localizationInstance)
+                }
+                project.save(flush: true)
                 localizationInstance.delete(flush: true)
-                project.save()
+                
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'localization.label', default: 'Localization'), params.id])}"
                 redirect(controller: 'project' , action: "show", id: params.pid)
             }
@@ -122,14 +144,15 @@ class LocalizationController {
     }
 // ajax 获取 客户 定价信息的json
     def getPricing = {
-        log.info params.pid
+        log.info "localization.getPricing params.pid = ${params.pid}" 
         def project = Project.get(params.pid)
         if (project) {
             def result = project?.customer?.quote.findAll{
                 it.source == params.source && it.target == params.target
-            }
-            return render(['success': true, 'message': result ] as JSON)
+            } 
+            if (result) return render(['success': true, 'message': result ] as JSON)
+        
         }
-        return render(['success': false])
+        return render(['success': false] as JSON)
     }
 }

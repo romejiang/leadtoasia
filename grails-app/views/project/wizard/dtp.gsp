@@ -9,6 +9,8 @@
         <link rel="stylesheet" href="${resource(dir:'css',file:'cupertino/jquery-ui-1.8.custom.css')}" />
         <g:javascript src="jquery/jquery-ui-1.8.custom.min.js"/>
 		<g:javascript src="flowDTP.js"  />
+ 		<g:javascript src="enterEvent.js"  />
+
     </head>
     <body>
         <div class="nav">

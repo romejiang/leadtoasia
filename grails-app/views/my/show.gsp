@@ -23,10 +23,8 @@
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
-                                <g:each in="${Localization.findAllByProjectOrder(projectOrderInstance)}" var="q">
-                                    <li>${q?.encodeAsHTML()}</li>
-                                </g:each>
-                                </ul>
+                                     <li>${projectOrderInstance?.localization?.encodeAsHTML()}</li>
+                                 </ul>
                             </td>
                             
                         </tr>
@@ -102,6 +100,13 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="projectOrder.invoiceDate.label" default="invoice Date" /></td>
+                            
+                            <td valign="top" class="value"><g:formatDate date="${projectOrderInstance?.invoiceDate}" /></td>
+                            
+                        </tr>
+
+                          <tr class="prop">
                             <td valign="top" class="name"><g:message code="projectOrder.deliveryDate.label" default="Delivery Date" /></td>
                             
                             <td valign="top" class="value"><g:formatDate date="${projectOrderInstance?.deliveryDate}" /></td>

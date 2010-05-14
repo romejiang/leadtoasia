@@ -22,9 +22,9 @@
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
-                                <g:each in="${Localization.findAllByProjectOrder(projectOrderInstance)}" var="q">
-                                    <li>${q?.encodeAsHTML()}</li>
-                                </g:each>
+                                
+                                    <li>${projectOrderInstance?.localization?.encodeAsHTML()}</li>
+                                 
                                 </ul>
                             </td>
                             
@@ -99,8 +99,25 @@
                             
                         </tr>
 
+                        <tr class="prop">
+                            <td valign="top" class="name">Project Attachments</td>
+                            
+                            <td valign="top" class="value"> 
+								<ul>
+								<g:each in="${projectOrderInstance?.project.attachments}" var="f">
+                                    <li> 
+									<fileuploader:download id="${f.id}"
+									errorAction="index"
+									errorController="my">${f.name}</fileuploader:download>
+									</li>
+                                </g:each>
+								</ul>
+							</td>
+                            
+                        </tr>
+
 						<tr class="prop">
-                            <td valign="top" class="name">Attachments</td>
+                            <td valign="top" class="name">PO Attachments</td>
                             
                             <td valign="top" class="value">
                             <div class="warning">

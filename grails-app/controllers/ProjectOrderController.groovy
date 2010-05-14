@@ -67,29 +67,12 @@ class ProjectOrderController {
     }
 
     def save = {
-		log.info "total: $params.total"
-		if(!params.total)params.total = 0
+	 
         def projectOrderInstance = new ProjectOrder(params)
  
         log.info params.matchs?.size()
         if (projectOrderInstance.save(flush: true)) {
-
-
-        // 将这个本地化任务，和当前po关联起来
-//		if(params.localize) {
-//		if(params.localize in String){
-//			params.localize = [params.localize]
-//		}
-//		log.info "projectOrder.save $params.localize"         
-//                params.localize?.each{
-//                    def loc = Localization.get(it)
-//                    if (loc) {
-//                        loc.projectOrder = projectOrderInstance
-//                        projectOrderInstance.localization = loc
-//                        loc.save()
-//                    }
-//                }
-//            }
+ 
             /// 保存给free lance 的报价和折扣
             // word计费方式才需要保持匹配率
             if (params.type == 'word') {
@@ -150,18 +133,18 @@ class ProjectOrderController {
                     
                     projectOrderInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'projectOrder.label', default: 'ProjectOrder')] as Object[], "Another user has updated this ProjectOrder while you were editing")
                     render(view: "edit", model: [projectOrderInstance: projectOrderInstance,
-        pid : params.pid,parentType:params.parentType])
+                        pid : params.pid,parentType:params.parentType])
                     return
                 }
             }
             projectOrderInstance.properties = params
             if (!projectOrderInstance.hasErrors() && projectOrderInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'projectOrder.label', default: 'ProjectOrder'), projectOrderInstance.id])}"
-                redirect(action: "show",controller: 'project', id :  params.pid)
+                redirect(action: "show",controller: 'project', id : projectOrderInstance.project?.id)
             }
             else {
                 render(view: "edit", model: [projectOrderInstance: projectOrderInstance,
-        pid : params.pid,parentType:params.parentType])
+                pid : params.pid,parentType:params.parentType])
             }
         }
         else {
@@ -182,12 +165,12 @@ class ProjectOrderController {
                     } 
                 } 
 //清理和本地化任务的关系
-                def localization = Localization.findByProjectOrder(projectOrderInstance)
-                if (localization) {
-                    localization.projectOrder = null
-                    localization.save()
-                }
-
+//                def localization = projectOrderInstance.localization
+//                if (localization) {
+//                    localization.projectOrder = null
+//                    localization.save()
+//                }
+                projectOrderInstance.localization = null
                 projectOrderInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'projectOrder.label', default: 'ProjectOrder'), params.id])}"
                 redirect(action: "show", controller: "project",id : projectOrderInstance?.project?.id)
@@ -240,10 +223,10 @@ class ProjectOrderController {
         def po =   ProjectOrder.get(params.id)
         if (po) {
             log.info "projectOrder.finished $po"
-            po.state = 'finished';
+            po.state = 'finished'
+            po.invoiceDate = new Date()
             po.save(flush: true)
-  
-
+   
              emailerService.process("ProjectOrderFinished" , po?.vendor?.mails?.mail ){[
                 'to':po?.vendor?.userRealName,
                 'projectNo':po?.project?.projectNo,
@@ -251,6 +234,7 @@ class ProjectOrderController {
                 'projectOrder': po,
                 'project': po?.project
              ]}
+             return redirect(controller: 'project',action: "show" , id : po?.project?.id)
         }
         redirect(action: "show" , id : params.id)
     }
@@ -270,6 +254,7 @@ class ProjectOrderController {
                 'projectOrder': po,
                 'project': po?.project
              ]}
+             return redirect(controller: 'project',action: "show" , id : po?.project?.id)
         }
         redirect(action: "show" , id : params.id)
     }
@@ -291,7 +276,7 @@ class ProjectOrderController {
                 'project': po?.project
              ]}
 
-
+            return redirect(controller: 'project',action: "show" , id : po?.project?.id)
         }
         redirect(action: "show" , id : params.id)
     }

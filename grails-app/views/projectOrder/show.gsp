@@ -124,6 +124,13 @@
                         </tr>
                     
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="projectOrder.invoiceDate.label" default="invoice Date" /></td>
+                            
+                            <td valign="top" class="value"><g:formatDate date="${projectOrderInstance?.invoiceDate}" /></td>
+                            
+                        </tr>
+                    
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="projectOrder.project.label" default="Project" /></td>
                             
                             <td valign="top" class="value"><g:link controller="project" action="show" id="${projectOrderInstance?.project?.id}">${projectOrderInstance?.project?.encodeAsHTML()}</g:link></td>
@@ -179,7 +186,7 @@
 					</g:if>
 
 					<g:if test="${projectOrderInstance?.state == 'invoice'}">
-					  <span class="button"><g:actionSubmit class="edit" action="finished" value="finished" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+					  <span class="button"><g:actionSubmit class="edit" action="finished" value="Paid" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
 					 </g:if>
 
                 </g:form>

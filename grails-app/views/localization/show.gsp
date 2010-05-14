@@ -60,17 +60,26 @@
                             <td valign="top" class="value">${fieldValue(bean: localizationInstance, field: "price")}</td>
                             
                         </tr> 
-                    
+
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="localization.amount.label" default="amount" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: localizationInstance, field: "amount")}</td>
+                            
+                        </tr> 
                     </tbody>
                 </table>
             </div>
             <div class="buttons">
+              <g:if test="${!localizationInstance.projectOrder}">  
                 <g:form>
                     <g:hiddenField name="id" value="${localizationInstance?.id}" />
+                    <g:hiddenField name="parentType" value="${params.parentType}" />
 					<input type="hidden" name="pid" value="${pid}">
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:form>
+                  </g:if>
             </div>
         </div>
     </body>

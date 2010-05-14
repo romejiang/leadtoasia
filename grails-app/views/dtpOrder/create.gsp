@@ -22,8 +22,9 @@
                 <g:renderErrors bean="${projectOrderInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form action="save" method="post" >
-			<input type="hidden" name="pid" id="pid" value="${pid}">
+            <g:form action="save" method="post" > 
+            <input type="hidden" name="project.id" id="project.id" value="${projectOrderInstance.project?.id}">
+            <input type="hidden" name="localization.id" value="${projectOrderInstance.localization?.id}"/>
 
                 <div class="dialog">
                     <table>
@@ -33,11 +34,7 @@
                                     <label ><g:message code="projectOrder.localize.label" default="Localize" /></label>
                                 </td>
                                 <td valign="top" class="value " >
-                                  <g:each in="${Project.get(pid).dtp}" var="loc">
-                                    <g:if test="${!loc.projectOrder}">
-								  <input type="checkbox" name="localize" value="${loc.id}" String="${loc}" class="localize"   />${loc}<br>
-                                  </g:if>
-                                  </g:each>
+                                  ${projectOrderInstance.localization} 
                                 </td>
                             </tr>
                         
@@ -66,38 +63,13 @@
       
                             <tr class="prop">
                                 <td valign="top" class="name">
-                                    <label for="wordcount"><g:message code="projectOrder.wordcount.label" default="Amount" /></label>
+                                    <label for="amount"><g:message code="projectOrder.amount.label" default="Amount" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'wordcount', 'errors')}">
-                                    <g:textField name="wordcount" value="${projectOrderInstance.wordcount}" />
+                                    <g:textField name="wordcount" value="${projectOrderInstance.localization?.amount}" /><g:select name="type" from="${projectOrderInstance.constraints.type.inList}" value="${projectOrderInstance.localization?.type}" valueMessagePrefix="projectOrder.type"  />
                                 </td>
                             </tr>
-                        
-                            <tr class="prop outside">
-                                <td valign="top" class="name">
-                                    <label for="type"><g:message code="projectOrder.type.label" default="Type" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'type', 'errors')}">
-                                    <g:select name="type" from="${projectOrderInstance.constraints.type.inList}" value="${projectOrderInstance?.type}" valueMessagePrefix="projectOrder.type"  />
-                                </td>
-                            </tr>
-                            <tr class="prop outside">
-                                <td valign="top" class="name">
-                                    <label for="paymentTerms"><g:message code="projectOrder.paymentTerms.label" default="Payment Terms" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'paymentTerms', 'errors')}">
-                                    <g:textField name="paymentTerms" maxlength="250" value="${projectOrderInstance?.paymentTerms}" />
-                                </td>
-                            </tr>
-                             <tr class="prop outside">
-                                <td valign="top" class="name">
-                                    <label for="paymentSort"><g:message code="projectOrder.paymentSort.label" default="Payment Sort" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'paymentSort', 'errors')}">
-                                    <g:lookupSelect  name="paymentSort" realm="Payment Sort"
-								 value="${projectOrderInstance.paymentSort}"/>
-                                </td>
-                            </tr>
+
                           
                             <tr class="prop outside">
                                 <td valign="top" class="name">
@@ -115,7 +87,26 @@
                                     <label for="total"><g:message code="projectOrder.total.label" default="Total" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'total', 'errors')}">
-                                    <g:textField name="total" value="${fieldValue(bean: projectOrderInstance, field: 'total')}" /> 
+                                    <g:textField name="total" value="${fieldValue(bean: projectOrderInstance, field: 'total')}" /><input type="button" id="calculate" value="calculate">
+                                </td>
+                            </tr>
+                                                
+                        <tr class="prop outside">
+                                <td valign="top" class="name">
+                                    <label for="paymentSort"><g:message code="projectOrder.paymentSort.label" default="Payment Sort" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'paymentSort', 'errors')}">
+                                    <g:lookupSelect  name="paymentSort" realm="Payment Sort"
+								 value="${projectOrderInstance.paymentSort}"/>
+                                </td>
+                            </tr>
+                         
+                            <tr class="prop outside">
+                                <td valign="top" class="name">
+                                    <label for="paymentTerms"><g:message code="projectOrder.paymentTerms.label" default="Payment Terms" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'paymentTerms', 'errors')}">
+                                    <g:textField name="paymentTerms" maxlength="250" value="${projectOrderInstance?.paymentTerms}" /> days after invoice
                                 </td>
                             </tr>
                         

@@ -58,7 +58,7 @@
                                 <g:link action="invoice" id="${projectInstance.id}">send invoice</g:link>
                             </g:if>
                             <g:else>
-                                <g:link action="finished" id="${projectInstance.id}">check finished</g:link>
+                                <g:link action="finished" id="${projectInstance.id}">check finish</g:link>
                             </g:else>
                             </td>
 

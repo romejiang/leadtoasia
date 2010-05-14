@@ -42,30 +42,30 @@
     <td width="170" >Tel:${projectOrderInstance?.project?.manager?.tel}</td>
   </tr>
   <tr>
-    <td colspan="2">Order No: ${projectOrderInstance?.id}</td>
+    <td colspan="2">Order No: ${projectOrderInstance?.project?.projectNo}</td>
     <td>Email:${projectOrderInstance?.project?.manager?.email}</td>
     <td>Fax:${projectOrderInstance?.project?.manager?.fax}</td>
   </tr>
   <tr>
-    <td width="170" >PO Content: ${projectOrderInstance?.serviceType}</td>
+    <td width="170" >PO State: ${projectOrderInstance?.state}</td>
     <td width="170" >Tel:${projectOrderInstance?.vendor?.tel}</td>
     <td colspan="2">Service Type: ${projectOrderInstance?.serviceType}</td>
   </tr>
   <tr>
     <td>Email:${projectOrderInstance?.vendor?.email}</td>
     <td>Fax:${projectOrderInstance?.vendor?.fax}</td>
-    <td>Adjusted word count: ${projectOrderInstance?.paymentSort}</td>
-    <td>New words: ${projectOrderInstance?.paymentSort}</td>
+    <td colspan="2">Amount: ${projectOrderInstance?.wordcount} ${projectOrderInstance?.type}</td>
+    
   </tr>
   <tr>
-    <td>Source Language: ${Localization.findByProjectOrder(projectOrderInstance)?.source}</td>
-    <td>Field:</td>
-    <td>Target Language: ${Localization.findByProjectOrder(projectOrderInstance)?.target}</td>
-    <td></td>
+    <td>Source Language: </td>
+    <td>${projectOrderInstance?.localization?.source}</td>
+    <td>Target Language: </td>
+    <td>${projectOrderInstance?.localization?.target}</td>
   </tr>
   <tr>
     <td colspan="2">Delivery date: <g:formatDate date="${projectOrderInstance?.deliveryDate}" /></td>
-    <td colspan="2">Rate: ${projectOrderInstance?.rate}</td>
+    <td colspan="2">Rate: ${projectOrderInstance?.rate} ${projectOrderInstance?.unit}</td>
   </tr>
   <tr>
     <td colspan="2" rowspan="5">Any requirements: ${projectOrderInstance?.requirement}</td>
@@ -76,10 +76,10 @@
     <td>Payment terms: ${projectOrderInstance?.paymentTerms}</td>
   </tr>
   <tr>
-    <td colspan="2">Total:${projectOrderInstance?.total}</td>
+    <td colspan="2">Total:${projectOrderInstance?.total} ${projectOrderInstance?.unit}</td>
   </tr>
   <tr>
-    <td colspan="2">PM: </td>
+    <td colspan="2">PM Signature: </td>
   </tr>
   <tr>
     <td colspan="2">Date:<g:formatDate date="${projectOrderInstance?.start}" /></td>
