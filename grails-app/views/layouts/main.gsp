@@ -45,7 +45,8 @@
 		<li><g:link controller='requestmap'   action='index'>Request Map</g:link> 
 	    <li><g:link controller='noticeMail'   >NoticeMail Manage</g:link> 
 		<li><g:link controller='noticeMail'   action='create'>Create NoticeMail</g:link> 
-		<li><g:link controller='exchangeRate'   action='index'>Exchange Rate </g:link> 
+		<li><g:link controller='exchangeRate' action='index'>Exchange Rate </g:link> 
+		<li><g:link controller='exchangeRate' action='exchange'>Exchange</g:link> 
 	 </ol>
 	</g:ifAnyGranted>
 

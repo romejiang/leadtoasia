@@ -39,7 +39,7 @@
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="exchangeRate.rate.label" default="Rate" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: exchangeRateInstance, field: "rate")}</td>
+                            <td valign="top" class="value"><g:formatNumber number="${exchangeRateInstance.rate}" format="#0.00##"  /></td>
                             
                         </tr>
                     

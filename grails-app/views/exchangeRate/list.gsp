@@ -34,7 +34,7 @@
                         
                             <td><g:link action="show" id="${exchangeRateInstance.id}">${fieldValue(bean: exchangeRateInstance, field: "currency")}</g:link></td>
                         
-                            <td>${fieldValue(bean: exchangeRateInstance, field: "rate")}</td>
+                            <td><g:formatNumber number="${exchangeRateInstance.rate}" format="#0.00##"  /></td>
                         
                         </tr>
                     </g:each>

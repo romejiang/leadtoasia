@@ -18,7 +18,7 @@ class ExchangeRateController {
     }
 
     def save = {
-        def exchangeRateInstance = new ExchangeRate(params)
+         def exchangeRateInstance = new ExchangeRate(params)
         if (exchangeRateInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'exchangeRate.label', default: 'ExchangeRate'), exchangeRateInstance.id])}"
             redirect(action: "list")
@@ -35,6 +35,7 @@ class ExchangeRateController {
             redirect(action: "list")
         }
         else {
+            
             [exchangeRateInstance: exchangeRateInstance]
         }
     }
@@ -50,7 +51,8 @@ class ExchangeRateController {
         }
     }
 
-    def update = {
+    def update = { 
+
         def exchangeRateInstance = ExchangeRate.get(params.id)
         if (exchangeRateInstance) {
             if (params.version) {
@@ -63,7 +65,7 @@ class ExchangeRateController {
                 }
             }
             exchangeRateInstance.properties = params
-            if (!exchangeRateInstance.hasErrors() && exchangeRateInstance.save(flush: true)) {
+             if (!exchangeRateInstance.hasErrors() && exchangeRateInstance.save(flush: true)) {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'exchangeRate.label', default: 'ExchangeRate'), exchangeRateInstance.id])}"
                 redirect(action: "list")
             }
@@ -93,6 +95,12 @@ class ExchangeRateController {
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'exchangeRate.label', default: 'ExchangeRate'), params.id])}"
             redirect(action: "list")
+        }
+    }
+
+    def exchange = {
+        if (params.source && params.currency) {
+            return [result : new ExchangeRate().exchange(params.double('source') , params.currency)]
         }
     }
 }

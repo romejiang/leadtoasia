@@ -35,7 +35,7 @@
                                   <label for="currency"><g:message code="exchangeRate.currency.label" default="Currency" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: exchangeRateInstance, field: 'currency', 'errors')}">
-                                    <g:textField name="currency" value="${exchangeRateInstance?.currency}" />
+                                    <g:lookupSelect  name="currency" realm="Monetary Unit"  value="${exchangeRateInstance.currency}"/>
                                 </td>
                             </tr>
                         
@@ -44,7 +44,7 @@
                                   <label for="rate"><g:message code="exchangeRate.rate.label" default="Rate" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: exchangeRateInstance, field: 'rate', 'errors')}">
-                                    <g:textField name="rate" value="${fieldValue(bean: exchangeRateInstance, field: 'rate')}" />
+                                    <g:textField name="rate" value="${exchangeRateInstance.rate}" />
                                 </td>
                             </tr>
                         

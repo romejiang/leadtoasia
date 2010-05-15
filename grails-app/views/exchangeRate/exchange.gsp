@@ -22,7 +22,7 @@
                 <g:renderErrors bean="${exchangeRateInstance}" as="list" />
             </div>
             </g:hasErrors>
-            <g:form action="save" method="post" >
+            <g:form action="exchange" method="post" >
                 <div class="dialog">
                     <table>
                         <tbody>
@@ -32,7 +32,7 @@
                                     <label for="currency"><g:message code="exchangeRate.currency.label" default="Currency" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: exchangeRateInstance, field: 'currency', 'errors')}">
-                                     <g:lookupSelect  name="currency" realm="Monetary Unit"  value="${exchangeRateInstance.currency}"/>
+                                     <g:lookupSelect  name="currency" realm="Monetary Unit"  value="${params.currency}"/>
                                 </td>
                             </tr>
                         
@@ -41,10 +41,20 @@
                                     <label for="rate"><g:message code="exchangeRate.rate.label" default="Rate" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: exchangeRateInstance, field: 'rate', 'errors')}">
-                                    <g:textField name="rate" value="${exchangeRateInstance.rate}" />
+                                    <g:textField name="source" value="${params.source}" />
                                 </td>
                             </tr>
-                        
+                            <g:if test="${result}">
+                            
+                             <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="rate">Result</label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: exchangeRateInstance, field: 'rate', 'errors')}">
+                                     ${result} USD
+                                </td>
+                            </tr> 
+                            </g:if>                      
                         </tbody>
                     </table>
                 </div>

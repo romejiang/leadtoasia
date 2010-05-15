@@ -2,10 +2,10 @@
 // 目标都是美圆
 class ExchangeRate {
     String currency   // 源货币 
-    Float rate // 汇率
+    Double rate // 汇率
 
     static constraints = {
- 		currency(blank: false) 
+ 		currency(blank: false,unique : true) 
 		rate(blank: false)
     }
     String toString (){ 
@@ -14,12 +14,12 @@ class ExchangeRate {
 //    float a = 999.3599f; //设数值 
 //    int b = (int)Math.round(a * 100); //小数点后两位前移，并四舍五入 
 //    float c = (double)b / 100.00; //还原小数点后两位 
-    float exchange(float source){
-        def temp = (int)Math.round(((source/100) * rate)*100)
+    double exchange(double source){
+        def temp = (int)Math.round((source * rate)*100)
         (double)temp / 100.00
     }
 
-    float exchange(float source , String currency ){
+    double exchange(double source , String currency ){
         if (currency == 'USD') {
             return source
         }
