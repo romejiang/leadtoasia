@@ -205,7 +205,7 @@ class ProjectController {
         }
     }
     
-    // 项目完成标志，需要手动出发
+    // 检查项目完成标志，需要手动出发
     def finished = {
 	    log.info params.id
         def project = Project.get(params.id)
@@ -222,12 +222,23 @@ class ProjectController {
             log.info "project.finished  $result~!"
             if (result) {
                 project.state = 'finished'
+                
                 if (project.save(flush:true)) {
                     flash.message = "Project " + project+ " is finished."
                 } 
             }
         } 
         redirect(action: "list")
+    }
+
+    def paid = {
+        def project = Project.get(params.id) 
+        if (project) {
+            project.state = "paid"
+            project.invoiceDate = new Date()
+            project.save()
+        }
+        redirect(action: "show", id: params.id)
     }
 
         // 给客户发送invoice

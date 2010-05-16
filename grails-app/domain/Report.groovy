@@ -18,6 +18,21 @@ class Report {
 			}) 
     }
 
+    static mapping = {
+        sort deadline:"desc" 
+    }
+
+    static namedQueries = { 
+        someMonth { year , month ->
+            def calendar = Calendar.getInstance()
+            calendar.set(  year ,month-1 ,1 , 0 ,0) 
+            def first = calendar.getTime()
+            calendar.set(  year ,month ,1 , 0 ,0) 
+            def end = calendar.getTime()
+            between 'deadline', first , end
+        } 
+    }
+
     String toString (){ 
         "$project $income - $expenses = $profit"
     }

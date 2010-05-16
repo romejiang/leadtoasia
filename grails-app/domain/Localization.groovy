@@ -50,5 +50,11 @@ class Localization implements Comparable , Serializable{
     int compareTo(obj) {
        target.compareTo(obj.target)
     }
+
+    float income(){
+        def er = new ExchangeRate()
+
+        er.exchange(price * amount , unit)
+    }
  
 }

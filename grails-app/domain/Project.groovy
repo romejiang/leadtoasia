@@ -17,7 +17,7 @@ class Project implements Serializable{
     String content
 //	项目交付日期，
     Date deadline  = new Date() + 1
-    Date invoiceDate = new Date()
+    Date invoiceDate  
 
 //	项目状态 = open close paid processing
     String state = 'open'
@@ -39,7 +39,7 @@ class Project implements Serializable{
 		deadline(validator:{val, obj->
 			  return val.after(obj.start)
 			})
-
+        invoiceDate(nullable: true)
         state(blank: false , inList:['open','finished','invoice','paid','processing'])
  
 		content(blank: true, size:0..255) 
@@ -80,5 +80,19 @@ class Project implements Serializable{
         dtp?.any{
                     it.target.compareTo(obj.target) == 0 && it.source.compareTo(obj.source) == 0
         }
+    }
+
+    Report buildReport(){
+        if (state == 'paid' && invoiceDate != null ) {
+            income = this.task.sum{
+                er.exchange()
+            }
+            Report report = new Report(project: this , start : this.start, deadline : this.invoiceDate)
+            float income //收 入
+            float expenses  //支出
+            float profit // 盈利
+            return 
+        }
+        return null
     }
 }
