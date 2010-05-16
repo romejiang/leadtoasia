@@ -20,19 +20,14 @@ class PayNoticeJob {
         }
         results.each{
              def pdflink = "${request.scheme}://${request.serverName}:${request.serverPort}${request.contextPath}/projectOrder/show/" + it.id
-              
-            def config = authenticateService.securityConfig
-            if (config.security.useMail) {
-                  def notice = Notice.findByName("ProjectPay")
-                if (notice) { 
-                    def email = [
-                        to: NoticeMail.findAll().mail, // 'to' expects a List, NOT a single email address
-                        subject: "[${it?.project?.projectNo}] ${notice.title}",
-                        text: notice.content +  pdflink // 'text' is the email body
-                    ]
-                    emailerService.sendEmails([email])   
-                }
-			}
+  
+              emailerService.process("ProjectPay" , NoticeMail.findAll().mail ){[
+                'to': "manager" ,
+                'projectNo':it?.project?.projectNo,
+                'pdflink':pdflink,
+                'projectOrder': it,
+                'project': it?.project
+             ]}
         }
 
         // 该收款的
@@ -43,35 +38,25 @@ class PayNoticeJob {
         }
         results.each{
              def pdflink = "${request.scheme}://${request.serverName}:${request.serverPort}${request.contextPath}/project/show/" + it.id
-              
-            def config = authenticateService.securityConfig
-            if (config.security.useMail) {
-                  def notice = Notice.findByName("ProjectReceiving")
-                if (notice) { 
-                    def email = [
-                        to: NoticeMail.findAll().mail, // 'to' expects a List, NOT a single email address
-                        subject: "[${it}] ${notice.title}",
-                        text: notice.content +  pdflink // 'text' is the email body
-                    ]
-                    emailerService.sendEmails([email])   
-                }
-			}
+            
+
+             emailerService.process("ProjectReceiving" , NoticeMail.findAll().mail ){[
+                'to': "manager" ,
+                'projectNo':it?.projectNo,
+                'pdflink':pdflink, 
+                'project': it
+             ]} 
         }
         // 该完结的项目
         results = Project.findAllByDeadlineBetween(new Date() , new Date()+3)
         results.each{
-            def config = authenticateService.securityConfig
-            if (config.security.useMail) {
-                  def notice = Notice.findByName("ProjectDeadline")
-                if (notice) { 
-                    def email = [
-                        to: it?.manager?.mails?.mail, // 'to' expects a List, NOT a single email address
-                        subject: "[${it.projectNo}] ${notice.title}",
-                        text: notice.content  // 'text' is the email body
-                    ]
-                    emailerService.sendEmails([email])   
-                }
-			}
+
+             emailerService.process("ProjectDeadline" , it?.manager?.mails?.mail ){[
+                'to': it?.manager?.userRealName ,
+                'projectNo':it?.project?.projectNo,  
+                'project': it
+             ]}
+            
         }
     }
 }

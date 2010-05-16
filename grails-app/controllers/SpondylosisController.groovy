@@ -6,6 +6,7 @@ import java.awt.geom.Rectangle2D
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
 import java.awt.geom.AffineTransform
+import com.lucastex.grails.fileuploader.*
 
 class SpondylosisController {
 
@@ -83,4 +84,51 @@ class SpondylosisController {
     out.close()
 
    }
+
+	def messageSource
+  def test = { 
+	
+		UFile ufile = UFile.get(21)
+		if (!ufile) {
+			def msg = messageSource.getMessage("fileupload.download.nofile", [23] as Object[], request.locale)
+			log.debug msg
+			flash.message = msg
+			redirect controller: params.errorController, action: params.errorAction
+			return
+		}
+		
+		def file = new File(ufile.path)
+		if (file.exists()) {
+			log.debug "Serving file id=[${ufile.id}] for the ${ufile.downloads} to ${request.remoteAddr}"
+			ufile.downloads++
+			ufile.save()
+            params.contentDisposition = params.contentDisposition? params.contentDisposition: "attachment"
+			response.setContentType("application/octet-stream;charset=UTF-8")
+            response.setHeader("Pragma", "No-cache"); 
+            response.setHeader("Cache-Control", "No-cache"); 
+            response.setDateHeader("Expires", 0);
+			response.setHeader("Content-disposition", "${params.contentDisposition}; filename=${new String(file.name.getBytes(),'iso8859-1')}") 
+            response.setHeader("Content-Length", "${file.size()}");  
+
+            BufferedInputStream bufferedInput = file.newInputStream() 
+            BufferedOutputStream output = new BufferedOutputStream(response.outputStream);
+            
+            byte[] buffer = new byte[2048];
+            int bytesRead = 0;
+            while (-1 != (bytesRead = bufferedInput.read(buffer))) {
+                output << buffer
+            }
+            response.flushBuffer()
+
+            bufferedInput.close()
+            output.close()
+			return
+		} else {
+			def msg = messageSource.getMessage("fileupload.download.filenotfound", [ufile.name] as Object[], request.locale)
+			log.error msg
+			flash.message = msg
+			redirect controller: params.errorController, action: params.errorAction
+			return
+		}
+	}
 }

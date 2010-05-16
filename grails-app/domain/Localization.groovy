@@ -37,10 +37,10 @@ class Localization implements Comparable , Serializable{
         "$source-$target"
     }
     boolean checkDomain (){ 
-        (org.grails.plugins.lookups.Lookup.valueFor("Language",  source) != null 
-        && org.grails.plugins.lookups.Lookup.valueFor("Language",  target) != null
-        && target != source
-        && org.grails.plugins.lookups.Lookup.valueFor("Monetary Unit", unit) != null )
+//        (org.grails.plugins.lookups.Lookup.valueFor("Language",  source) != null 
+//        && org.grails.plugins.lookups.Lookup.valueFor("Language",  target) != null
+        target != source
+//        && org.grails.plugins.lookups.Lookup.valueFor("Monetary Unit", unit) != null )
     }
     static mapping = {
 	   

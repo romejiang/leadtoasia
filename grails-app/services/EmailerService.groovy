@@ -57,20 +57,8 @@ class EmailerService {
     def engine = new SimpleTemplateEngine()
 
     def process(String noticeName  ,Collection mails , Closure callable){
-
-            def config = authenticateService.securityConfig
-            if (config.security.useMail) {
-                def notice = Notice.findByName(noticeName)
-                def binding = callable.call()
-                if (notice && binding && !mails?.isEmpty() ) { 
-                    def email = [
-                        to: mails, // 'to' expects a List, NOT a single email address
-                        subject: make(notice.title, binding),
-                        text: make(notice.content, binding) // 'text' is the email body
-                    ]
-                    sendEmails([email])
-                }
-			}
+         def notice = Notice.findByName(noticeName)
+         process(notice , mails ,callable);
     }
     def process(Notice notice  ,Collection mails , Closure callable){
 

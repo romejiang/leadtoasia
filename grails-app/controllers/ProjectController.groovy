@@ -318,15 +318,15 @@ class ProjectController {
                 // 3.task
                 def languageCode = org.grails.plugins.lookups.Lookup.codeList('Language')
                 def localizationList = languageCode.collect{ code->
-                    new Localization(target: code.value)
+                    new Localization(target: code.code)
                 }
                 flow.localizationInstanceList = localizationList
                 // 4.dtp
                 def DTPList = languageCode.collect{ code->
-                    new Localization(target: code.value )
+                    new Localization(target: code.code )
                 }
                 flow.DTPInstanceList = DTPList
-                flow.source = languageCode.toList()[0].value
+                flow.source = languageCode.toList()[0].code
                 // 5.file
                
             }

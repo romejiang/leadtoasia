@@ -43,7 +43,7 @@ class MyController {
     }
           
             emailerService.process("ProjectOrderProcessing" , po?.project?.manager?.mails?.mail ){[
-                'to':po?.vendor?.userRealName,
+                'to':po?.project?.manager?.userRealName,
                 'projectNo':po?.project?.projectNo,
 //                'pdflink':pdflink,
                 'projectOrder': po,
@@ -86,7 +86,7 @@ class MyController {
             
 
             emailerService.process("ProjectOrderSubmit" , po?.project?.manager?.mails?.mail ){[
-                'to':po?.vendor?.userRealName,
+                'to':po?.project?.manager?.userRealName,
                 'projectNo':po?.project?.projectNo,
 //                'pdflink':pdflink,
                 'projectOrder': po,
@@ -122,7 +122,7 @@ class MyController {
              
 
                 emailerService.process("ProjectOrderInvoice" , projectOrderInstance?.project?.manager?.mails?.mail ){[
-                'to':projectOrderInstance?.vendor?.userRealName,
+                'to': projectOrderInstance?.project?.manager?.userRealName,
                 'projectNo':projectOrderInstance?.project?.projectNo,
 //                'pdflink':pdflink,
                 'projectOrder': projectOrderInstance,
