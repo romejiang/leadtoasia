@@ -24,8 +24,7 @@
                    	     
                    	    <g:sortableColumn property="wordcount" title="Wordcount" titleKey="projectOrder.wordcount" />
                         
-                   	    <g:sortableColumn property="requirement" title="Requirement" titleKey="projectOrder.requirement" />
-                        
+                         
                    	    <g:sortableColumn property="deliveryDate" title="Delivery Date" titleKey="projectOrder.deliveryDate" />
                         <th>PO</th>
                         <th>Status</th>
@@ -45,8 +44,7 @@
                          
                             <td>${fieldValue(bean: projectOrderInstance, field: "wordcount")}</td>
                         
-                            <td>${fieldValue(bean: projectOrderInstance, field: "requirement")}</td>
-                        
+                         
                             <td><g:formatDate date="${projectOrderInstance.deliveryDate}"   /></td>
                             <td>
 							<g:link uri="/my/pdf/${projectOrderInstance.id}" target="_blank">PO</g:link> 

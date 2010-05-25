@@ -154,15 +154,18 @@ class ProjectController {
         if (projectInstance) {
             try {
                 projectInstance.attachments?.each {   
-                    it.delete()
+                    it.delete(flush:true)
                 }
                 projectInstance.matchs?.each {   
-                    it.delete()
+                    it.delete(flush:true)
                 }
                 projectInstance.dtp?.each {   
-                    it.delete()
+                    
+                    it?.projectOrder.delete(flush:true)
+                    it.delete(flush:true)
                 }
                 projectInstance.task?.each {   
+                    it?.projectOrder.delete(flush:true)
                     it.delete()
                 }
 
@@ -329,12 +332,12 @@ class ProjectController {
                 // 3.task
                 def languageCode = org.grails.plugins.lookups.Lookup.codeList('Language')
                 def localizationList = languageCode.collect{ code->
-                    new Localization(target: code.code)
+                    new Localization(target: code.code,type : 'word')
                 }
                 flow.localizationInstanceList = localizationList
                 // 4.dtp
                 def DTPList = languageCode.collect{ code->
-                    new Localization(target: code.code )
+                    new Localization(target: code.code ,type : 'page' )
                 }
                 flow.DTPInstanceList = DTPList
                 flow.source = languageCode.toList()[0].code

@@ -70,7 +70,7 @@
                                     <label for="deadline"><g:message code="project.deadline.label" default="Deadline" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'deadline', 'errors')}">
-                                    <g:datePicker name="deadline" precision="day" value="${projectInstance?.deadline}"  />
+                                    <g:datePicker name="deadline" precision="hour" value="${projectInstance?.deadline}"  />
                                 </td>
                             </tr>
                          
