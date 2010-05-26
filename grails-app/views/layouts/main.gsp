@@ -46,7 +46,13 @@
 	    <li><g:link controller='noticeMail'   >NoticeMail Manage</g:link> 
 		<li><g:link controller='noticeMail'   action='create'>Create NoticeMail</g:link> 
 		<li><g:link controller='exchangeRate' action='index'>Exchange Rate </g:link> 
-		<li><g:link controller='exchangeRate' action='exchange'>Exchange</g:link> 
+		<li><g:link controller='exchangeRate' action='exchange'>Test Exchange</g:link> 
+	 </ol>
+     	  	  <h1>Report</h1>
+	  <ol> 
+		<li><g:link controller='report' action="build">Build Report</g:link> 
+		<li><g:link controller='report' >Last Report</g:link>
+		<li><g:link controller='report'  action='history'>History Report</g:link>
 	 </ol>
 	</g:ifAnyGranted>
 
@@ -83,6 +89,7 @@
             
 			<li><g:link controller="my" action="cv" >Upload CV</g:link>
 			<li><g:link controller="skill" action="index" >My Language</g:link>
+			<li><g:link controller="invoiceInfo" action="index" >Payment Info</g:link>
 			
 		   </ol>
 		   

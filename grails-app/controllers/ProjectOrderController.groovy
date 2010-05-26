@@ -247,7 +247,7 @@ class ProjectOrderController {
             po.state = 'processing';
             po.save(flush: true)
 
-            emailerService.process("ProjectOrderProcessing" , po?.vendor?.mails?.mail ){[
+            emailerService.process("ProjectOrderBack" , po?.vendor?.mails?.mail ){[
                 'to':po?.vendor?.userRealName,
                 'projectNo':po?.project?.projectNo,
 //                'pdflink':pdflink,

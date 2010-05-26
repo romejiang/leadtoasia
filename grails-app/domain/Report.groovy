@@ -2,7 +2,7 @@
 
 class Report {
     Project project
-    float income //收 入
+    float income //收 入 都按美金计算
     float expenses  //支出
     float profit // 盈利
     Date start

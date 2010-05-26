@@ -13,7 +13,7 @@
             <h1><g:message code="default.show.label" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
-            </g:if>
+            </g:if><g:form>
             <div class="dialog">
                 <table>
                     <tbody>
@@ -68,6 +68,13 @@
                             <td valign="top" class="value">${new java.text.DecimalFormat("#0.00").format(projectOrderInstance?.rate)} ${projectOrderInstance.unit}</td>
                             
                         </tr>
+
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="projectOrder.total.label" default="total" /></td>
+                            
+                            <td valign="top" class="value">${new java.text.DecimalFormat("#0.00").format(projectOrderInstance?.total)} ${projectOrderInstance.unit}</td>
+                            
+                        </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="projectOrder.deliveryDate.label" default="Delivery Date" /></td>
@@ -91,13 +98,21 @@
                             
                         </tr>
 					 
-
+                        <tr class="prop">
+                            <td valign="top" class="name">Select Payment</td>
+                            
+                            <td valign="top" class="value">
+                            <g:select  name="invoiceInfo" id="invoiceInfo" class="userSelected"  from="${invoiceInfoInstanceList}" value="${invoice}"
+                                                noSelection="['':'-Choose Payment Info-']" optionKey="id"  />
+                            </td>
+                            
+                        </tr>
 						 
                     </tbody>
                 </table>
             </div>
             <div class="buttons">
-                 <g:form>
+                 
                     <g:hiddenField name="id" value="${projectOrderInstance?.id}" /> 
                     <span class="button"><g:actionSubmit class="edit" action="invoiced" value="send invoice"  onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
                  </g:form>

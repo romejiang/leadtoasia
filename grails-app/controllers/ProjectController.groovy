@@ -153,22 +153,27 @@ class ProjectController {
         def projectInstance = Project.get(params.id)
         if (projectInstance) {
             try {
-                projectInstance.attachments?.each {   
-                    it.delete(flush:true)
+//                projectInstance.attachments?.each {   
+//                    it.delete(flush:true)
+//                }
+//                projectInstance.matchs?.each {   
+//                    it.delete(flush:true)
+//                }
+                if (projectInstance.dtp) {
+                     projectInstance.dtp.toList().each {   
+                        projectInstance.dtp.remove(it)
+                        it?.projectOrder?.delete(flush:true) 
+                        it.delete(flush:true)
+                    }                   
                 }
-                projectInstance.matchs?.each {   
-                    it.delete(flush:true)
+                if (projectInstance.task) {
+                     projectInstance.task.toList().each {   
+                        projectInstance.task.remove(it)
+                        it?.projectOrder?.delete(flush:true) 
+                        it.delete(flush:true)
+                    }                   
                 }
-                projectInstance.dtp?.each {   
-                    
-                    it?.projectOrder.delete(flush:true)
-                    it.delete(flush:true)
-                }
-                projectInstance.task?.each {   
-                    it?.projectOrder.delete(flush:true)
-                    it.delete()
-                }
-
+     
                 projectInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
                 redirect(action: "list")

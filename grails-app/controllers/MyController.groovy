@@ -50,7 +50,7 @@ class MyController {
                 'project': po?.project
              ]}
 
-
+    flash.message = "Job Confirmed"
 	redirect(action: "index",params: [state:'processing'])
    }
     // 完成任务
@@ -100,21 +100,28 @@ class MyController {
             log.error it
         } 
    }
+    flash.message = "Job Submitted, Please wait."
 	redirect(action: "index",params: [state:'submit'])
    }
    // 提交账单 invoice
    def invoice = {
         def projectOrderInstance = ProjectOrder.get(params.id)
         if (projectOrderInstance) {
-            [projectOrderInstance: projectOrderInstance]
+            [projectOrderInstance: projectOrderInstance ,
+                invoiceInfoInstanceList: InvoiceInfo.findAllByUser(authenticateService.userDomain() , [order:'desc' , sort: 'head']) ]
         }else{
             redirect(action: "index",params: [state:'pass'])
         }
    }
    def invoiced = {
+         if (!params.invoiceInfo) {
+            flash.message = "Please select payment ."
+            return redirect(action: "invoice",id: params.id)
+        }
         def projectOrderInstance = ProjectOrder.get(params.id)
+        def InvoiceInfo = InvoiceInfo.get(params.invoiceInfo)
 
-        if (projectOrderInstance) {
+        if (projectOrderInstance && projectOrderInstance.state == 'pass') {
             projectOrderInstance.state = 'invoice';
             projectOrderInstance.invoiceDate = new Date()
 
@@ -126,9 +133,10 @@ class MyController {
                 'projectNo':projectOrderInstance?.project?.projectNo,
 //                'pdflink':pdflink,
                 'projectOrder': projectOrderInstance,
-                'project': projectOrderInstance?.project
+                'project': projectOrderInstance?.project,
+                'invoiceInfo': InvoiceInfo
              ]}
-
+                flash.message = "Sent successfully."
                 return redirect(action: "index",params: [state:'invoice']) 
             }else{
                 projectOrderInstance.errors.allErrors.each {

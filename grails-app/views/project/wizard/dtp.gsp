@@ -46,7 +46,7 @@
                             </tr>
                             <g:each in="${DTPInstanceList}" var="localizationInstance" status="i">
                             
-                            <tr id="tr_${localizationInstance.target.replace(' ','')}" class="${localizationInstance.type ? '' : 'hide'}">
+                            <tr id="tr_${localizationInstance.target.replace(' ','')}" class="${localizationInstance.price ? '' : 'hide'}">
                                 <td valign="top">
                                     <label for="target"><g:message code="localization.target.label" default="Target" />:</label>
                                 </td>
@@ -93,7 +93,7 @@
                 <div id="dialog-select" class="hide" title="select localization">
         <ul  style="text-align:left">
         <g:each in="${DTPInstanceList}" var="localizationInstance" status="i">
-            <li><input type="checkbox" name="selectLocalization" class="selectLocalization" ${localizationInstance.type ? 'checked' : ''} value="${localizationInstance.target.replace(' ','')}">${localizationInstance.target} 
+            <li><input type="checkbox" name="selectLocalization" class="selectLocalization" ${localizationInstance.price ? 'checked' : ''} value="${localizationInstance.target.replace(' ','')}">${localizationInstance.target} 
         </g:each>
         </ul>
         </div>
