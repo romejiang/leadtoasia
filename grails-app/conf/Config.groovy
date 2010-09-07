@@ -74,7 +74,7 @@ log4j = {
 fileuploader {
 	docs {
 		maxSize = 1000 * 1024 * 10 //4 mbytes
-		allowedExtensions = ["doc", "docx", "pdf", "rtf", "rar", "zip", "txt", "xml"]
+		allowedExtensions = ["doc", "docx", "pdf", "rtf", "rar", "zip", "txt", "xml","ttx"]
 		path = "/tmp/docs/"
         keepOriginalFilename = true
 	}
@@ -87,7 +87,7 @@ environments {
         fileuploader {
             docs {
                 maxSize = 1000 * 1024 * 200 //4 mbytes
-                allowedExtensions = ["doc", "docx", "pdf", "rtf", "rar", "zip", "txt", "xml"]
+                allowedExtensions = ["doc", "docx", "pdf", "rtf", "rar", "zip", "txt", "xml","ttx"]
                 path = "/opt/fileuploader/"
                 keepOriginalFilename = true
             }

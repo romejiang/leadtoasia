@@ -16,10 +16,10 @@ environments {
 			//dbCreate = "update"
 			//url = "jdbc:hsqldb:file:prodDb;shutdown=true"
 			dbCreate = "update" // one of 'create', 'create-drop','update'
-			url = "jdbc:mysql://117.34.88.91:3306/lead?useUnicode=true&characterEncoding=utf8"		 
+			url = "jdbc:mysql://127.0.0.1:3306/leadtoasia?useUnicode=true&characterEncoding=utf8"		 
 //			url = "jdbc:mysql://127.0.0.1:3306/leadtoasia?useUnicode=true&characterEncoding=utf8"		 
 			driverClassName = "org.gjt.mm.mysql.Driver"
-			username = "user"
+			username = "root"
 			password = "1qazxsw2"
 		}
 	}

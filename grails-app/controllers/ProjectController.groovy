@@ -25,8 +25,24 @@ class ProjectController {
                 return [projectInstanceList: Project.list(params), projectInstanceTotal: Project.count()]    
             }else if(authenticateService.ifAllGranted("ROLE_MANAGER")){	
                 log.info "project.list in ROLE_MANAGER"
-                return [projectInstanceList: Project.findAllByManager(authenticateService.userDomain(), params), 
-                projectInstanceTotal: Project.countByManager(authenticateService.userDomain())]
+                if (params.state) {
+                    return [projectInstanceList: Project.findAllByManagerAndState(authenticateService.userDomain(),  params.state,params), 
+                    projectInstanceTotal: Project.countByManagerAndState(authenticateService.userDomain() ,  params.state)]
+                }else{
+                    return [projectInstanceList:Project.withCriteria(uniqueResult:true) {
+                            and{
+                            eq('manager', authenticateService.userDomain())
+                            ne('state', 'paid')
+                            }
+                        }, 
+                    projectInstanceTotal: Project.withCriteria() {
+                            and{
+                            eq('manager', authenticateService.userDomain())
+                            ne('state', 'paid')
+                            }
+                            count("projectNo")
+                        }]
+                }
             }
         }
 	    redirect(uri: '/')
@@ -246,7 +262,7 @@ class ProjectController {
             project.invoiceDate = new Date()
             project.save()
         }
-        redirect(action: "show", id: params.id)
+        redirect(action: "list",  id: params.id , params: ['state' : 'paid'])
     }
 
         // 给客户发送invoice
@@ -337,12 +353,12 @@ class ProjectController {
                 // 3.task
                 def languageCode = org.grails.plugins.lookups.Lookup.codeList('Language')
                 def localizationList = languageCode.collect{ code->
-                    new Localization(target: code.code,type : 'word')
+                    new Localization(target: code.code) //,type : 'word'
                 }
                 flow.localizationInstanceList = localizationList
                 // 4.dtp
                 def DTPList = languageCode.collect{ code->
-                    new Localization(target: code.code ,type : 'page' )
+                    new Localization(target: code.code  )//,type : 'page'
                 }
                 flow.DTPInstanceList = DTPList
                 flow.source = languageCode.toList()[0].code

@@ -239,24 +239,40 @@ class ProjectOrderController {
         redirect(action: "show" , id : params.id)
     }
 
+    def  goback = {
+        def noticeInstance = Notice.findByName("ProjectOrderBack")
+        if (!noticeInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'notice.label', default: 'Notice'), 'ProjectOrderNew'])}"
+            redirect(action: "list")
+        }
+        else {
+            return [noticeInstance: noticeInstance , id : params.id , pid : params.pid]
+        }
+    }
         // review 验证项目的状态
     def processing = {
+  
         def po =   ProjectOrder.get(params.id)
         if (po) {
             log.info "projectOrder.processing $po"
             po.state = 'processing';
             po.save(flush: true)
 
-            emailerService.process("ProjectOrderBack" , po?.vendor?.mails?.mail ){[
-                'to':po?.vendor?.userRealName,
+             def noticeInstance = new Notice(params)
+            emailerService.process(noticeInstance ,  po?.vendor?.mails?.mail){[
+               'to':po?.vendor?.userRealName,
                 'projectNo':po?.project?.projectNo,
 //                'pdflink':pdflink,
                 'projectOrder': po,
                 'project': po?.project
              ]}
-             return redirect(controller: 'project',action: "show" , id : po?.project?.id)
+            flash.message = "send back notice success!" 
         }
-        redirect(action: "show" , id : params.id)
+        if (params.pid) {
+            redirect(action: "show" , controller: "project",id : params.pid )
+        }else{
+            redirect(action: "show" , id :  params.id)
+        }
     }
 
         // close 验证项目的状态
@@ -264,7 +280,12 @@ class ProjectOrderController {
         def po =   ProjectOrder.get(params.id)
         if (po) {
             log.info "projectOrder.pass $po"
-            po.state = 'pass';
+            if (po.vendor.fullTime) {
+               po.state = 'finished'; 
+            }else{
+                po.state = 'pass'; 
+            }
+        
             po.save(flush: true)
            
 

@@ -41,7 +41,7 @@ Building Nathan Road <br/>
 Telephone: +852 8199 9307 <br/>
 Fax:  +852 2783 7978 <br/>
 Email: <a href="mailto:accounting@leadtoasia.com">accounting@leadtoasia.com</a> <br/><br/>
-Invoice Number 100525 <br/>
+Invoice Number ${projectInstance?.projectNo} <br/>
 </div>
 <div class="info">
 Anthony van de Veen <br/>
@@ -51,7 +51,7 @@ Tel: 31 646053148  <br/>
 Date: 8th January 2010 <br/>
 Fax:  <br/>
 E-mail:<a href="mailto:anthony@nimbuzz.com">anthony@nimbuzz.com </a><br/>
-Order Number: EN-Multiple languages <br/>
+<br/>
         </div>
   
 <table width="680" align="center" border="1">
@@ -75,6 +75,7 @@ Order Number: EN-Multiple languages <br/>
 				<li>${m.encodeAsHTML()}</li>   
 		<g:set var="totalwords" value="${totalwords + m.discount * m.wordcount/100}" />
 		</g:each></ul>
+        Total : ${totalwords} words
 	</g:if>
 	<g:if test="${localizationInstance.type == 'hour'}">
 		<g:set var="totalwords" value="${localizationInstance?.projectOrder?.wordcount}" />

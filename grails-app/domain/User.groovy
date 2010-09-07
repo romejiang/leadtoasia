@@ -50,6 +50,6 @@ class User implements Serializable{
 	  
 	}
 	String toString(){
-		"${userRealName} ${fullTime?'<':'>'}"
+		"${userRealName} ${fullTime?'（^_^）':'（╰_╯）'}"
 	}
 }

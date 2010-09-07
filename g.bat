@@ -182,7 +182,7 @@ goto end
 
 
 :run-app
-call grails run-app                 %2 %3  -server -Xmx800M 
+call grails run-app                 %2 %3  -server -Xmx800M   -Dserver.port=80
 rem -Dserver.port=80
 goto end
 

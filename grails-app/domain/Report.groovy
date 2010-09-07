@@ -8,7 +8,7 @@ class Report {
     Date start
     Date deadline
     static constraints = {
-    	project()
+    	project(unique:true)
 		income(blank: false)
 		expenses(blank: false)
 		profit(blank: false)

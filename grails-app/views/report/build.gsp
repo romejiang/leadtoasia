@@ -71,7 +71,7 @@
 							dtp:${projectInstance?.dtp?.size()}  <br>
                             </td>
                             <td>
-                            <g:link uri="/project/pdf/${projectInstance?.id}" target="_blank">view invoice</g:link>  
+                            <g:link id="${projectInstance?.id}" action="buildReport">Build Report</g:link>  
  							</td>
                         </tr>
                     </g:each>

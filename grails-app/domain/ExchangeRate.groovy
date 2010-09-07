@@ -19,7 +19,7 @@ class ExchangeRate {
         (double)temp / 100.00
     }
 
-    double exchange(double source , String currency ){
+    static double exchange(double source , String currency ){
         if (currency == 'USD') {
             return source
         }

@@ -6,7 +6,7 @@ class Match  implements Comparable , Serializable{
 
     static constraints = {
         wordcount(blank: false )
-        match(blank: false ,size:0..20, inList:['No match','95% - 99% & 100%','75% - 95%','50%-74%'])
+        match(blank: false ,size:0..20, inList: ['Repetitions','100%','95% - 99%','85% - 94%','75% - 84%','50%-74%','No match'])
         discount(blank: false,range: 1..100)
     }
     static mapping = {

@@ -4,6 +4,7 @@ import com.lucastex.grails.fileuploader.UFile
 class Project implements Serializable{
 // 项目编号
 	String projectNo
+//    String name
     //客户项目号
     String fromNo 
 //    客户名称，
@@ -45,6 +46,8 @@ class Project implements Serializable{
 		content(blank: true, size:0..255) 
 
         manager()
+//        name(blank: true, size:0..250)
+
 //        dtp( nullable: true)
     }
 
@@ -83,15 +86,44 @@ class Project implements Serializable{
     }
 
     Report buildReport(){
-        if (state == 'paid' && invoiceDate != null ) {
-            income = this.task.sum{
-                er.exchange()
-            }
-            Report report = new Report(project: this , start : this.start, deadline : this.invoiceDate)
+//        if (state == 'paid' && invoiceDate != null ) {
+        if (state == 'paid' || state == 'finished' ) {
+            Report report = Report.findByProject(this)
+            if(report)report.delete(flush: true)
+
             float income //收 入
             float expenses  //支出
             float profit // 盈利
-            return 
+
+             
+            float match 
+            match = this.matchs.sum{
+                it.total()
+            }
+            this.task.each{
+                if (it.type == 'word') {
+                    it.amount = match
+                    it.save()
+                }
+            }
+            income = this.task.sum{ task-> 
+                return task.income();
+            }
+
+            expenses = this.task.sum{ task->
+                return task.expenses()
+            }
+
+            report = new Report(
+                project: this , 
+                start : this.start, 
+                deadline : this.invoiceDate,
+                income : income,
+                expenses : expenses ,
+                profit :  income - expenses
+                )
+            
+            return report
         }
         return null
     }

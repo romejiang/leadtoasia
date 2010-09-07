@@ -9,7 +9,7 @@
     <body>
        
         <div class="body">
-            <h1>${title[params.state]}</h1>
+            <h1>${params?.state?title[params.state] : "Project Order List"}</h1>
             <g:if test="${flash.message}">
             <div class="message"><g:message code="${flash.message}" args="${flash.args}" default="${flash.defaultMessage}" /></div>
             </g:if>
@@ -18,7 +18,7 @@
                     <thead>
                         <tr>
                          
-                   	    <th>Project No</th>
+                   	    <th>Project No</th> 
                    	    <th>Service Type</th>
                    	    <th>Source And Target</th>
                    	     
@@ -34,26 +34,26 @@
                     <g:each in="${projectOrderInstanceList}" status="i" var="projectOrderInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
                         
-                            <td><g:link action="show" id="${projectOrderInstance.id}">${projectOrderInstance?.project?.projectNo}</g:link></td>
+                            <td><g:link action="show" id="${projectOrderInstance.id}" fragment="Source">${projectOrderInstance?.project?.projectNo}</g:link></td>
+                             
                             <td>${projectOrderInstance.serviceType}</td>
                         
                             <td> 
                                    ${projectOrderInstance?.localization?.encodeAsHTML()} 
                             </td>
                         
-                         
                             <td>${fieldValue(bean: projectOrderInstance, field: "wordcount")}</td>
                         
                          
                             <td><g:formatDate date="${projectOrderInstance.deliveryDate}"   /></td>
                             <td>
-							<g:link uri="/my/pdf/${projectOrderInstance.id}" target="_blank">PO</g:link> 
+							<g:link uri="/my/pdf/${projectOrderInstance.id}" target="_blank">View PO</g:link> 
 							
 							</td>
                             <td>
 							 
 							<g:if test="${projectOrderInstance.state == 'new'}">
-										 <g:link action="activating"  id="${projectOrderInstance.id}">Confirm</g:link>
+										 <g:link action="activating"  id="${projectOrderInstance.id}" onclick="return confirm('Are you sure?');">Confirm</g:link>
 							</g:if>
 							<g:if test="${projectOrderInstance.state == 'processing'}">
 										 <g:link action="complete"  id="${projectOrderInstance.id}">Submit</g:link>

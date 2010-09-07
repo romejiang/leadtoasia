@@ -120,7 +120,7 @@
                                             <g:link  action="notice" controller="projectOrder" id="${q?.projectOrder?.id}" params="[pid: projectInstance.id]" onclick="this.disabled = true;\$('#spinner').show();">Notice Now</g:link>
                                         </g:if>
                                         <g:if test="${q?.projectOrder?.state == 'submit' }">
-                                            <g:link controller="projectOrder" action="processing" id="${q?.projectOrder?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" >Back</g:link> |
+                                            <g:link controller="projectOrder" action="goback" id="${q?.projectOrder?.id}"  params="[pid: projectInstance.id]" onclick="this.disabled = true;\$('#spinner').show();">Back</g:link> |
                                             <g:link controller="projectOrder" action="pass" id="${q?.projectOrder?.id}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" >Pass</g:link>
                                          </g:if>
                                          <g:if test="${q?.projectOrder?.state == 'invoice'}">
@@ -221,10 +221,12 @@
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${projectInstance?.id}" />
+                    <g:if test="${projectInstance?.state != 'finished' }">
                      <span class="button"><g:actionSubmit class="edit" action="finished" value="check finish" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
-                 
+                    </g:if>
                     <g:if test="${projectInstance?.state == 'finished' }">
-                        <g:link action="invoice" id="${projectInstance?.id}">send invoice</g:link>
+                        <g:link action="invoice" id="${projectInstance?.id}">Send Invoice</g:link> | 
+                        <g:link action="paid" id="${projectInstance?.id}">Paid</g:link>
                     </g:if>
                     <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>

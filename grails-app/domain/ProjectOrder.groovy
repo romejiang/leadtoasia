@@ -32,7 +32,7 @@ class ProjectOrder implements Serializable{
 //	客户付款方式选项。
     String paymentSort
     //付款期限
-    Integer paymentTerms = 30
+    Integer paymentTerms = 45
 //???生成的PO直接存成word, excel或PDF格式到指定的路径。
     String serviceType
     String state = 'new'

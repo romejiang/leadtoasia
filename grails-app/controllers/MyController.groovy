@@ -27,7 +27,8 @@ class MyController {
             projectOrderInstanceTotal: ProjectOrder.countByVendorAndState(user , params.state)]
 
         }else{
-            [projectOrderInstanceList: ProjectOrder.findAllByVendor(user ,params),
+            [title: [],
+            projectOrderInstanceList: ProjectOrder.findAllByVendor(user ,params),
             projectOrderInstanceTotal: ProjectOrder.countByVendor(user)]
         }
     }
@@ -57,6 +58,7 @@ class MyController {
    def complete = {
         def projectOrderInstance = ProjectOrder.get(params.id)
         if (!projectOrderInstance) {
+           
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'projectOrder.label', default: 'ProjectOrder'), params.id])}"
             redirect(action: "index")
         }
@@ -113,21 +115,29 @@ class MyController {
             redirect(action: "index",params: [state:'pass'])
         }
    }
+
    def invoiced = {
-         if (!params.invoiceInfo) {
+        def projectOrderInstance = ProjectOrder.get(params.id)
+        // 内部人员不需要 付款信息
+         if ((!params.invoiceInfo) && (!projectOrderInstance.vendor.fullTime)) {
             flash.message = "Please select payment ."
             return redirect(action: "invoice",id: params.id)
         }
-        def projectOrderInstance = ProjectOrder.get(params.id)
+        
         def InvoiceInfo = InvoiceInfo.get(params.invoiceInfo)
 
         if (projectOrderInstance && projectOrderInstance.state == 'pass') {
-            projectOrderInstance.state = 'invoice';
+        // 内部人员直接 完成不需要进入付款阶段
+            if (projectOrderInstance.vendor.fullTime) {
+               projectOrderInstance.state = 'finished'; 
+            }else{
+                projectOrderInstance.state = 'invoice'; 
+            }
+            
             projectOrderInstance.invoiceDate = new Date()
 
             if (projectOrderInstance.save()) { 
              
-
                 emailerService.process("ProjectOrderInvoice" , projectOrderInstance?.project?.manager?.mails?.mail ){[
                 'to': projectOrderInstance?.project?.manager?.userRealName,
                 'projectNo':projectOrderInstance?.project?.projectNo,
@@ -137,7 +147,13 @@ class MyController {
                 'invoiceInfo': InvoiceInfo
              ]}
                 flash.message = "Sent successfully."
-                return redirect(action: "index",params: [state:'invoice']) 
+            if (projectOrderInstance.vendor.fullTime) {
+          
+               return redirect(action: "index",params: [state:'finished']) 
+            }else{
+               return redirect(action: "index",params: [state:'invoice']) 
+            }
+                
             }else{
                 projectOrderInstance.errors.allErrors.each {
                     log.error it

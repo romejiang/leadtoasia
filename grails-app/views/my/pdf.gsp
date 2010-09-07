@@ -86,7 +86,7 @@
   </tr>
 </table>
 <div class="bottom">Invoice to: accounting@leadtoasia.com<br></br>
-Our terms of payment is 30 days after receiving your receipt of invoice. <br></br>
+Our terms of payment is ${projectOrderInstance?.paymentTerms} days after receiving your receipt of invoice. <br></br>
 Lead To Asia Translation &amp; localization Co., Ltd 
 <br></br>Tel: 0085281999847 • Fax: 0085227837978 Email: info@leadtoasia.com • Web:www.leadtoasia.com 
 <br></br>UNIT 1001 FOURSEAS BUILDING 208-212 NATHAN ROAD KOWLOON HONGKONG </div>      

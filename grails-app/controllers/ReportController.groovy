@@ -6,13 +6,38 @@ class ReportController {
         redirect(action: "list", params: params)
     }
 
-    def build = {
+   
+    def buildReport = {
         def project = Project.get(params.id)
         if (project) {
             if (project.state == 'finished' || project.state == 'paid' ) {
-                
+                def report = project.buildReport();
+                if (report) {
+                    report.save()
+                    flash.message = "Build Report !"
+                }
             } 
-        } 
+        }else{
+            flash.message = "Not Build Report!"
+        }
+        redirect(action: "build")
+    }
+
+    def build = {
+        return [projectInstanceList : Project.withCriteria() {
+            or{
+            eq('state', 'finished')
+            eq('state', 'paid')
+            }
+        }, 
+        projectInstanceTotal : Project.withCriteria() {
+            or{
+            eq('state', 'finished')
+            eq('state', 'paid')
+            }
+            count('projectNo')
+        }]
+         
     }
 
     def list = {

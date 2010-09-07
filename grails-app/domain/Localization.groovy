@@ -52,9 +52,16 @@ class Localization implements Comparable , Serializable{
     }
 
     float income(){
-        def er = new ExchangeRate()
-
-        er.exchange(price * amount , unit)
+        //def er = new ExchangeRate()
+        ExchangeRate.exchange(price * amount , unit)
     }
- 
+
+
+  float expenses(){
+        if (!projectOrder?.vendor?.fullTime) {
+            return ExchangeRate.exchange(projectOrder?.total , projectOrder?.unit)
+        } else{
+            return 0
+        }
+    }
 }
