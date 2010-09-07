@@ -37,14 +37,7 @@
                                 </td>
                             </tr>
                             
-                            <tr class="prop">
-                                <td valign="top" class="name">
-                                  <label for="name"><g:message code="project.name.label" default="Project Name" /></label>
-                                </td>
-                                <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'name', 'errors')}">
-                                   <g:textField name="name" maxlength="250" value="${projectInstance?.name}" />
-                                </td>
-                            </tr>
+                          
 
                            <tr class="prop">
                                 <td valign="top" class="name">

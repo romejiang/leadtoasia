@@ -8,8 +8,6 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
 		<g:javascript src="flowMatch.js"  />
  		<g:javascript src="enterEvent.js"  />
-
-
     </head>
     <body>
         <div class="nav">
@@ -25,7 +23,13 @@
                 <div class="dialog">
                    <table>
                         <tbody>
-                            
+                             <tr class="prop">
+                                <td valign="top" colspan=8>
+<textarea id="name1" rows="10" cols="100" style="width: 500px;height: 180px;"></textarea>   
+ <input type="button" value="Calculate" id="calculate">
+                                </td>
+                                
+                            </tr>
                             <g:each in="${matchs}" status="i" var="matchInstance">
 
                             <tr class="prop">
@@ -50,7 +54,7 @@
                                     <label for="discount"><g:message code="match.discount.label" default="Discount" /></label>
                                 </td>
                                 <td valign="top" >
-                                    <g:textField name="discount"   class="discount" value="${fieldValue(bean: matchInstance, field: 'discount')}"  size="5" />%
+                                    <g:textField name="discount"   class="discount" value="${fieldValue(bean: matchInstance, field: 'discount')}"  size="3" />%
                                 </td>
                                   <td valign="top">
                                     <label for="Result">Result</label>

@@ -63,7 +63,8 @@
 		<li><g:link action="create" controller="customer">New Client</g:link>
   		<li><g:link action="start" controller="project">New Project</g:link>
  		<li><g:link action="list" controller="project">Project In Hands</g:link>
-        <li><g:link action="list" controller="project" params="[state: 'finished']">Wait Pay Project</g:link>  
+        <li><g:link action="list" controller="project" params="[state: 'finished']">Finished Project</g:link>  
+        <li><g:link action="list" controller="project" params="[state: 'invoice']">Wait Pay Project</g:link>  
         <li><g:link action="list" controller="project" params="[state: 'paid']">Paid Project</g:link>  
  <!-- 			<li><g:link action="list" controller="projectOrder">All PO List</g:link>
  		<li><g:link action="list" controller="projectOrder" params="[state: 'new']">New PO List</g:link>

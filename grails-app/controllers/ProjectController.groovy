@@ -29,7 +29,7 @@ class ProjectController {
                     return [projectInstanceList: Project.findAllByManagerAndState(authenticateService.userDomain(),  params.state,params), 
                     projectInstanceTotal: Project.countByManagerAndState(authenticateService.userDomain() ,  params.state)]
                 }else{
-                    return [projectInstanceList:Project.withCriteria(uniqueResult:true) {
+                    return [projectInstanceList:Project.withCriteria() {
                             and{
                             eq('manager', authenticateService.userDomain())
                             ne('state', 'paid')
@@ -268,7 +268,7 @@ class ProjectController {
         // 给客户发送invoice
     def sendInvoice = {
         def project = Project.get(params.id) 
-        if (project && project.state == 'finished') {
+        if (project && (project.state == 'finished' || project.state == 'invoice') ) {
 
              def noticeInstance = new Notice(params)
 
@@ -280,7 +280,9 @@ class ProjectController {
                 //'projectOrder': po,
                 'project': project
              ]}
-           flash.message = "send invoice success!" 
+            project.state = "invoice"
+            project.save()
+            flash.message = "send invoice success!" 
         }else{
             flash.message = "Project not finished."
         }
@@ -346,8 +348,14 @@ class ProjectController {
                 // 初始化一些flow中使用到的数据
                 //1.project 
                 flow.projectInstance = new Project()
-                // 2.match
-                flow.matchs = [ new Match(discount: 100),new Match(discount: 25),new Match(discount: 50),new Match(discount: 100)]
+                // 2.match var rate = [15,15,15,50,50,100,100];
+                flow.matchs = [ new Match(discount: 25),
+                                        new Match(discount: 25),
+                                        new Match(discount: 25),
+                                        new Match(discount: 50),
+                                        new Match(discount: 50),
+                                        new Match(discount: 100),
+                                        new Match(discount: 100)]
                 flow.matchCount = 0
 
                 // 3.task
