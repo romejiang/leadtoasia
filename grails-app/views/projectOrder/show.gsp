@@ -174,6 +174,7 @@
             <div class="buttons">
                 <g:form>
                     <g:hiddenField name="id" value="${projectOrderInstance?.id}" />
+                    <g:hiddenField name="pid" value="${pid}" />
                     <g:if test="${projectOrderInstance?.state == 'new'}">
 					<span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
                     
@@ -181,7 +182,7 @@
                     </g:if>
 
 					<g:if test="${projectOrderInstance?.state == 'submit' }">
-					<span class="button"><g:actionSubmit class="edit" action="processing" value="Back" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
+					<span class="button"><g:actionSubmit class="edit" action="goback" value="Back" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
 					<span class="button"><g:actionSubmit class="edit" action="pass" value="Pass" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
 					</g:if>
 
