@@ -20,6 +20,8 @@ class Project implements Serializable{
     Date deadline  = new Date() + 1
     Date invoiceDate  
 
+    Boolean global = true
+    Boolean test = false
 //	项目状态 = open close paid processing
     String state = 'open'
 // PO

@@ -47,6 +47,20 @@
                                    <g:textField name="fromNo" maxlength="250" value="${projectInstance?.fromNo}" />
                                 </td>
                             </tr>
+ 
+                    <tr class="prop">
+						<td valign="top" class="name"><label for="global">Global:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'global','errors')}">
+							 <g:checkBox name="global" value="${projectInstance?.global}"/>
+						</td>
+					</tr>
+
+                    <tr class="prop">
+						<td valign="top" class="name"><label for="test">Test:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'test','errors')}">
+							 <g:checkBox name="test" value="${projectInstance?.test}"/>
+						</td>
+					</tr>
 
                         
                             <tr class="prop">

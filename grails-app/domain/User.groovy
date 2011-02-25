@@ -5,7 +5,7 @@ import com.lucastex.grails.fileuploader.UFile
  */
 class User implements Serializable{
 	static transients = ['pass']
-	static hasMany = [authorities: Role , quote: Pricing  , attachments :UFile ,mails: Email]
+	static hasMany = [authorities: Role , quote: Pricing  , attachments :UFile ,mails: Email , industrys : Industry]
     SortedSet  quote
 	static belongsTo = Role
 
@@ -32,6 +32,8 @@ class User implements Serializable{
 //   内部==============================
     String tel = ''
     String fax = ''
+    Boolean useSoft = false
+    Integer level = 0;
 //外部==============================
    
  
@@ -47,6 +49,9 @@ class User implements Serializable{
 
 		passwd(blank: false)
 		fullTime()
+        industrys()
+        useSoft()
+        level(size: 0..5)
 	  
 	}
 	String toString(){

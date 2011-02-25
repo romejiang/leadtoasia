@@ -83,6 +83,20 @@
 						</td>
 					</tr>
 
+                       <tr class="prop">
+						<td valign="top" class="name"><label for="useSoft">Use Soft :</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'useSoft','errors')}">
+							<g:checkBox name="useSoft" value="${person.useSoft}"/>
+						</td>
+					</tr>
+
+                    <tr class="prop">
+						<td valign="top" class="name"><label for="level">level:</label></td>
+						<td valign="top" class="value ${hasErrors(bean:person,field:'level','errors')}">
+                            <g:select name="level" from="${(0..5)}" value="${person.level}"  />
+						</td>
+					</tr>
+
 			<tr class='prop'>
 				<td valign='top' class='name'><label for='tel'>Tel:</label></td>
 				<td valign='top' class='value ${hasErrors(bean:person,field:'tel','errors')}'>
@@ -104,6 +118,15 @@
 				</td>
 			</tr>
 
+                    <tr class="prop">
+						<td valign="top" class="name" align="left">Industry :</td>
+					 
+                        <td align="left">
+                        <g:each in="${Industry.list()}">
+ 						<g:checkBox name="${it}"  />${it.encodeAsHTML()}
+                        </g:each>
+                        </td>
+					</tr>
 
 					<tr class="prop">
 						<td valign="top" class="name"><label for="authorities">Roles:</label></td>

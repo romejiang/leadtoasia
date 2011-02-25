@@ -37,6 +37,11 @@
 		<li><g:link controller='project' action='create'>Create Project</g:link>
 		<li><g:link controller='user' >User Manage</g:link>
 		<li><g:link controller='user'  action='create'>New User</g:link>
+        <li><g:link controller='industry' >Industry Manage</g:link>
+		<li><g:link controller='industry'  action='create'>New Industry</g:link>
+        </ol>
+            <h1>System Parameter</h1>
+	    <ol> 
 		<li><g:link controller='notice' >Notice Manage</g:link>
 		<li><g:link controller='notice'  action='create'>Create Notice</g:link>
 		<li><g:link controller='lookup'  action='index'>Lookup Manage</g:link>
@@ -66,12 +71,30 @@
         <li><g:link action="list" controller="project" params="[state: 'finished']">Finished Project</g:link>  
         <li><g:link action="list" controller="project" params="[state: 'invoice']">Wait Pay Project</g:link>  
         <li><g:link action="list" controller="project" params="[state: 'paid']">Paid Project</g:link>  
- <!-- 			<li><g:link action="list" controller="projectOrder">All PO List</g:link>
+   <%--      <li><g:link controller='user' >User Manage</g:link>
+		<li><g:link controller='user'  action='create'>Register User</g:link>
+        <li><g:link controller='industry' >Industry Manage</g:link>
+		<li><g:link controller='industry'  action='create'>New Industry</g:link>
+ 			<li><g:link action="list" controller="projectOrder">All PO List</g:link>
  		<li><g:link action="list" controller="projectOrder" params="[state: 'new']">New PO List</g:link>
  		<li><g:link action="list" controller="projectOrder" params="[state: 'processing']">Processing PO List</g:link>
  		<li><g:link action="list" controller="projectOrder" params="[state: 'submit']">Submit PO List</g:link>
  		<li><g:link action="list" controller="projectOrder" params="[state: 'invoice']">Invoiced PO List</g:link>
- 		<li><g:link action="list" controller="projectOrder" params="[state: 'finished']">Finished PO List</g:link> -->
+ 		<li><g:link action="list" controller="projectOrder" params="[state: 'finished']">Finished PO List</g:link> --%>
+ 	</ol>
+	</g:ifAnyGranted>
+
+      	  <g:ifAnyGranted role="ROLE_SALES">
+	  	<h1>Manager</h1>
+	<ol>
+		<li><g:link action="list" controller="customer">Client Manage</g:link>
+		<li><g:link action="create" controller="customer">New Client</g:link>
+  		<li><g:link action="start" controller="project">New Project</g:link>
+ 		<li><g:link action="list" controller="project">Project In Hands</g:link>
+        <li><g:link action="list" controller="project" params="[state: 'finished']">Finished Project</g:link>  
+        <li><g:link action="list" controller="project" params="[state: 'invoice']">Wait Pay Project</g:link>  
+        <li><g:link action="list" controller="project" params="[state: 'paid']">Paid Project</g:link>  
+ 
  	</ol>
 	</g:ifAnyGranted>
 			  <h1>My Task</h1>
@@ -102,7 +125,7 @@
 	   <h1>Welcome</h1>
 		   <ol>
 		   <li><g:link action="index" controller="login">Sign In</g:link>
-		   <li><g:link action="index" controller="register">Sign Up</g:link>
+		    <!--<li><g:link action="index" controller="register">Sign Up</g:link>-->
 		   </ol>
 	   </g:isNotLoggedIn>
  
