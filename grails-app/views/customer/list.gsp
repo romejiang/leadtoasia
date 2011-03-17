@@ -31,10 +31,9 @@
                         
                             <g:sortableColumn property="contact" title="${message(code: 'customer.contact.label', default: 'Contact')}" />
                         
-                            <g:sortableColumn property="tel" title="${message(code: 'customer.tel.label', default: 'Tel')}" />
+                            <g:sortableColumn property="registrant" title="${message(code: 'customer.registrant.label', default: 'Registrant')}" />
                         
-                            <g:sortableColumn property="fax" title="${message(code: 'customer.fax.label', default: 'Fax')}" />
-							<th>Pricing</th>
+ 							<th>Pricing</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,13 +44,13 @@
                         
                             <td>${fieldValue(bean: customerInstance, field: "country")}</td>
                         
-                            <td>${fieldValue(bean: customerInstance, field: "contact")}
-							${customerInstance?.mails}
-							</td>
+                            <td>${fieldValue(bean: customerInstance, field: "contact")}<br>
+							${customerInstance?.mails}<br>
+                            Tel:${fieldValue(bean: customerInstance, field: "tel")}<br>
+                            Fax:${fieldValue(bean: customerInstance, field: "fax")}
+							</td> 
                         
-                            <td>${fieldValue(bean: customerInstance, field: "tel")}</td>
-                        
-                            <td>${fieldValue(bean: customerInstance, field: "fax")}</td>
+                            <td>${fieldValue(bean: customerInstance, field: "registrant")}</td>
 							<td>
 							 <!-- g: each in="${customerInstance?.quote}" var="p" 
 								${p}<br>

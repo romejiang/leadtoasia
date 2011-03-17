@@ -5,13 +5,12 @@ import org.springframework.transaction.annotation.*
 class ProjectService {
  
     boolean transactional = true
-//    def log
+ 
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    def finish(flow) throws Exception {
-                println "==============================================="
-                //1.project 
-                println flow.projectInstance
+//    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    def finish(flow)  {
+                 //1.project 
+                log.info "ProjectService flow.projectInstance =" + flow.projectInstance
                 if (!flow.projectInstance.save()) {
                     throw new  Exception(flow.projectInstance.errors)  
                 }
@@ -29,7 +28,7 @@ class ProjectService {
                 flow.localizationInstanceList.each{
                     if (it.price && it.price > 0) {
 //                    it.project = flow.projectInstance
-                    println "task ${it}"
+                        log.info "task ${it}"
                         if (it.save()) {
                             flow.projectInstance.addToTask(it)
                         }else{
@@ -44,7 +43,7 @@ class ProjectService {
                 // 4.dtp
                 flow.DTPInstanceList.each{
                     if (it.price && it.price > 0) {
-                        println "DTP ${it}"
+                        log.info "DTP ${it}"
                          if (it.save()) {
                              flow.projectInstance.addToDtp(it)
                         }else{

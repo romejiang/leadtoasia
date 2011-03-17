@@ -33,6 +33,7 @@
 					<td>${requestmap.configAttribute}</td>
 					<td class="actionButtons">
 						<span class="actionButton">
+						<g:link action="edit" id="${requestmap.id}">Edit</g:link>
 						<g:link action="show" id="${requestmap.id}">Show</g:link>
 						</span>
 					</td>

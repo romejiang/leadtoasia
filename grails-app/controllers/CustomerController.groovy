@@ -2,18 +2,33 @@ class CustomerController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     def customerService
+    def authenticateService
+
     def index = {
         redirect(action: "list", params: params)
     }
 
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
-        [customerInstanceList: Customer.list(params), customerInstanceTotal: Customer.count()]
+        if (authenticateService.ifAllGranted("ROLE_SALES_DIRECTOR")) { 
+             [customerInstanceList: Customer.findAllByRegistrantIsNotNull( params), 
+                customerInstanceTotal: Customer.countByRegistrantIsNotNull( )]
+        }else if (authenticateService.ifAllGranted("ROLE_SALES")) {
+            
+             [customerInstanceList: Customer.findAllByRegistrant(authenticateService.userDomain() ,params), 
+                customerInstanceTotal: Customer.countByRegistrant(authenticateService.userDomain())]
+        }else {
+            [customerInstanceList: Customer.list(params), customerInstanceTotal: Customer.count()]
+        }
     }
 
     def search = {
         params.max = 100
+         if (authenticateService.ifAnyGranted("ROLE_SALES_DIRECTOR,ROLE_SALES")) { 
+            return redirect(action: "list");
+         }
         if (params.keyword && params.keyword != '') {
+            
             log.info "customer.search keyword = ${params.keyword}  "
             return  render(view: "list", model: [customerInstanceList: Customer.findAllByNameIlike('%'+params.keyword +'%'),
                 customerInstanceTotal: Customer.countByNameIlike('%'+params.keyword +'%' ),
@@ -32,6 +47,9 @@ class CustomerController {
     def save = {
         def customerInstance = new Customer(params)
 	    customerService.addToMails(params.mail,customerInstance)
+         if (authenticateService.ifAllGranted("ROLE_SALES")) {
+            customerInstance.registrant = User.get(authenticateService.userDomain()?.id)
+         }
 
         if (customerInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'customer.label', default: 'Customer'), customerInstance.id])}"

@@ -17,9 +17,9 @@ class RequestmapController {
 	}
 
 	def list = {
-		if (!params.max) {
-			params.max = 10
-		}
+		 
+			params.max = 50
+		 
 		[requestmapList: Requestmap.list(params)]
 	}
 
@@ -83,7 +83,7 @@ class RequestmapController {
 		requestmap.properties = params
 		if (requestmap.save()) {
 			authenticateService.clearCachedRequestmaps()
-			redirect action: show, id: requestmap.id
+			redirect action: list
 		}
 		else {
 			render view: 'edit', model: [requestmap: requestmap]

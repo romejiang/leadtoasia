@@ -75,6 +75,19 @@
                             <td valign="top" ><g:link controller="user" action="show" id="${projectInstance?.manager?.id}">${projectInstance?.manager.encodeAsHTML()}</g:link></td>
                             
                         </tr>  
+
+                        
+                        <tr class="prop">
+                            <td valign="top" ><g:message code="project.sales.label" default="sales" /></td>
+                            
+                            <td valign="top" >${fieldValue(bean: projectInstance, field: "sales")}</td>
+                            
+                      
+                            <td valign="top" > </td>
+                            
+                            <td valign="top" >   </td>
+                            
+                        </tr>  
                     
                  </tbody>
                 </table>

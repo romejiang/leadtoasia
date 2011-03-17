@@ -33,7 +33,7 @@
                                     <label for="projectNo"><g:message code="project.projectNo.label" default="Project No" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'projectNo', 'errors')}">
-                                    <g:textField name="projectNo" maxlength="250" value="${projectInstance?.projectNo}" />* Auto-fill in the blank
+                                    <g:textField name="projectNo" maxlength="250" value="${projectInstance?.projectNo}" /><g:message code="project.tip.label" default="* Auto-fill in the blank" />
                                 </td>
                             </tr>
                             
@@ -49,14 +49,16 @@
                             </tr>
  
                     <tr class="prop">
-						<td valign="top" class="name"><label for="global">Global:</label></td>
+						<td valign="top" class="name"><label for="global"><g:message code="project.global.label" default="Global" /></label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'global','errors')}">
+                        
 							 <g:checkBox name="global" value="${projectInstance?.global}"/>
+                         
 						</td>
 					</tr>
 
                     <tr class="prop">
-						<td valign="top" class="name"><label for="test">Test:</label></td>
+						<td valign="top" class="name"><label for="test"><g:message code="project.test.label" default="Test" /></label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'test','errors')}">
 							 <g:checkBox name="test" value="${projectInstance?.test}"/>
 						</td>
@@ -67,11 +69,36 @@
                                 <td valign="top" class="name">
                                     <label for="customer"><g:message code="project.customer.label" default="Customer" /></label>
                                 </td>
+
                                 <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'customer', 'errors')}">
-                                    <g:select name="customer.id" from="${Customer.list()}" optionKey="id" value="${projectInstance?.customer?.id}"  />
+                                <g:ifAllGranted role="ROLE_SALES"> 
+
+                                    <g:ifNotGranted role="ROLE_SALES_DIRECTOR">  
+                                        <g:select name="customer.id" from="${Customer.findAllByRegistrant(User.get(userId))}" optionKey="id" value="${projectInstance?.customer?.id}"  />
+                                     </g:ifNotGranted>
+
+                                     <g:ifAllGranted role="ROLE_SALES_DIRECTOR">  
+                                        <g:select name="customer.id" from="${Customer.findAllByRegistrantInList(User.list()?.findAll(){it.authorities.contains(Role.findByAuthority('ROLE_SALES'))})}" optionKey="id" value="${projectInstance?.customer?.id}"  />
+                                     </g:ifAllGranted>
+                                 </g:ifAllGranted>
+                                 
+                                  
+                                 <g:ifAnyGranted role="ROLE_MANAGER,ROLE_ADMIN"> 
+                                    <g:select name="customer.id" from="${Customer.find()}" optionKey="id" value="${projectInstance?.customer?.id}"  />
+                                 </g:ifAnyGranted>
                                 </td>
                             </tr>
-
+                            <g:ifAnyGranted role="ROLE_SALES">
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="manager"><g:message code="project.manager.label" default="manager" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'manager', 'errors')}">
+                                    <g:select name="manager.id" from="${User.list()?.findAll(){it.authorities.contains(Role.findByAuthority('ROLE_MANAGER'))}}" optionKey="id" 
+                                    value="${projectInstance?.manager?.id}"  />
+                                </td>
+                            </tr>
+                            </g:ifAnyGranted>
                             <tr class="prop">
                                 <td valign="top" class="name">
                                     <label for="start"><g:message code="project.start.label" default="Start" /></label>

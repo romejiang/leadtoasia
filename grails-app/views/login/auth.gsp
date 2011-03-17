@@ -54,20 +54,20 @@ $(function(){
 			<g:if test='${flash.message}'>
 			<div class='login_message'>${flash.message}</div>
 			</g:if>
-			<div class='fheader'>Please Login..</div>
+			<div class='fheader'><g:message code="login.label" default="Please Login.." /></div>
 			<form action='${postUrl}' method='POST' id='loginForm' class='cssform'>
 				<p>
-					<label for='j_username'>Login Name&nbsp;</label>
+					<label for='j_username'><g:message code="user.username.label" default="Login Name" />：&nbsp;</label>
 					<input type='text' class='text_' name='j_username' id='j_username' value='${request.remoteUser}' />
 				</p>
 				<p>
-					<label for='j_password'>&nbsp;&nbsp;&nbsp;Password&nbsp;</label>
+					<label for='j_password'>&nbsp;&nbsp;&nbsp;<g:message code="user.passwd.label" default="Password" />：&nbsp;</label>
 					<input type='password' class='text_' name='j_password' id='j_password' />
 				</p> 
 				<p>
 					<input type='checkbox' class='chk hide' name='_spring_security_remember_me' id='remember_me'  />
 			 
-					<input type='submit' value='Login' style="width: 80px"/>
+					<input type='submit' value="${message(code: 'default.login.label', default: 'Login')}" style="width: 80px"/>
 				</p>
 			</form>
 		</div>

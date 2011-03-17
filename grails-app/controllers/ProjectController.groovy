@@ -9,12 +9,13 @@ class ProjectController {
 
     def authenticateService
     def emailerService
+
     def projectService
 
     def index = {
         redirect(action: "list", params: params)
     }
-
+// 不同的用户和查看不同状态的项目
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         params.sort = "start"
@@ -43,6 +44,12 @@ class ProjectController {
                             count("projectNo")
                         }]
                 }
+            }else if(authenticateService.ifAllGranted("ROLE_SALES_DIRECTOR")){	
+                return [projectInstanceList: Project.findAllBySalesIsNotNull( params), 
+                    projectInstanceTotal: Project.countBySalesIsNotNull()]
+            } else if(authenticateService.ifAllGranted("ROLE_SALES")){	
+                return [projectInstanceList: Project.findAllBySales(authenticateService.userDomain(),  params), 
+                    projectInstanceTotal: Project.countBySales(authenticateService.userDomain() )]
             }
         }
 	    redirect(uri: '/')
@@ -348,6 +355,11 @@ class ProjectController {
                 // 初始化一些flow中使用到的数据
                 //1.project 
                 flow.projectInstance = new Project()
+
+                if(authenticateService.ifAllGranted("ROLE_SALES")){
+                    flow.projectInstance.global = false;
+                }
+                
                 // 2.match var rate = [15,15,15,50,50,100,100];
                 flow.matchs = [ new Match(discount: 25),
                                         new Match(discount: 25),
@@ -371,7 +383,9 @@ class ProjectController {
                 flow.DTPInstanceList = DTPList
                 flow.source = languageCode.toList()[0].code
                 // 5.file
+
                
+                 [ userId : authenticateService.userDomain().id] 
             }
             on("success").to "project"
 
@@ -384,9 +398,11 @@ class ProjectController {
                 if (!params.projectNo) {
                     projectInstance.projectNo = 'nothing'
                 }
-              
-                projectInstance.manager = authenticateService.userDomain()
- 
+                 if(authenticateService.ifAllGranted("ROLE_SALES")){	
+                    projectInstance.sales = authenticateService.userDomain()
+                }else{ 
+                    projectInstance.manager = authenticateService.userDomain()
+                }
                 if (projectInstance.validate()) {
  
                 }
@@ -439,7 +455,7 @@ class ProjectController {
                 }
 
                 flow.localizationInstanceList = localizationList
-                log.info flow.localizationInstanceList
+                log.info "wizard localization list = " + flow.localizationInstanceList
             
             }.to "dtp"
         }
@@ -463,7 +479,7 @@ class ProjectController {
                 }
 
                 flow.DTPInstanceList = localizationList
-                log.info flow.DTPInstanceList
+                log.info "wizard dtp list = " + flow.DTPInstanceList
             
             }.to "review"
         }

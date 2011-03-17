@@ -11,6 +11,7 @@ class Project implements Serializable{
 
     Customer customer
     User manager //项目经理
+    User sales // 销售
  
 //	项目日期（自动生成），
     Date start = new Date()
@@ -43,11 +44,12 @@ class Project implements Serializable{
 			  return val.after(obj.start)
 			})
         invoiceDate(nullable: true)
-        state(blank: false , inList:['open','finished','invoice','paid','processing'])
+        state(blank: false , inList:['open','finished','invoice','paid','processing','cancel','bid'])
  
 		content(blank: true, size:0..255) 
 
         manager()
+        sales(nullable: true)
 //        name(blank: true, size:0..250)
 
 //        dtp( nullable: true)

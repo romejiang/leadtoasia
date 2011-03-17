@@ -15,6 +15,8 @@ class Customer implements Serializable {
     static hasMany = [quote: Pricing ,mails: Email]
     SortedSet  quote
 
+    User  registrant
+
     static constraints = {
         name(blank: false, size:0..250)
  		country(blank: false, size:0..250)
@@ -26,6 +28,7 @@ class Customer implements Serializable {
  		fax(blank: true, size:0..250,matches:"[0-9|-]+")
 
  		quote()
+        registrant()
     }
 
     static mapping = {

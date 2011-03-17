@@ -43,7 +43,19 @@
                     <g:each in="${projectInstanceList}" status="i" var="projectInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'} " title="${projectInstance?.state}">
                             
-                            <td><g:link action="show" id="${projectInstance.id}"  >${fieldValue(bean: projectInstance, field: "projectNo")}</g:link> 
+                            <td><g:link action="show" id="${projectInstance.id}"  >
+                            <g:if test="${projectInstance.test}">
+                                CS
+                            </g:if>
+                            <g:else>
+                              <g:if test="${projectInstance.global}">
+                                GJ
+                              </g:if>
+                              <g:else>
+                                GN
+                              </g:else>
+                            </g:else>
+                            ${fieldValue(bean: projectInstance, field: "projectNo")}</g:link> 
 							</td>
 
 							<td>   ${fieldValue(bean: projectInstance, field: "customer")}  </td>
@@ -53,7 +65,7 @@
                              
 
 							<td>${fieldValue(bean: projectInstance, field: "state")} <br>
-                            
+                            <g:ifNotGranted role="ROLE_SALES">
                             <g:if test="${projectInstance.state == 'finished'}"> 
                                 <g:link action="invoice" id="${projectInstance.id}">Send Invoice</g:link> |
                                 <g:link action="paid" id="${projectInstance?.id}">Paid</g:link>
@@ -63,6 +75,7 @@
                                     <g:link action="finished" id="${projectInstance.id}">check finish</g:link>
                                 </g:if>
                             </g:else>
+                            </g:ifNotGranted >
                             </td>
 
 							<td>
@@ -71,7 +84,9 @@
 							dtp:${projectInstance?.dtp?.size()}  <br>
                             </td>
                             <td>
-                            <g:link uri="/project/pdf/${projectInstance?.id}" target="_blank">view invoice</g:link>  
+                            <g:ifNotGranted role="ROLE_SALES">
+                                <g:link uri="/project/pdf/${projectInstance?.id}" target="_blank">view invoice</g:link>  
+                            </g:ifNotGranted >
  							</td>
                         </tr>
                     </g:each>
