@@ -101,7 +101,7 @@
 	<ol>
 		<li><g:link action="list" controller="customer"><g:message code="customer.label" default="Client" /><g:message code="menu.management" default=" Management" /></g:link>
 		<li><g:link action="create" controller="customer"><g:message code="menu.create" default="Create " /><g:message code="customer.label" default="Client" /></g:link>
-  		<li><g:link action="start" controller="project"><g:message code="menu.create" default="Create " /><g:message code="project.label" default="Project" /></g:link>
+  		<li><g:link action="quotego" controller="project"><g:message code="menu.create" default="Create " /><g:message code="project.label" default="Project" /></g:link>
  		<li><g:link action="list" controller="project"><g:message code="menu.projectinhands" default="Project  In Hands" /></g:link>
   
  	</ol>

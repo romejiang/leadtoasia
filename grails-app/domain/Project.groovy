@@ -44,7 +44,7 @@ class Project implements Serializable{
 			  return val.after(obj.start)
 			})
         invoiceDate(nullable: true)
-        state(blank: false , inList:['open','finished','invoice','paid','processing','cancel','bid'])
+        state(blank: false , inList:['quote','open','processing','finished','invoice','paid','cancel'])
  
 		content(blank: true, size:0..255) 
 

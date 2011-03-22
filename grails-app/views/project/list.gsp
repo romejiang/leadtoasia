@@ -36,29 +36,25 @@
                          
 						    <g:sortableColumn property="state" title="${message(code: 'project.state.label', default: 'State')}" /> 
                             <th></th>
+                           <g:ifNotGranted role="ROLE_SALES">
                             <th></th>
+                            </g:ifNotGranted>
                         </tr>
                     </thead>
                     <tbody>
                     <g:each in="${projectInstanceList}" status="i" var="projectInstance">
                         <tr class="${(i % 2) == 0 ? 'odd' : 'even'} " title="${projectInstance?.state}">
                             
-                            <td><g:link action="show" id="${projectInstance.id}"  >
-                            <g:if test="${projectInstance.test}">
-                                CS
-                            </g:if>
-                            <g:else>
-                              <g:if test="${projectInstance.global}">
-                                GJ
-                              </g:if>
-                              <g:else>
-                                GN
-                              </g:else>
-                            </g:else>
-                            ${fieldValue(bean: projectInstance, field: "projectNo")}</g:link> 
-							</td>
+                            <td>
+                            <g:ifAnyGranted role="ROLE_SALES">
+                                ${fieldValue(bean: projectInstance, field: "projectNo")} 
+							 </g:ifAnyGranted>
+<g:ifNotGranted role="ROLE_SALES">
+<g:link action="show" id="${projectInstance.id}"  >${fieldValue(bean: projectInstance, field: "projectNo")}</g:link> 
+</g:ifNotGranted>
+                            </td>
 
-							<td>   ${fieldValue(bean: projectInstance, field: "customer")}  </td>
+							<td> ${fieldValue(bean: projectInstance, field: "customer")}  </td>
                         
                             <td><g:formatDate date="${projectInstance.start}" /><br>
                             <g:formatDate date="${projectInstance.deadline}" /></td> 
@@ -83,11 +79,13 @@
 							task:${projectInstance?.task?.size()}  <br>
 							dtp:${projectInstance?.dtp?.size()}  <br>
                             </td>
-                            <td>
+                            
                             <g:ifNotGranted role="ROLE_SALES">
+                            <td>
                                 <g:link uri="/project/pdf/${projectInstance?.id}" target="_blank">view invoice</g:link>  
+                            	</td>
                             </g:ifNotGranted >
- 							</td>
+ 						
                         </tr>
                     </g:each>
                     </tbody>
