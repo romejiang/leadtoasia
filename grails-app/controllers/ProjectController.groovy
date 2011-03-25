@@ -112,7 +112,7 @@ class ProjectController {
                 projectInstance.projectNo += new DecimalFormat("0000").format(projectInstance.id)
             }
 
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'project.label', default: 'Project'), projectInstance])}"
             redirect(action: "show", id: projectInstance.id)
         }
         else {
@@ -159,7 +159,7 @@ class ProjectController {
             }
             projectInstance.properties = params
             if (!projectInstance.hasErrors() && projectInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'project.label', default: 'Project'), projectInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'project.label', default: 'Project'), projectInstance])}"
                 redirect(action: "show", id: projectInstance.id)
             }
             else {
@@ -262,6 +262,31 @@ class ProjectController {
         redirect(action: "list")
     }
 
+    ///// 取消这个项目
+    def cancel = {
+         
+        def project = Project.get(params.id)
+ 
+        if (project) {
+             project.state = "cancel"
+             project.save()
+        } 
+        redirect(action: "show" , id: params.id)
+
+    }
+/////  接收销售人员提交的项目
+    def accept = {
+         
+        def project = Project.get(params.id)
+ 
+        if (project) {
+             project.state = "open"
+             project.save()
+        } 
+        redirect(action: "show" , id: params.id)
+
+    }
+    //将项目设置为已完成支付
     def paid = {
         def project = Project.get(params.id) 
         if (project) {
@@ -352,9 +377,6 @@ class ProjectController {
             render(ps[0].id)
         }else{
             render("")
-        }
-        
-    }
-
-
+        } 
+    } 
 }

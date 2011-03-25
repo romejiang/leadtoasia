@@ -20,7 +20,7 @@ class NoticeMailController {
     def save = {
         def noticeMailInstance = new NoticeMail(params)
         if (noticeMailInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'noticeMail.label', default: 'NoticeMail'), noticeMailInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'noticeMail.label', default: 'NoticeMail'), noticeMailInstance])}"
             redirect(action: "list")
         }
         else {
@@ -64,7 +64,7 @@ class NoticeMailController {
             }
             noticeMailInstance.properties = params
             if (!noticeMailInstance.hasErrors() && noticeMailInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'noticeMail.label', default: 'NoticeMail'), noticeMailInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'noticeMail.label', default: 'NoticeMail'), noticeMailInstance])}"
                 redirect(action: "list")
             }
             else {

@@ -20,7 +20,7 @@ class NoticeController {
     def save = {
         def noticeInstance = new Notice(params)
         if (noticeInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'notice.label', default: 'Notice'), noticeInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'notice.label', default: 'Notice'), noticeInstance])}"
             redirect(action: "list")
         }
         else {
@@ -64,7 +64,7 @@ class NoticeController {
             }
             noticeInstance.properties = params
             if (!noticeInstance.hasErrors() && noticeInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'notice.label', default: 'Notice'), noticeInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'notice.label', default: 'Notice'), noticeInstance])}"
                 redirect(action: "list")
             }
             else {

@@ -20,7 +20,7 @@ class EmailController {
     def save = {
         def emailInstance = new Email(params)
         if (emailInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'email.label', default: 'Email'), emailInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'email.label', default: 'Email'), emailInstance])}"
             redirect(action: "list")
         }
         else {
@@ -64,7 +64,7 @@ class EmailController {
             }
             emailInstance.properties = params
             if (!emailInstance.hasErrors() && emailInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'email.label', default: 'Email'), emailInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'email.label', default: 'Email'), emailInstance])}"
                 redirect(action: "list")
             }
             else {

@@ -112,6 +112,17 @@ environments {
     }
 }
 
-    
+war {
+    exclude.files = [
+        "Givenchy.exe",
+        "test.html"
+    ]
+    exclude.dirs = [
+        "WEB-INF/lib",
+        "images",
+        "js",
+        "css"
+    ]
+}    
 
 //log4j.logger.org.springframework.security='off,stdout'

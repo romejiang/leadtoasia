@@ -28,7 +28,7 @@ class Customer implements Serializable {
  		fax(blank: true, size:0..250,matches:"[0-9|-]+")
 
  		quote()
-        registrant()
+        registrant(nullable:true)
     }
 
     static mapping = {

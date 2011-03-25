@@ -38,7 +38,7 @@ class DtpController {
  
             if (localizationInstance.save(flush: true)) {
                 project.save()
-                flash.message = "${message(code: 'default.created.message', args: [message(code: 'localization.label', default: 'Localization'), localizationInstance.id])}"
+                flash.message = "${message(code: 'default.created.message', args: [message(code: 'localization.label', default: 'Localization'), localizationInstance])}"
                 redirect(action: "show", controller: 'project', id: params.pid)
             }
         }
@@ -82,7 +82,7 @@ class DtpController {
             }
             localizationInstance.properties = params
             if (!localizationInstance.hasErrors() && localizationInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'localization.label', default: 'Localization'), localizationInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'localization.label', default: 'Localization'), localizationInstance])}"
                 redirect(action: "show", controller: 'project', id: params.pid)
             }
             else {

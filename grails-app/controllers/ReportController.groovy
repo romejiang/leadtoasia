@@ -54,7 +54,7 @@ class ReportController {
     def save = {
         def reportInstance = new Report(params)
         if (reportInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'report.label', default: 'Report'), reportInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'report.label', default: 'Report'), reportInstance])}"
             redirect(action: "list")
         }
         else {
@@ -98,7 +98,7 @@ class ReportController {
             }
             reportInstance.properties = params
             if (!reportInstance.hasErrors() && reportInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'report.label', default: 'Report'), reportInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'report.label', default: 'Report'), reportInstance])}"
                 redirect(action: "list")
             }
             else {

@@ -52,7 +52,7 @@ class CustomerController {
          }
 
         if (customerInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'customer.label', default: 'Customer'), customerInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'customer.label', default: 'Customer'), customerInstance])}"
             redirect(action: "list")
         }
         else {
@@ -98,7 +98,7 @@ class CustomerController {
     	    customerService.addToMails(params.mail,customerInstance)
 
             if (!customerInstance.hasErrors() && customerInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'customer.label', default: 'Customer'), customerInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'customer.label', default: 'Customer'), customerInstance])}"
                 redirect(action: "list")
             }
             else {

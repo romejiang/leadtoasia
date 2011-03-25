@@ -35,7 +35,7 @@ class SkillController {
 //            ========================================
         if (pricingInstance.save()) {
             tempc.addToQuote(pricingInstance).save()
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'pricing.label', default: 'Pricing'), pricingInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'pricing.label', default: 'Pricing'), pricingInstance])}"
             redirect(action: "index")
         }
         else {
@@ -84,7 +84,7 @@ class SkillController {
 
             if (!pricingInstance.hasErrors() && pricingInstance.save(flush: true)) {
                 log.info "$pricingInstance to save!"
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'pricing.label', default: 'Pricing'), pricingInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'pricing.label', default: 'Pricing'), pricingInstance])}"
                 redirect(action: "index" )
             }
             else {

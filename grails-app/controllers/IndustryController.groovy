@@ -21,7 +21,7 @@ class IndustryController {
         if (!industryInstance.hasErrors() && industryInstance.save()) {
             flash.message = "industry.created"
             flash.args = [industryInstance.id]
-            flash.defaultMessage = "Industry ${industryInstance.id} created"
+            flash.defaultMessage = "Industry ${industryInstance} created"
             redirect(action: "show", id: industryInstance.id)
         }
         else {
@@ -71,7 +71,7 @@ class IndustryController {
             if (!industryInstance.hasErrors() && industryInstance.save()) {
                 flash.message = "industry.updated"
                 flash.args = [params.id]
-                flash.defaultMessage = "Industry ${params.id} updated"
+                flash.defaultMessage = "Industry ${industryInstance} updated"
                 redirect(action: "show", id: industryInstance.id)
             }
             else {

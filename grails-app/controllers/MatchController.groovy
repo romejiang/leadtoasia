@@ -33,7 +33,7 @@ class MatchController {
     
         
         if (matchInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'match.label', default: 'Match'), matchInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'match.label', default: 'Match'), matchInstance])}"
             
             def project = Project.get(params.pid)
             project.addToMatchs(matchInstance)
@@ -87,7 +87,7 @@ class MatchController {
             }
             matchInstance.properties = params
             if (!matchInstance.hasErrors() && matchInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'match.label', default: 'Match'), matchInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'match.label', default: 'Match'), matchInstance])}"
                 redirect(action: "show", controller: 'project', id: params.pid)
             }
             else {

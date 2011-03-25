@@ -83,7 +83,9 @@
 	<ol>
 		<li><g:link action="list" controller="customer"><g:message code="customer.label" default="Client&nbsp;" /><g:message code="menu.management" default=" Management" /></g:link>
 		<li><g:link action="create" controller="customer"><g:message code="menu.create" default="Create " /><g:message code="customer.label" default="Client" /></g:link>
-  		<li><g:link action="start" controller="project"><g:message code="menu.create" default="Create " /><g:message code="project.label" default="Project" /></g:link>
+  		<li><g:link action="start" controller="wizard"><g:message code="menu.create" default="Create " /><g:message code="project.label" default="Project" /></g:link>
+ 		<li><g:link action="list" controller="project" params="[state:'quote']"><g:message code="menu.projectquote" default="Quote  " /></g:link>
+ 		<li><g:link action="list" controller="project" params="[state:'processing']"><g:message code="menu.projectprocessing" default="Processing" /></g:link>
  		<li><g:link action="list" controller="project"><g:message code="menu.projectinhands" default="Project  In Hands" /></g:link>
         <li><g:link action="list" controller="project" params="[state: 'finished']"><g:message code="menu.finished" default="Finished" /> <g:message code="project.label" default="Project" /></g:link>  
         <li><g:link action="list" controller="project" params="[state: 'invoice']"><g:message code="menu.awaitingpayment" default="Awaiting Payment" /></g:link>  
@@ -106,7 +108,7 @@
 	<ol>
 		<li><g:link action="list" controller="customer"><g:message code="customer.label" default="Client" /><g:message code="menu.management" default=" Management" /></g:link>
 		<li><g:link action="create" controller="customer"><g:message code="menu.create" default="Create " /><g:message code="customer.label" default="Client" /></g:link>
-  		<li><g:link action="quotego" controller="project"><g:message code="menu.create" default="Create " /><g:message code="project.label" default="Project" /></g:link>
+  		<li><g:link action="quotego" controller="wizard"><g:message code="menu.create" default="Create " /><g:message code="project.label" default="Project" /></g:link>
  		<li><g:link action="list" controller="project"><g:message code="menu.projectinhands" default="Project  In Hands" /></g:link>
   
  	</ol>

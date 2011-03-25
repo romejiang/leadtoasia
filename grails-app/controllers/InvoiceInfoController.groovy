@@ -41,7 +41,7 @@ class InvoiceInfoController {
         def invoiceInfoInstance = new InvoiceInfo(params)
         invoiceInfoInstance.user = authenticateService.userDomain()
         if (invoiceInfoInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'invoiceInfo.label', default: 'InvoiceInfo'), invoiceInfoInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'invoiceInfo.label', default: 'InvoiceInfo'), invoiceInfoInstance])}"
             redirect(action: "list")
         }
         else {
@@ -85,7 +85,7 @@ class InvoiceInfoController {
             }
             invoiceInfoInstance.properties = params
             if (!invoiceInfoInstance.hasErrors() && invoiceInfoInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'invoiceInfo.label', default: 'InvoiceInfo'), invoiceInfoInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'invoiceInfo.label', default: 'InvoiceInfo'), invoiceInfoInstance])}"
                 redirect(action: "list")
             }
             else {

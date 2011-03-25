@@ -60,7 +60,7 @@ class PricingController {
 //            ========================================
         if (pricingInstance.save()) {
             tempc.addToQuote(pricingInstance).save()
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'pricing.label', default: 'Pricing'), pricingInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'pricing.label', default: 'Pricing'), pricingInstance])}"
             redirect(action: "list", params : [pid : params.pid,parentType:params.parentType])
         }
         else {
@@ -151,7 +151,7 @@ class PricingController {
 
             if (!pricingInstance.hasErrors() && pricingInstance.save(flush: true)) {
                 log.info "$pricingInstance to save!"
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'pricing.label', default: 'Pricing'), pricingInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'pricing.label', default: 'Pricing'), pricingInstance])}"
                 redirect(action: "list", params : [pid : params.pid,parentType:params.parentType])
             }
             else {

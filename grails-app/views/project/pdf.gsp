@@ -34,7 +34,7 @@
         <br/>Invoice
         </div>
 		<div class="title">  
-         
+<g:if test="${projectInstance.global}">         
 Lead to Asia consultancy &amp; service Co., Ltd<br/>
 Unit 1001 Fourseas  <br/>
 Building Nathan Road <br/>
@@ -42,15 +42,23 @@ Telephone: +852 8199 9307 <br/>
 Fax:  +852 2783 7978 <br/>
 Email: <a href="mailto:accounting@leadtoasia.com">accounting@leadtoasia.com</a> <br/><br/>
 Invoice Number ${projectInstance?.projectNo} <br/>
+</g:if> 
+<g:else> 
+北京力图亚洲咨询服务有限公司 <br/>
+联系地址：北京市朝阳区酒仙桥路甲12号  <br/>         
+电子城科技大厦9层918室   邮编：100015 <br/>
+电子邮箱： <a href="mailto:accounting@leadtoasia.com">accounting@leadtoasia.com</a> <br/><br/>
+项目编号：${projectInstance?.projectNo} <br/>
+</g:else>
 </div>
 <div class="info">
-Anthony van de Veen <br/>
-Program Director <br/>
+${projectInstance.customer} <br/>
+${projectInstance?.customer?.contact}  <br/>
 
-Tel: 31 646053148  <br/>
-Date: 8th January 2010 <br/>
-Fax:  <br/>
-E-mail:<a href="mailto:anthony@nimbuzz.com">anthony@nimbuzz.com </a><br/>
+Tel: ${projectInstance?.customer?.tel}  <br/>
+Date: ${formatDate( formatName: "default.date.format", date :projectInstance?.start)}<br/>
+Fax: ${projectInstance?.customer?.fax} <br/>
+E-mail:${projectInstance?.customer?.mails}<br/>
 <br/>
         </div>
   
@@ -107,11 +115,20 @@ E-mail:<a href="mailto:anthony@nimbuzz.com">anthony@nimbuzz.com </a><br/>
   </tr>
 </table>
 <div class="bottom">
-Bank information: Bank name: HSBC Hong Kong <br/>
+<g:if test="${projectInstance.global}">
+Bank information<br/>
+Bank name: HSBC Hong Kong <br/>
 Bank Address: 1 Queen’s Road Central, Hong Kong <br/>
 Bank Code: 004 (for local payment) <br/>
 Swift code: HSBCHKHHHKH (for telegraphic transfers) <br/>
-Account number: 411-750409-838 <br/>
+Account number: 411-750409-838 <br/> 
+</g:if> 
+<g:else>
+银行账户信息<br/>
+北京力图亚洲咨询服务有限公司 <br/>
+中国工商银行股份有限公司北京西河沿支行 <br/>
+帐号：0200002109200206258 <br/>
+</g:else>
 
 </div>      
               

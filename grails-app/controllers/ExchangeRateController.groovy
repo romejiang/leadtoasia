@@ -20,7 +20,7 @@ class ExchangeRateController {
     def save = {
          def exchangeRateInstance = new ExchangeRate(params)
         if (exchangeRateInstance.save(flush: true)) {
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'exchangeRate.label', default: 'ExchangeRate'), exchangeRateInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'exchangeRate.label', default: 'ExchangeRate'), exchangeRateInstance])}"
             redirect(action: "list")
         }
         else {
@@ -66,7 +66,7 @@ class ExchangeRateController {
             }
             exchangeRateInstance.properties = params
              if (!exchangeRateInstance.hasErrors() && exchangeRateInstance.save(flush: true)) {
-                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'exchangeRate.label', default: 'ExchangeRate'), exchangeRateInstance.id])}"
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'exchangeRate.label', default: 'ExchangeRate'), exchangeRateInstance])}"
                 redirect(action: "list")
             }
             else {

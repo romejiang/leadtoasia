@@ -38,7 +38,7 @@ class DtpOrderController {
                 }
             }
             projectOrderInstance.save()
-            flash.message = "${message(code: 'default.created.message', args: [message(code: 'projectOrder.label', default: 'ProjectOrder'), projectOrderInstance.id])}"
+            flash.message = "${message(code: 'default.created.message', args: [message(code: 'projectOrder.label', default: 'ProjectOrder'), projectOrderInstance])}"
             redirect(action: "show",controller: 'project', id :  params.project.id)
         }
         else {
