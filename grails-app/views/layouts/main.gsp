@@ -39,7 +39,12 @@
         </div>
 	 <div class="container">	 
       <div class="span-5 left">
+
 <g:isLoggedIn>
+  <ol>
+		<li><g:link controller='index' ><g:message code="default.home.label" default="Index" /></g:link>
+	</ol>	
+
  <g:ifAnyGranted role="ROLE_ADMIN">
 	  	  <h1><g:message code="menu.administrator" default="Administrator " /></h1>
 	  <ol>

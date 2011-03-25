@@ -55,6 +55,6 @@ class User implements Serializable{
 	  
 	}
 	String toString(){
-		"${userRealName} ${fullTime?'（^_^）':'（╰_╯）'}"
+		"${userRealName} ${fullTime?'':'@'}"
 	}
 }

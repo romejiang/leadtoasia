@@ -10,8 +10,10 @@
         </g:isNotLoggedIn>
         <div class="body">
             <h1><g:message code="menu.welcome" default="Welcome" /></h1>
+            <g:each in="${quoteProject}" var="project">
+                <div class="message">${project}</div>
+            </g:each>
             
-            <div class="message"></div>
         
             <div class="errors">
                  
