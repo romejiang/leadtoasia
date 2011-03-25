@@ -35,6 +35,7 @@
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'projectNo', 'errors')}">
                                     <g:textField name="projectNo" maxlength="250" value="${projectInstance?.projectNo}" />
+                                    <g:hiddenField name="state"   value="${projectInstance?.state}" />
                                      
                                 </td>
                             </tr>

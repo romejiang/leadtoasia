@@ -84,8 +84,9 @@
                                  
                                   
                                  <g:ifAnyGranted role="ROLE_MANAGER,ROLE_ADMIN"> 
-                                    <g:select name="customer.id" from="${Customer.find()}" optionKey="id" value="${projectInstance?.customer?.id}"  />
+                                    <g:select name="customer.id" from="${Customer.list()}" optionKey="id" value="${projectInstance?.customer?.id}"  />
                                  </g:ifAnyGranted>
+
                                 </td>
                             </tr>
                             <g:ifAnyGranted role="ROLE_SALES">

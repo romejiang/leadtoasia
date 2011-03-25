@@ -35,8 +35,12 @@
                             <g:sortableColumn property="deadline" title="${message(code: 'project.deadline.label', default: 'Deadline')}" />
                          
 						    <g:sortableColumn property="state" title="${message(code: 'project.state.label', default: 'State')}" /> 
+                            <g:ifAnyGranted role="ROLE_SALES">
+                             <g:sortableColumn property="state" title="${message(code: 'project.manager.label', default: 'Manager')}" /> 
+                            </g:ifAnyGranted>
                             <th></th>
-                           <g:ifNotGranted role="ROLE_SALES">
+
+                            <g:ifNotGranted role="ROLE_SALES">
                             <th></th>
                             </g:ifNotGranted>
                         </tr>
@@ -73,7 +77,9 @@
                             </g:else>
                             </g:ifNotGranted >
                             </td>
-
+                            <g:ifAnyGranted role="ROLE_SALES">
+                             <td>${projectInstance?.manager}</td>
+                            </g:ifAnyGranted>
 							<td>
 							matchs:${projectInstance?.matchs?.size()} <br>
 							task:${projectInstance?.task?.size()}  <br>
