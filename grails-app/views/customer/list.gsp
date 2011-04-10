@@ -46,8 +46,9 @@
                         
                             <td>${fieldValue(bean: customerInstance, field: "contact")}<br>
 							${customerInstance?.mails}<br>
-                            Tel:${fieldValue(bean: customerInstance, field: "tel")}<br>
-                            Fax:${fieldValue(bean: customerInstance, field: "fax")}
+                            <g:message code="customer.mobile.label" default="mobile" />:${fieldValue(bean: customerInstance, field: "mobile")}<br>
+                            <g:message code="customer.tel.label" default="Tel" />:${fieldValue(bean: customerInstance, field: "tel")}<br>
+                            <g:message code="customer.fax.label" default="Fax" />Fax:${fieldValue(bean: customerInstance, field: "fax")}
 							</td> 
                         
                             <td>${fieldValue(bean: customerInstance, field: "registrant")}</td>
@@ -55,8 +56,12 @@
 							 <!-- g: each in="${customerInstance?.quote}" var="p" 
 								${p}<br>
 							   /g :each -->
-							 <g:link controller="pricing" action="create" params="[pid : customerInstance?.id,parentType:'customer']">Add Pricing</g:link>
-							 <g:link controller="pricing" action="list" params="[pid : customerInstance?.id,parentType:'customer']">Manage Pricing</g:link>
+							 <g:link controller="pricing" action="create" params="[pid : customerInstance?.id,parentType:'customer']">
+        <g:message code="default.new.label" args="[g.message(code:'pricing.label')]" />
+        </g:link><br>
+							 <g:link controller="pricing" action="list" params="[pid : customerInstance?.id,parentType:'customer']">
+<g:message code="default.manage.label" args="[g.message(code:'pricing.label')]" />
+</g:link>
 							 </td>
 							</tr>
                         </tr>

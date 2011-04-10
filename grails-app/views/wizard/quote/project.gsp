@@ -100,6 +100,15 @@
                                 </td>
                             </tr>
                             </g:ifAnyGranted>
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="industry"><g:message code="project.industry.label" default="Industry" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'industry', 'errors')}">
+                                    <g:select name="industry.id" from="${Industry.list()}" optionKey="id" 
+                                    value="${projectInstance?.industry?.id}"  />
+                                </td>
+                            </tr>
 
                              <tr class="prop">
                                 <td valign="top" class="name">

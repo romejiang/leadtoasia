@@ -59,10 +59,16 @@
                                     <li><g:link controller="email" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
                                 </g:each>
                                 </ul>
-                            </td>
+                            </td> 
+
+                        </tr>
+                     <tr class="prop">
+                            <td valign="top" class="name"><g:message code="customer.mobile.label" default="Mobile" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: customerInstance, field: "mobile")}</td>
                             
                         </tr>
-                    
+
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="customer.tel.label" default="Tel" /></td>
                             

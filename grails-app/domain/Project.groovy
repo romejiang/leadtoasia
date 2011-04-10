@@ -9,6 +9,7 @@ class Project implements Serializable{
     String fromNo 
 //    客户名称，
 
+    Industry industry
     Customer customer
     User manager //项目经理
     User sales // 销售
@@ -50,6 +51,7 @@ class Project implements Serializable{
 
         manager()
         sales(nullable: true)
+        industry(nullable: true)
 //        name(blank: true, size:0..250)
 
 //        dtp( nullable: true)

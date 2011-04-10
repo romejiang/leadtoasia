@@ -7,7 +7,10 @@
     <body>
         <g:isNotLoggedIn>
         <meta http-equiv="refresh" content="0;url=login/auth">
+
+
         </g:isNotLoggedIn>
+        <g:isLoggedIn>
         <div class="body">
             <h1><g:message code="menu.welcome" default="Welcome" /></h1>
             <g:if test="${quoteProject.size > 0}"  >
@@ -27,5 +30,6 @@
                     </table>
                 </div> 
          </div>
+         </g:isLoggedIn>
     </body>
 </html>

@@ -1,7 +1,7 @@
 $(function(){
 	generateID();
-	$("#test").change(generateID);
-	$("#global").change(generateID);
+	$("#test").click(generateID);
+	$("#global").click(generateID);
 	 
 }); 
 

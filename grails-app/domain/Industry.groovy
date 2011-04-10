@@ -1,5 +1,5 @@
 // implements  Comparable
-class Industry  {
+class Industry   implements Serializable{
     String name
     String enname
   

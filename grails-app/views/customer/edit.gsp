@@ -57,6 +57,16 @@
                                 </td>
                             </tr>
                          
+                                                 
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="tel"><g:message code="customer.mobile.label" default="Mobile" /></label>
+                                </td>
+                                <td valign="top" class="value ${hasErrors(bean: customerInstance, field: 'mobile', 'errors')}">
+                                    <g:textField name="mobile" maxlength="250" value="${customerInstance?.mobile}" />
+                                </td>
+                            </tr>
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="tel"><g:message code="customer.tel.label" default="Tel" /></label>

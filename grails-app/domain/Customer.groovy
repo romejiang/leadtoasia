@@ -5,7 +5,8 @@ class Customer implements Serializable {
     String country
 //	相关联系方式，
     String contact
-
+//	相关联系方式，
+    String mobile 
  
     String tel = ''
     String fax = ''
@@ -26,8 +27,9 @@ class Customer implements Serializable {
 
  		tel(blank: true, size:0..250,matches:"[0-9|-]+")
  		fax(blank: true, size:0..250,matches:"[0-9|-]+")
-
+        mobile(blank: true, size:0..20,matches:"[0-9]+")
  		quote()
+
         registrant(nullable:true)
     }
 
