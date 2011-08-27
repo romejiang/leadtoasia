@@ -1,16 +1,16 @@
 <head>
 	<meta name="layout" content="main" />
-	<title>Edit Profile</title>
+	<title>修改个人档案</title>
 </head>
 
 <body>
 
 	<div class="nav">
-		<span class="menuButton"><a class='home' href="${createLinkTo(dir:'')}">Home</a></span>
+		<span class="menuButton"><a class='home' href="${createLinkTo(dir:'')}">主页</a></span>
 	</div>
 
 	<div class="body">
-		<h1>Edit Profile</h1>
+		<h1>修改个人档案</h1>
 		<g:if test="${flash.message}">
 		<div class="message">${flash.message}</div>
 		</g:if>
@@ -27,7 +27,7 @@
 			<table>
 				<tbody>
 				<tr class='prop'>
-					<td valign='top' class='name'><label for='username'>Login Name:</label></td>
+					<td valign='top' class='name'><label for='username'>登录名：</label></td>
 					<td valign='top' class='value ${hasErrors(bean:person,field:'username','errors')}'>
 						<input type="hidden" name='username' value="${person.username?.encodeAsHTML()}"/>
 						<div style="margin:3px">${person.username?.encodeAsHTML()}</div>
@@ -35,21 +35,21 @@
 				</tr>
 
 				<tr class='prop'>
-					<td valign='top' class='name'><label for='userRealName'>Full Name:</label></td>
+					<td valign='top' class='name'><label for='userRealName'>真实名称：</label></td>
 					<td valign='top' class='value ${hasErrors(bean:person,field:'userRealName','errors')}'>
 						<input type="text" name='userRealName' value="${person.userRealName?.encodeAsHTML()}"/>
 					</td>
 				</tr>
 
 				<tr class='prop'>
-					<td valign='top' class='name'><label for='passwd'>Password:</label></td>
+					<td valign='top' class='name'><label for='passwd'>密码：</label></td>
 					<td valign='top' class='value ${hasErrors(bean:person,field:'passwd','errors')}'>
 						<input type="password" name='passwd' value=""/>
 					</td>
 				</tr>
 
 				<tr class='prop'>
-					<td valign='top' class='name'><label for='enabled'>Confirm Password:</label></td>
+					<td valign='top' class='name'><label for='enabled'>确认密码：</label></td>
 					<td valign='top' class='value ${hasErrors(bean:person,field:'passwd','errors')}'>
 						<input type="password" name='repasswd' />
 					</td>
@@ -63,7 +63,7 @@
 				</tr>
 
 				<tr class='prop'>
-					<td valign='top' class='name'><label for='emailShow'>Show Email:</label></td>
+					<td valign='top' class='name'><label for='emailShow'>显示邮件：</label></td>
 					<td valign='top' class='value ${hasErrors(bean:person,field:'emailShow','errors')}'>
 						<g:checkBox name='emailShow' value="${person.emailShow}" ></g:checkBox>
 					</td>

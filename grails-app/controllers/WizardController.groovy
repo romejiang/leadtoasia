@@ -4,6 +4,8 @@ class WizardController {
     def authenticateService
   
     def projectService
+    def emailerService
+
     // ===========================================
     // ============ Flow =========================
     // ===========================================
@@ -154,13 +156,15 @@ class WizardController {
                 projectService.finish(flow)
            
                 //log.info "flow finished project id: ${flow.projectId} / ${flow.projectInstance.id}"
+                flow.projectId = flow?.projectInstance?.id
+                redirect(controller:"project", action:"show", id : flow.projectId)
             }.to "finish"
             on(Exception).to "review"
         }
         finish{
-            //log.info "flow finish project id: ${flow.projectId} / ${flow.projectInstance.id}"
+//            log.info "flow finish project id: ${flow.projectId} / ${flow.projectInstance.id}"
 //            redirect(controller:"project", action:"show", id : flow.projectId)
-            redirect(controller:"project", action:"list")
+//            redirect(controller:"project", action:"list")
         } 
     }
 //
@@ -263,13 +267,28 @@ class WizardController {
                 projectService.finish(flow)
            
                 //log.info "flow finished project id: ${flow.projectId} / ${flow.projectInstance.id}"
+            
+                emailerService.process("ProjectQuote" , flow?.projectInstance?.manager?.mails?.mail ){[
+                    'to': flow?.projectInstance?.manager?.userRealName ,
+                    'projectNo':flow?.projectInstance?.projectNo,  
+                    'project': flow?.projectInstance
+                 ]}
+
+                 flash.projectId = flow?.projectInstance?.id
+
+                 println flash.projectId + "============"
+
+                redirect(controller:"project", action:"show", id : flash.projectId)
             }.to "finish"
             on(Exception).to "review"
         }
         finish{
-            //log.info "flow finish project id: ${flow.projectId} / ${flow.projectInstance.id}"
-//            redirect(controller:"project", action:"show", id : flow.projectId)
-            redirect(controller:"project", action:"list")
+//            println "flow finish project id: ${flash?.projectId} / ${flow.projectInstance.id}"
+
+//            def pid = flash.projectId
+           // flash.projectId = null;
+//            redirect(controller:"project", action:"show", id : pid)
+//            redirect(controller:"project", action:"list")
         } 
     }
 

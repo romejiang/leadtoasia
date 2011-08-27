@@ -36,10 +36,10 @@
                             
                         </tr>
                     
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="projectOrder.total.label" default="Total" /></td>
+                   <tr class="prop">
+                            <td valign="top" class="name">所属行业</td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: projectOrderInstance, field: "total")}</td>
+                            <td valign="top" class="value">${projectOrderInstance?.project?.industry?.name}</td>
                             
                         </tr>
                     
@@ -57,38 +57,31 @@
                             
                         </tr>
                     
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="projectOrder.rate.label" default="Rate" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: projectOrderInstance, field: "rate")}</td>
-                            
-                        </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="projectOrder.wordcount.label" default="Wordcount" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: projectOrderInstance, field: "wordcount")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: projectOrderInstance, field: "wordcount")} ${fieldValue(bean: projectOrderInstance, field: "type")}</td>
                             
                         </tr>
-                    
+                      
                         <tr class="prop">
-                            <td valign="top" class="name"><g:message code="projectOrder.type.label" default="Type" /></td>
+                            <td valign="top" class="name"><g:message code="projectOrder.rate.label" default="Rate" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: projectOrderInstance, field: "type")}</td>
-                            
-                        </tr>
-                    
-                        <tr class="prop">
-                            <td valign="top" class="name"><g:message code="projectOrder.unit.label" default="Unit" /></td>
-                            
-                            <td valign="top" class="value">${fieldValue(bean: projectOrderInstance, field: "unit")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: projectOrderInstance, field: "rate")} ${fieldValue(bean: projectOrderInstance, field: "unit")}</td>
                             
                         </tr>
-                    
+
+                          <tr class="prop">
+                            <td valign="top" class="name"><g:message code="projectOrder.total.label" default="Total" /></td>
+                            
+                            <td valign="top" class="value">${fieldValue(bean: projectOrderInstance, field: "total")} ${fieldValue(bean: projectOrderInstance, field: "unit")}</td>
+                            
+                        </tr>
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="projectOrder.paymentTerms.label" default="Payment Terms" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: projectOrderInstance, field: "paymentTerms")}</td>
+                            <td valign="top" class="value">${fieldValue(bean: projectOrderInstance, field: "paymentTerms")}天</td>
                             
                         </tr>
                     
@@ -127,27 +120,27 @@
                             
                         </tr>
 						<tr class="prop">
-                            <td valign="top" class="name">Mail</td>
+                            <td valign="top" class="name"><g:message code="projectOrder.mail.label" default="Mail" /></td>
                             
                             <td valign="top" class="value">${projectOrderInstance?.project?.manager?.email}</td>
                             
                         </tr>
 
 						<tr class="prop">
-                            <td valign="top" class="name">Tel</td>
+                            <td valign="top" class="name">电话</td>
                             
                             <td valign="top" class="value">${projectOrderInstance?.project?.manager?.tel}</td>
                             
                         </tr>
 						<tr class="prop">
-                            <td valign="top" class="name">Fax</td>
+                            <td valign="top" class="name">传真</td>
                             
                             <td valign="top" class="value">${projectOrderInstance?.project?.manager?.fax}</td>
                             
                         </tr>
 
 						<tr class="prop"><a name="Source"></a>
-                            <td valign="top" class="name">Project Source</td>
+                            <td valign="top" class="name">源文件</td>
                             
                             <td valign="top" class="value">
                             <div class="warning">
@@ -163,7 +156,7 @@
                             
                         </tr>
                         <tr class="prop">
-                            <td valign="top" class="name">To client</td>
+                            <td valign="top" class="name">完成的文件</td>
                             
                             <td valign="top" class="value">
 							<g:each in="${projectOrderInstance?.attachments}" var="f">
@@ -182,7 +175,24 @@
                 </table>
             </div>
             <div class="buttons">
-                 
+                 	<g:if test="${projectOrderInstance.state == 'new'}">
+							 <g:link action="activating"  id="${projectOrderInstance.id}" onclick="return confirm('Are you sure?');">Confirm</g:link>
+							</g:if>
+							<g:if test="${projectOrderInstance.state == 'processing'}">
+										 <g:link action="complete"  id="${projectOrderInstance.id}">Submit</g:link>
+							</g:if>	
+                            <g:if test="${projectOrderInstance.state == 'pass'}">
+										 <g:link action="invoice"  id="${projectOrderInstance.id}">Invoice</g:link>
+							</g:if>	
+                           <g:if test="${projectOrderInstance.state == 'submit'}">
+										 Awaiting Authenticate
+							</g:if>	
+                            <g:if test="${projectOrderInstance.state == 'invoice'}">
+										 Invoiced
+							</g:if>	
+                            <g:if test="${projectOrderInstance.state == 'finished'}">
+										 Finished
+							</g:if>	
             </div>
         </div>
     </body>

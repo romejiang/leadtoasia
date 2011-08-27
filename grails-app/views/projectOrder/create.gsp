@@ -39,7 +39,17 @@
                               
                                 </td>
                             </tr>
-                        
+                            
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label ><g:message code="project.industry.label" default="industry" /></label>
+                                </td>
+                                <td valign="top" class="value " >
+                                   
+								  ${projectOrderInstance?.project?.industry} 
+                              
+                                </td>
+                            </tr>
 												
                             <tr class="prop">
                                 <td valign="top" class="name">
@@ -48,7 +58,7 @@
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'vendor', 'errors')}">
 							 
                                     <g:select  name="vendor.id" id="vendor.id" class="userSelected"  from="${vendors}" value="${projectOrderInstance.vendor}"
-                                                noSelection="['':'-Choose vendor-']" optionKey="id"  />
+                                                noSelection="['':' - 选择译者 - ']" optionKey="id" optionValue="string"  />
                                 </td>
                             </tr>
                             <g:if test="${projectOrderInstance.project?.matchs}">
@@ -60,7 +70,7 @@
                                 <td valign="top" class="value"> 
  
 									 <g:each in="${projectOrderInstance.project?.matchs}" var="m">
-                                     ${m.wordcount} words Match ${m.match}, so <input type="text" name="matchs" value="${m.discount}" style="width:50px" class="matchs" size="4">% discount
+                                     ${m.wordcount} words Match ${m.match}, so <input type="text" name="discount" value="${m.discount}" style="width:50px" class="discount" size="4">% discount
                                      <input type="hidden" name="matchid" value="${m.id}">
                                       <div class="matchdiscount" style="display: none">${m.discount}</div>
                                       <div class="matchwordcount" style="display: none">${m.wordcount}</div>
@@ -84,7 +94,8 @@
                                     <label for="wordcount"><g:message code="projectOrder.amount.label" default="Amount" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'wordcount', 'errors')}">
-                                    <g:textField name="wordcount" value="${projectOrderInstance.localization?.amount}" /> <g:select name="type" from="${projectOrderInstance.constraints.type.inList}" value="${projectOrderInstance.localization?.type}" valueMessagePrefix="projectOrder.type"  />
+                                    <g:textField name="wordcount" value="${projectOrderInstance.localization?.amount}" />
+                                    <g:select name="type" from="${projectOrderInstance.constraints.type.inList}" value="${projectOrderInstance.localization?.type}" valueMessagePrefix="projectOrder.type"  />
                                 </td>
                             </tr>
 
@@ -105,7 +116,9 @@
                                     <label for="total"><g:message code="projectOrder.total.label" default="Total" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'total', 'errors')}">
-                                    <g:textField name="total" value="${fieldValue(bean: projectOrderInstance, field: 'total')}" /><input type="button" id="calculate" value="calculate">
+                                    <g:textField name="total" value="${fieldValue(bean: projectOrderInstance, field: 'total')}" />
+                                    <input type="button" id="sum" value="计算总字数">
+                                    <input type="button" id="calculate" value="计算总价">
                                 </td>
                             </tr>
                         
@@ -124,7 +137,7 @@
                                     <label for="paymentTerms"><g:message code="projectOrder.paymentTerms.label" default="Payment Terms" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'paymentTerms', 'errors')}">
-                                    <g:textField name="paymentTerms" maxlength="250" value="${projectOrderInstance?.paymentTerms}" /> days after invoice
+                                    <g:textField name="paymentTerms" maxlength="250" value="${projectOrderInstance?.paymentTerms}" /> 天 （收到发票后）
                                 </td>
                             </tr>
 

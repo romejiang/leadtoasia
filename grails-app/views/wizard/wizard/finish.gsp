@@ -17,7 +17,7 @@
       
             <g:form action="wizard" method="post" >
                 <div class="dialog">
-                   finished
+                  已完成
                 </div>
                 <div class="buttons">
                     <span class="button"></span>

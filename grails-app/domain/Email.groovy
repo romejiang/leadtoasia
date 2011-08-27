@@ -1,5 +1,5 @@
 // implements  Comparable
-class Email  {
+class Email   implements Serializable{
     String mail
   
 

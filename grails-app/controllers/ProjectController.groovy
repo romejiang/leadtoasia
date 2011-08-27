@@ -17,7 +17,7 @@ class ProjectController {
     }
 // 不同的用户和查看不同状态的项目
     def list = {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 20, 100)
         params.sort = "start"
         params.order = "desc"
         if (authenticateService.isLoggedIn()) {
@@ -35,6 +35,7 @@ class ProjectController {
                             eq('manager', authenticateService.userDomain())
                             ne('state', 'paid')
                             }
+                            order("start", "desc")
                         }, 
                     projectInstanceTotal: Project.withCriteria() {
                             and{
@@ -45,6 +46,8 @@ class ProjectController {
                         }]
                 }
             }else if(authenticateService.ifAllGranted("ROLE_SALES_DIRECTOR")){	
+      
+
                 return [projectInstanceList: Project.findAllBySalesIsNotNull( params), 
                     projectInstanceTotal: Project.countBySalesIsNotNull()]
             } else if(authenticateService.ifAllGranted("ROLE_SALES")){	
@@ -55,6 +58,115 @@ class ProjectController {
 	    redirect(uri: '/')
     }
 
+
+// 销售总监用的，搜索销售人员做的项目
+def sales = {
+
+//              return [projectInstanceList:Project.withCriteria() {
+//                            and{
+//                            isNotNull('sales')
+//                              if (params.state) {
+//                                eq('state',  params.state)
+//                            }
+//                            }
+//                            order("start", "desc")
+//                        }, 
+//                    projectInstanceTotal: Project.withCriteria() {
+//                            and{
+//                            isNotNull('sales')
+//                            if (params.state) {
+//                                eq('state',  params.state)
+//                            }
+//                            
+//                            }
+//                            count("projectNo")
+//                        }]
+
+//[1: '本周' , 2:'本月' , 3: '季度' ,4:'全年',5:'所有']
+    Calendar   calendar   =   Calendar.getInstance(); 
+    calendar.set(Calendar.HOUR_OF_DAY ,23)
+    calendar.set(Calendar.MINUTE ,59)
+    Date end = calendar.getTime();
+    Date start = end
+
+    calendar.set(Calendar.HOUR_OF_DAY ,0)
+    calendar.set(Calendar.MINUTE ,0)
+    if (params.datetime) {
+        if (params.int("datetime") == 1) {
+            calendar.set(Calendar.DAY_OF_WEEK,   Calendar.SUNDAY);
+            start = calendar.getTime();
+        }else if(params.int("datetime") == 2){
+            calendar.set(Calendar.DAY_OF_MONTH,   1);
+            start = calendar.getTime();
+        }else if(params.int("datetime") == 3){
+            def m = calendar.get(Calendar.MONTH)
+            def qr = (m/3) as int 
+//            println "${m} ${qr}"
+            calendar.set(Calendar.MONTH ,   qr * 3);
+            calendar.set(Calendar.DAY_OF_MONTH,   1);
+            start = calendar.getTime();
+        }else if(params.int("datetime") == 4){
+            calendar.set(Calendar.DAY_OF_YEAR,   1);
+            start = calendar.getTime();
+        } 
+
+        flash.message =  "从${start.format('yyyy-MM-dd HH:mm')} 到  ${end.format('yyyy-MM-dd HH:mm')}的项目。"
+    }
+//          System.out.println(calendar.get(Calendar.WEEK_OF_YEAR));   //获取是一年的第几周  
+//          calendar.set(Calendar.DAY_OF_WEEK,   Calendar.MONDAY);   //将日历翻到这周的周一  
+//          System.out.println(calendar.getTime());  
+//          calendar.set(Calendar.DAY_OF_WEEK,   Calendar.SUNDAY);   //将日历翻到这周的周日（具体每周是周一开始还是周日，甚至周四周五，都可以设置，方法setFirstDayOfWeek，参数类似）  
+//          System.out.println(calendar.getTime());  
+//          calendar.add(Calendar.WEEK_OF_YEAR,   1);   //使用add进行增减操作，在“一年的第几周”这一属性在当前值的基础上+1，也就是下一周，上一周则是-1  
+//          calendar.set(Calendar.DAY_OF_WEEK,   Calendar.MONDAY);//将日历翻到这周的周一  
+//          System.out.println(calendar.getTime());  
+//          calendar.set(Calendar.DAY_OF_WEEK,   Calendar.SUNDAY);  
+//          System.out.println(calendar.getTime());   
+
+       params.max = 100
+        def results = Project.withCriteria {
+            and{
+                 if (params.sale) {
+                    sales{
+                        eq('id', params.sale.toLong())
+                    }  
+                }
+                if (params.state) {
+                    eq('state',  params.state)
+                }
+                if (params.datetime) {
+                    between("start" , start , end)
+                }
+   
+            }
+            order("start", "desc")
+
+        }
+
+        def total = Project.withCriteria {
+            and{
+                 if (params.sale) {
+                    sales{
+                        eq('id', params.sale.toLong())
+                    }
+                } 
+                if (params.state) {
+                    eq('state',  params.state)
+                }
+                 if (params.datetime) {
+                    between("start" , start , end)
+                }
+            }
+            count('id')
+        }
+
+
+        render(view: "list", model: [projectInstanceList:  results,   projectInstanceTotal:  total ,
+             sale: params.sale ,
+             state : params.state ,
+             datetime : params.datetime])
+}
+// 管理员和PM用的搜素项目
     def search = {
         params.max = 100
         def results = Project.withCriteria {
@@ -176,32 +288,54 @@ class ProjectController {
         def projectInstance = Project.get(params.id)
         if (projectInstance) {
             try {
-//                projectInstance.attachments?.each {   
-//                    it.delete(flush:true)
-//                }
-//                projectInstance.matchs?.each {   
-//                    it.delete(flush:true)
-//                }
-                if (projectInstance.dtp) {
-                     projectInstance.dtp.toList().each {   
-                        projectInstance.dtp.remove(it)
-                        it?.projectOrder?.delete(flush:true) 
-                        it.delete(flush:true)
-                    }                   
+                projectInstance.attachments?.toList().each {  
+                    projectInstance.removeFromAttachments(it)
+                    it.delete(flush:true) 
                 }
-                if (projectInstance.task) {
-                     projectInstance.task.toList().each {   
-                        projectInstance.task.remove(it)
-                        it?.projectOrder?.delete(flush:true) 
-                        it.delete(flush:true)
-                    }                   
+                projectInstance.matchs?.toList().each {   
+                    projectInstance.removeFromMatchs(it)
+                    it.delete(flush:true) 
                 }
-     
+ 
+                def dtp = projectInstance.dtp.collect{it.id}
+
+                projectInstance.dtp?.toList().each {   
+//                    projectInstance.dtp.remove(it) 
+                    projectInstance.removeFromDtp(it)
+                }      
+
+                    
+                    dtp.each {   
+                         def localization = Localization.get(it)
+                         if (localization?.projectOrder) {
+                            localization?.projectOrder?.delete(flush:true) 
+                         }else{
+                            localization?.delete(flush:true)
+                        }
+                    }
+ 
+                     def task = projectInstance.task.collect{it.id}
+                     projectInstance.task?.toList().each {   
+//                        projectInstance.task.remove(it) 
+                        projectInstance.removeFromTask(it)
+                    }     
+                    task.each {   
+                         def localization = Localization.get(it)
+                         if (localization?.projectOrder) {
+                            localization?.projectOrder?.delete(flush:true) 
+                         }else{
+                            localization?.delete(flush:true)
+                        }
+                    }
+                      
+ 
+//                projectInstance.save(flush: true)
                 projectInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
                 redirect(action: "list")
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {
+            
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'project.label', default: 'Project'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
@@ -244,20 +378,21 @@ class ProjectController {
         if (project) {
         
             def result = project?.task?.toList().every{
-                (it.projectOrder?.state == 'invoice' || it.projectOrder?.state == 'finished') 
+                (it.projectOrder?.state == 'pass' || it.projectOrder?.state == 'invoice' || it.projectOrder?.state == 'finished') 
             }
             result = result && project?.dtp?.toList().every{
-                (it.projectOrder?.state == 'invoice' || it.projectOrder?.state == 'finished') 
+                (it.projectOrder?.state == 'pass' || it.projectOrder?.state == 'invoice' || it.projectOrder?.state == 'finished') 
             }
             flash.message = "Under the project there is an outstanding PO."
             log.info "project.finished  $result~!"
             if (result) {
                 project.state = 'finished'
-                
+                project.finishedDate = new Date()
                 if (project.save(flush:true)) {
                     flash.message = "Project " + project+ " is finished."
                 } 
             }
+
         } 
         redirect(action: "list")
     }
@@ -280,8 +415,15 @@ class ProjectController {
         def project = Project.get(params.id)
  
         if (project) {
-             project.state = "open"
+             project.state = "processing"
              project.save()
+
+            emailerService.process("ProjectAccept" , project?.sales?.mails?.mail ){[
+                'to': project?.sales?.userRealName ,
+                'projectNo':project?.projectNo, 
+                //'projectOrder': po,
+                'project': project
+             ]}
         } 
         redirect(action: "show" , id: params.id)
 
@@ -296,6 +438,99 @@ class ProjectController {
         }
         redirect(action: "list",  id: params.id , params: ['state' : 'paid'])
     }
+
+
+// 给销售人员发邮件
+    def toSales = {
+        def project = Project.get(params.id)
+        if (!project) {
+            flash.message = "没有找到项目。"
+             redirect(action: "list")
+        }
+        if (!project?.sales) {
+            flash.message = "没有销售人员可以发信。"
+            redirect(action: "list")
+        }
+        def wordcount  = 0
+        project?.matchs?.each{match ->
+            wordcount += match.wordcount
+        }
+
+        
+        def noticeInstance = Notice.findByName("ProjectSubmit")
+        if (!noticeInstance) {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'notice.label', default: 'Notice'), 'ProjectSubmit'])}"
+            redirect(action: "list")
+        }
+        else {
+            return [noticeInstance: noticeInstance , id : params.id , "wordcount": wordcount]
+        }
+    }
+
+    def sendToSales = {
+         def project = Project.get(params.id) 
+         
+        if (project && (project.state == 'finished' || project.state == 'invoice') ) {
+  
+             def noticeInstance = new Notice(params)
+
+             emailerService.process(noticeInstance , project?.sales?.mails?.mail ){[
+                'to': project?.sales?.userRealName ,
+                'projectNo':project?.projectNo, 
+                //'projectOrder': po,
+                'project': project
+             ]}
+            //project.state = "invoice"
+            project.save()
+            flash.message = "send invoice success!" 
+        }else{
+            flash.message = "Project not finished."
+        }
+
+        redirect(action: "list" )  
+    }
+
+// 更新项目字数
+    def uptotal = {
+        
+        def project = Project.get(params.id)
+        if (!project) {
+            flash.message = "没有找到项目。"
+            redirect(action: "list")
+        } 
+
+        def wordcount  = 0
+        project?.matchs?.each{match ->
+            wordcount += match.wordcount
+        }
+
+        return [ "project" : project , id : params.id , "wordcount": wordcount]
+    }
+ 
+    def uptotalTo = {
+        def project = Project.get(params.id)
+
+        if (params.wordcount && project) {
+                println params.wordcount
+                project?.matchs?.each{match ->
+                    match.wordcount = params.int("wordcount")
+                    match.save();
+                }   
+
+                project?.task?.each{task ->
+                    task.amount = params.int("wordcount")
+                    task.save();
+                }   
+
+                ProjectOrder.findAllByProject(project).each{po ->
+                    po.wordcount = params.int("wordcount")
+                    po.total = po.wordcount * po.rate
+                }
+         }
+
+         redirect(action: "list")
+    }
+
 
         // 给客户发送invoice
     def sendInvoice = {
@@ -321,6 +556,8 @@ class ProjectController {
 
         redirect(action: "list" )  
     }
+
+
     def  invoice = {
         def noticeInstance = Notice.findByName("ProjectInvoice")
         if (!noticeInstance) {

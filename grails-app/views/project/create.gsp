@@ -32,7 +32,7 @@
                                     <label for="projectNo"><g:message code="project.projectNo.label" default="Project No" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'projectNo', 'errors')}">
-                                    <g:textField name="projectNo" maxlength="250" value="${projectInstance?.projectNo}" />* Auto-fill in the blank
+                                    <g:textField name="projectNo" maxlength="250" value="${projectInstance?.projectNo}" />* 自动显示
                                 </td>
                             </tr>
 

@@ -61,13 +61,18 @@ class ProjectOrderController {
                 }
             }
         }
+
+//        vendors = vendors.sort{e1, e2 ->
+//
+//            
+//        } 
   
         return [projectOrderInstance: projectOrderInstance,
          parentType:params.parentType , vendors : vendors]
     }
 
     def save = {
-	 
+	 ProjectOrder.withTransaction { status ->
         def projectOrderInstance = new ProjectOrder(params)
  
         log.info params.matchs?.size()
@@ -76,27 +81,44 @@ class ProjectOrderController {
             /// 保存给free lance 的报价和折扣
             // word计费方式才需要保持匹配率
             if (params.type == 'word') {
-                 
-                if (params.matchid?.size() > 0) {
+
+                if (params.matchid instanceof String) {
+                        log.info "========== String ${params.matchid} ================"
+                        def p_match = Match.get(params.matchid)
+                        def po_match = new Match()
+
+           
+                        po_match.wordcount = p_match.wordcount 
+                        po_match.match = p_match.match
+                        po_match.discount = params.int("discount")
+
+                        
+                        projectOrderInstance.addToMatchs(po_match)
+                        po_match.save()
+                   
+                }else  {
+                    log.info "========== String[] ${params.matchid}================"
 
                     params.matchid?.eachWithIndex{mid , i ->
                         def p_match = Match.get(mid)
-                        def po_match = new Match( wordcount: p_match.wordcount ,
-                               match: p_match.match,
-                               discount: params.matchs[i])
+                        def po_match = new Match( 'wordcount': p_match?.wordcount ,
+                               match: p_match?.match,
+                               discount: params.discount[i])
                         projectOrderInstance.addToMatchs(po_match)
                         po_match.save()
-                    }
-                    
+                    }  
                 }
             }
             projectOrderInstance.save()
+            
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'projectOrder.label', default: 'ProjectOrder'), projectOrderInstance])}"
             redirect(action: "show",controller: 'project', id :  params.project.id)
         }
-        else {
-            render(view: "create", model: [projectOrderInstance: projectOrderInstance,
-        pid : params.pid,parentType:params.parentType])
+
+            else {
+                render(view: "create", model: [projectOrderInstance: projectOrderInstance,
+                    pid : params.pid,parentType:params.parentType])
+            }
         }
     }
 

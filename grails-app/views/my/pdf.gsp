@@ -32,57 +32,57 @@
 		<div class="title">   </div>
 <table width="680"  align="center" border="1">
     <tr>
-    <th colspan="2" width="340" >Purchase Order </th>
-    <th colspan="2" width="340" >To: ${projectOrderInstance?.vendor?.userRealName}</th>
+    <th colspan="2" width="340" >项目订单</th>
+    <th colspan="2" width="340" >接单人： ${projectOrderInstance?.vendor?.userRealName}</th>
      
   </tr>
   <tr>
-    <td colspan="2">Supplier/Vendor Name: ${projectOrderInstance?.vendor?.userRealName}</td>
-    <td width="170" >PM:${projectOrderInstance?.project?.manager?.userRealName}</td>
+    <td colspan="2">译者名称： ${projectOrderInstance?.vendor?.userRealName}</td>
+    <td width="170" >项目经理：${projectOrderInstance?.project?.manager?.userRealName}</td>
     <td width="170" >Tel:${projectOrderInstance?.project?.manager?.tel}</td>
   </tr>
   <tr>
-    <td colspan="2">Order No: ${projectOrderInstance?.project?.projectNo}</td>
+    <td colspan="2">订单号：${projectOrderInstance?.project?.projectNo}</td>
     <td>Email:${projectOrderInstance?.project?.manager?.email}</td>
     <td>Fax:${projectOrderInstance?.project?.manager?.fax}</td>
   </tr>
   <tr>
     <td width="170" >PO State: ${projectOrderInstance?.state}</td>
     <td width="170" >Tel:${projectOrderInstance?.vendor?.tel}</td>
-    <td colspan="2">Service Type: ${projectOrderInstance?.serviceType}</td>
+    <td colspan="2">服务类型：${projectOrderInstance?.serviceType}</td>
   </tr>
   <tr>
     <td>Email:${projectOrderInstance?.vendor?.email}</td>
     <td>Fax:${projectOrderInstance?.vendor?.fax}</td>
-    <td colspan="2">Amount: ${projectOrderInstance?.wordcount} ${projectOrderInstance?.type}</td>
+    <td colspan="2">项目金额： ${projectOrderInstance?.wordcount} ${projectOrderInstance?.type}</td>
     
   </tr>
   <tr>
-    <td>Source Language: </td>
+    <td>源语言： </td>
     <td>${projectOrderInstance?.localization?.source}</td>
-    <td>Target Language: </td>
+    <td>目标语言：</td>
     <td>${projectOrderInstance?.localization?.target}</td>
   </tr>
   <tr>
-    <td colspan="2">Delivery date: <g:formatDate date="${projectOrderInstance?.deliveryDate}" /></td>
-    <td colspan="2">Rate: ${projectOrderInstance?.rate} ${projectOrderInstance?.unit}</td>
+    <td colspan="2">交付日期：<g:formatDate date="${projectOrderInstance?.deliveryDate}" /></td>
+    <td colspan="2">单价： ${projectOrderInstance?.rate} ${projectOrderInstance?.unit}</td>
   </tr>
   <tr>
-    <td colspan="2" rowspan="5">Any requirements: ${projectOrderInstance?.requirement}</td>
-    <td colspan="2">Submission Pattem:</td>
+    <td colspan="2" rowspan="5">其他要求： ${projectOrderInstance?.requirement}</td>
+    <td colspan="2">提交文件格式：</td>
   </tr>
   <tr>
-    <td>Payment Sort: ${projectOrderInstance?.paymentSort}</td>
-    <td>Payment terms: ${projectOrderInstance?.paymentTerms}</td>
+    <td>支付方式：${projectOrderInstance?.paymentSort}</td>
+    <td>付款周期： ${projectOrderInstance?.paymentTerms}</td>
   </tr>
   <tr>
-    <td colspan="2">Total:${projectOrderInstance?.total} ${projectOrderInstance?.unit}</td>
+    <td colspan="2">总金额：${projectOrderInstance?.total} ${projectOrderInstance?.unit}</td>
   </tr>
   <tr>
-    <td colspan="2">PM Signature: </td>
+    <td colspan="2">PM 签名：</td>
   </tr>
   <tr>
-    <td colspan="2">Date:<g:formatDate date="${projectOrderInstance?.start}" /></td>
+    <td colspan="2">日期：<g:formatDate date="${projectOrderInstance?.start}" /></td>
   </tr>
 </table>
 <div class="bottom">Invoice to: accounting@leadtoasia.com<br></br>

@@ -84,13 +84,14 @@ input[type='radio'] ,input[type='button'] ,input[type='submit'] ,input[type='fil
  
 .body {
     float: left; 
-	width: 735px;
-	margin:5px;
+	width: 100%;
+ 
 }
 .container{
 	background: #BAC1CC;
 	border: 1px solid #242B36;
 	border-top: 0;
+	width: 1004px;
 }
 /* NAVIGATION MENU */
 .nav {
@@ -272,7 +273,8 @@ th.desc a {
     text-align: right;
     width: 15%;
     white-space: nowrap;
- 
+	border-right: 3px solid #ccc;
+    font-weight: bold;
 }
 .prop .value {
     text-align: left;
@@ -412,7 +414,11 @@ th.desc a {
 	background: url(../images/accept.png) no-repeat;
 	width:16px;
 }
-
+.search  {
+	color: #000;
+	line-height: 30px;
+	font-weight:bold;
+}
 .search input, select{
 	width: auto;
 }

@@ -16,11 +16,11 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">主页</a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-           <h1>Task</h1>
+           <h1>任务</h1>
              <g:render template="navigate" model="['number':3]" />
              
             <g:form action="wizard" method="post" >

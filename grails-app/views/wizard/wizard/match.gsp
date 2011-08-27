@@ -11,11 +11,11 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">主页</a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-            <h1>Match</h1>
+            <h1>匹配率</h1>
         
              <g:render template="navigate" model="['number':2]" />
 
@@ -57,10 +57,10 @@
                                     <g:textField name="discount"   class="discount" value="${fieldValue(bean: matchInstance, field: 'discount')}"  size="3" />%
                                 </td>
                                   <td valign="top">
-                                    <label for="Result">Result</label>
+                                    <label for="Result">结果</label>
                                 </td>
                                 <td valign="top" >
-                                    <g:textField name="result" class="result" value=""  size="5" Disabled="true"/>word
+                                    <g:textField name="result" class="result" value=""  size="5" Disabled="true"/>字
                                 </td>
                             </tr>
 
@@ -70,10 +70,10 @@
                                    
                                 </td>
                                   <td valign="top">
-                                    <label for="total">Total:</label>
+                                    <label for="total">总计：</label>
                                 </td>
                                 <td valign="top" >
-                                    <g:textField name="total" size="5" />word
+                                    <g:textField name="total" size="5" />字
                                 </td>
                             </tr>
 

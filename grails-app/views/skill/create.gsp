@@ -13,7 +13,7 @@
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-            <h1>Add new service</h1>
+            <h1>添加新服务</h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>

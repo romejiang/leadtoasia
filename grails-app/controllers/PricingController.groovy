@@ -32,8 +32,8 @@ class PricingController {
     def save = {
         def pricingInstance = new Pricing(params)
 //            ========================================
-                  // 保存到客户的价格体系
-                  def tempc
+          // 保存到客户的价格体系
+          def tempc
             if (params.parentType == 'customer') {
                 tempc = Customer.get(params.pid)
                 if (tempc.quote && tempc.quote.contains(pricingInstance)) {
@@ -59,7 +59,12 @@ class PricingController {
             }
 //            ========================================
         if (pricingInstance.save()) {
-            tempc.addToQuote(pricingInstance).save()
+            
+            if (!tempc.addToQuote(pricingInstance).save()) {
+                tempc.errors.each{
+                    log.info "${it}"
+                }
+            }
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'pricing.label', default: 'Pricing'), pricingInstance])}"
             redirect(action: "list", params : [pid : params.pid,parentType:params.parentType])
         }

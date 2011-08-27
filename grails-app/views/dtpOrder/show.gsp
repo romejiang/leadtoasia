@@ -106,7 +106,7 @@
                         </tr>
 
 						<tr class="prop">
-                            <td valign="top" class="name">Attachments</td>
+                            <td valign="top" class="name">附件</td>
                             
                             <td valign="top" class="value"> 
 								<ul>
@@ -123,9 +123,9 @@
                         </tr>
                     <g:if test="${projectOrderInstance?.state == 'new' }">
                         <tr class="prop">
-                            <td valign="top" class="name">Notice</td>
+                            <td valign="top" class="name">通知</td>
                             <td valign="top" class="value"> 
-								<g:link  action="notice" id="${projectOrderInstance?.id}" onclick="this.disabled = true;\$('#spinner').show(); ">Notice Now</g:link>
+								<g:link  action="notice" id="${projectOrderInstance?.id}" onclick="this.disabled = true;\$('#spinner').show(); ">立即发送</g:link>
 							</td>
                         </tr> 
                     </g:if>

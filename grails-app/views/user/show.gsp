@@ -1,18 +1,18 @@
 <head>
 	<meta name="layout" content="main" />
-	<title>Show User</title>
+	<title>显示用户信息</title>
 </head>
 
 <body>
 
 	<div class="nav">
-		<span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
-		<span class="menuButton"><g:link class="list" action="list">User List</g:link></span>
-		<span class="menuButton"><g:link class="create" action="create">New User</g:link></span>
+		<span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">主页</a></span>
+		<span class="menuButton"><g:link class="list" action="list">用户列表</g:link></span>
+		<span class="menuButton"><g:link class="create" action="create">新用户</g:link></span>
 	</div>
 
 	<div class="body">
-		<h1>Show User</h1>
+		<h1>显示用户信息</h1>
 		<g:if test="${flash.message}">
 		<div class="message">${flash.message}</div>
 		</g:if>
@@ -26,17 +26,17 @@
 				</tr>
 
 				<tr class="prop">
-					<td valign="top" class="name">Login Name:</td>
+					<td valign="top" class="name">登录名：</td>
 					<td valign="top" class="value">${person.username?.encodeAsHTML()}</td>
 				</tr>
 
 				<tr class="prop">
-					<td valign="top" class="name">Full Name:</td>
+					<td valign="top" class="name">真实名称：</td>
 					<td valign="top" class="value">${person.userRealName?.encodeAsHTML()}</td>
 				</tr>
 
 				<tr class="prop">
-					<td valign="top" class="name">Description:</td>
+					<td valign="top" class="name">详细描述：</td>
 					<td valign="top" class="value">${person.description?.encodeAsHTML()}</td>
 				</tr>
 
@@ -46,17 +46,17 @@
 				</tr>
 
 				<tr class="prop">
-					<td valign="top" class="name">Show Email:</td>
+					<td valign="top" class="name">显示邮件：</td>
 					<td valign="top" class="value">${person.emailShow}</td>
 				</tr>
 
 				<tr class="prop">
-					<td valign="top" class="name">Full-Time:</td>
+					<td valign="top" class="name">全职员工：</td>
 					<td valign="top" class="value">${person.fullTime?"full-time":"part-time"}</td>
 				</tr>
 
 				<tr class="prop">
-					<td valign="top" class="name">Enabled:</td>
+					<td valign="top" class="name">已启用：</td>
 					<td valign="top" class="value">${person.enabled?"enabled" : "disabled"}</td>
 				</tr>
 
@@ -71,7 +71,7 @@
 				</tr>
 
 				<tr class="prop">
-					<td valign="top" class="name">Roles:</td>
+					<td valign="top" class="name">角色：</td>
 					<td valign="top" class="value">
 						<ul>
 						<g:each in="${roleNames}" var='name'>
@@ -80,9 +80,19 @@
 						</ul>
 					</td>
 				</tr>
+		        <tr class="prop">
+					<td valign="top" class="name">行业：</td>
+					<td valign="top" class="value"> 
+						<ul>
+						<g:each in="${person?.industrys}" var='industry'>
+							<li>${industry.name}</li>
+						</g:each>
+						</ul>
+					</td>
+				</tr>
 
                 <tr class="prop">
-					<td valign="top" class="name">CV:</td>
+					<td valign="top" class="name">简历：</td>
 					<td valign="top" class="value">
 						<ul>
 					    <g:each in="${person?.attachments}" var="f">

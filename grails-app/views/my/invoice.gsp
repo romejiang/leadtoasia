@@ -26,7 +26,7 @@
                         </tr>
 
                         <tr class="prop">
-                            <td valign="top" class="name">Source And Target</td>
+                            <td valign="top" class="name">源语言和目标语言</td>
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
@@ -99,7 +99,7 @@
                         </tr>
 					 
                         <tr class="prop">
-                            <td valign="top" class="name">Select Payment</td>
+                            <td valign="top" class="name">选择支付方式</td>
                             
                             <td valign="top" class="value">
                             <g:select  name="invoiceInfo" id="invoiceInfo" class="userSelected"  from="${invoiceInfoInstanceList}" value="${invoice}"

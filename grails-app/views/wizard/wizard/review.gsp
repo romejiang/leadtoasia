@@ -11,11 +11,11 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">主页</a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-            <h1>Review</h1>
+            <h1>查看</h1>
              <g:render template="navigate" model="['number':5]" />
       
             <g:form action="wizard" method="post" >
@@ -57,7 +57,7 @@
                             <td valign="top" >${fieldValue(bean: projectInstance, field: "state")}</td>
                             
                       
-                            <td valign="top" >Customer Project No</td>
+                            <td valign="top" >客户项目号</td>
                             
                             <td valign="top" >${projectInstance?.fromNo} </td>
                             
@@ -103,7 +103,7 @@
                                     <li>${m?.encodeAsHTML()}
                                     </g:if>
                                 </g:each>
-                                    <li>Total: ${matchCount}
+                                    <li>总计： ${matchCount}
                                 </ul>
                             </td>
                             

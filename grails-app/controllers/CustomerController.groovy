@@ -11,8 +11,13 @@ class CustomerController {
     def list = {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
         if (authenticateService.ifAllGranted("ROLE_SALES_DIRECTOR")) { 
-             [customerInstanceList: Customer.findAllByRegistrantIsNotNull( params), 
+            if (params.userid) {
+                  return [customerInstanceList: Customer.findAllByRegistrant(User.get(params.userid), params), 
+                customerInstanceTotal: Customer.countByRegistrant(User.get(params.userid) )]
+            }else{
+             return [customerInstanceList: Customer.findAllByRegistrantIsNotNull( params), 
                 customerInstanceTotal: Customer.countByRegistrantIsNotNull( )]
+                }
         }else if (authenticateService.ifAllGranted("ROLE_SALES")) {
             
              [customerInstanceList: Customer.findAllByRegistrant(authenticateService.userDomain() ,params), 
@@ -115,6 +120,11 @@ class CustomerController {
         def customerInstance = Customer.get(params.id)
         if (customerInstance) {
             try {
+                def projectCount = Project.countByCustomer(customerInstance)
+                if (projectCount > 0) {
+                    flash.message = "您要删除的客户已经建立相关项目，所以不能删除。"
+                    return redirect(action: "show", id: params.id)
+                }
                 customerInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'customer.label', default: 'Customer'), params.id])}"
                 redirect(action: "list")

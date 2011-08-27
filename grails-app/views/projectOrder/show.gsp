@@ -145,7 +145,7 @@
                         </tr>
 
 						<tr class="prop">
-                            <td valign="top" class="name">Attachments</td>
+                            <td valign="top" class="name">附件</td>
                             
                             <td valign="top" class="value"> 
 								<ul>

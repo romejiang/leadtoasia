@@ -45,6 +45,19 @@
 		<li><g:link controller='index' ><g:message code="default.home.label" default="Index" /></g:link>
 	</ol>	
 
+    <!--  译者管理 -->
+   <g:ifAnyGranted role="ROLE_VENDOR_MANAGER">
+	 <h1><g:message code="menu.vendorManager" default="Vendor Manager " /></h1>
+	<ol>
+		<li><g:link controller='user' ><g:message code="user.label" default="User" /><g:message code="menu.management" default=" Management" /></g:link>
+		<li><g:link controller='user'  action='create'><g:message code="menu.create" default="Create " /><g:message code="user.label" default="User" /></g:link>
+        <li><g:link controller='industry' ><g:message code="industry.label" default=" Industry" /><g:message code="menu.management" default=" Management" /></g:link>
+		<li><g:link controller='industry'  action='create'><g:message code="menu.create" default="Create " /><g:message code="industry.label" default=" Industry" /></g:link>
+
+  
+    </ol>
+</g:ifAnyGranted>
+
  <g:ifAnyGranted role="ROLE_ADMIN">
 	  	  <h1><g:message code="menu.administrator" default="Administrator " /></h1>
 	  <ol>
@@ -84,26 +97,27 @@
 		<li><g:link action="list" controller="customer"><g:message code="customer.label" default="Client&nbsp;" /><g:message code="menu.management" default=" Management" /></g:link>
 		<li><g:link action="create" controller="customer"><g:message code="menu.create" default="Create " /><g:message code="customer.label" default="Client" /></g:link>
   		<li><g:link action="start" controller="wizard"><g:message code="menu.create" default="Create " /><g:message code="project.label" default="Project" /></g:link>
- 		<li><g:link action="list" controller="project" params="[state:'quote']"><g:message code="menu.projectquote" default="Quote  " /></g:link>
+ 		<li><g:link action="list" controller="project" params="[state:'quote']"><g:message code="menu.projectquote" default="Quote" /></g:link>
+ 		<li><g:link action="list" controller="project" params="[state:'open']"><g:message code="menu.projectnew" default="New" /></g:link>
  		<li><g:link action="list" controller="project" params="[state:'processing']"><g:message code="menu.projectprocessing" default="Processing" /></g:link>
  		<li><g:link action="list" controller="project"><g:message code="menu.projectinhands" default="Project  In Hands" /></g:link>
         <li><g:link action="list" controller="project" params="[state: 'finished']"><g:message code="menu.finished" default="Finished" /> <g:message code="project.label" default="Project" /></g:link>  
         <li><g:link action="list" controller="project" params="[state: 'invoice']"><g:message code="menu.awaitingpayment" default="Awaiting Payment" /></g:link>  
         <li><g:link action="list" controller="project" params="[state: 'paid']"><g:message code="menu.paid" default="Paid" /><g:message code="project.label" default="Project" /></g:link>  
-   <%--      <li><g:link controller='user' >User Manage</g:link>
-		<li><g:link controller='user'  action='create'>Register User</g:link>
-        <li><g:link controller='industry' >Industry Manage</g:link>
-		<li><g:link controller='industry'  action='create'><g:message code="menu.create" default="Create " /> Industry</g:link>
- 			<li><g:link action="list" controller="projectOrder">All PO List</g:link>
- 		<li><g:link action="list" controller="projectOrder" params="[state: 'new']">New PO List</g:link>
- 		<li><g:link action="list" controller="projectOrder" params="[state: 'processing']">Processing PO List</g:link>
- 		<li><g:link action="list" controller="projectOrder" params="[state: 'submit']">Submit PO List</g:link>
- 		<li><g:link action="list" controller="projectOrder" params="[state: 'invoice']">Invoiced PO List</g:link>
- 		<li><g:link action="list" controller="projectOrder" params="[state: 'finished']">Finished PO List</g:link> --%>
+   
+      </ol>
+      <h1>任务管理</h1>
+	<ol>
+ 		<li><g:link action="list" controller="projectOrder">所有的任务</g:link>
+ 		<li><g:link action="list" controller="projectOrder" params="[state: 'new']">新任务</g:link>
+ 		<li><g:link action="list" controller="projectOrder" params="[state: 'processing']">进行中的任务</g:link>
+ 		<li><g:link action="list" controller="projectOrder" params="[state: 'submit']">提交的任务</g:link>
+ 		<li><g:link action="list" controller="projectOrder" params="[state: 'invoice']">等待付款的任务</g:link>
+ 		<li><g:link action="list" controller="projectOrder" params="[state: 'finished']">已付款的任务</g:link>  
  	</ol>
 	</g:ifAnyGranted>
 
-      	  <g:ifAnyGranted role="ROLE_SALES">
+    <g:ifAnyGranted role="ROLE_SALES">
 	  	<h1><g:message code="menu.manager" default="Manager" /></h1>
 	<ol>
 		<li><g:link action="list" controller="customer"><g:message code="customer.label" default="Client" /><g:message code="menu.management" default=" Management" /></g:link>
@@ -113,6 +127,25 @@
   
  	</ol>
 	</g:ifAnyGranted>
+
+
+
+<!--  财务管理 -->
+   <g:ifAnyGranted role="ROLE_FINANCIAL_OFFICER">
+	  	<h1><g:message code="menu.manager" default="Manager" /></h1>
+	<ol>
+		<li><g:link action="projectOrder" controller="financial">未付款任务</g:link>
+		<li><g:link action="projectOrder" controller="financial" params="[state: 'finished']">已付款的任务</g:link>
+
+		<li><g:link action="internal" controller="financial">未付款国内项目</g:link>
+		<li><g:link action="external" controller="financial">未付款国际项目</g:link>
+  		<li><g:link action="test" controller="financial">所有测试项目</g:link>
+ 		<li><g:link action="internal" controller="financial" params="[state: 'piad']">已付款国内项目</g:link>
+ 		<li><g:link action="external" controller="financial" params="[state: 'piad']">已付款国际项目</g:link>
+  
+ 	</ol>
+	</g:ifAnyGranted>
+        <g:ifAnyGranted role="ROLE_USER,ROLE_MANAGER,ROLE_ADMIN">
 			  <h1><g:message code="menu.mytask" default="My Task" /></h1>
 		   <ol> 
 			<li><g:link controller="my" action="index" params="[state:'new']"><g:message code="menu.requestedtasks" default="Requested Tasks" /></g:link>
@@ -127,6 +160,7 @@
             </g:if>
 			<li><g:link controller="my" action="index" params="[state:'finished']"><g:message code="menu.finished" default="Finished" /></g:link>
 			</ol>
+            </g:ifAnyGranted>
 	<g:ifAnyGranted role="ROLE_USER">
 
             <h1><g:message code="menu.profiles" default="Profiles" /></h1>
@@ -150,7 +184,7 @@
 	   </g:isNotLoggedIn>
  
       </div>
-      <div class="span-19 last main">
+      <div class="span-20 last main">
        <g:layoutBody />
       </div>
       <div class="span-24 last bottom">

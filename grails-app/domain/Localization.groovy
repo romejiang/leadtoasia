@@ -22,7 +22,7 @@ class Localization implements Comparable , Serializable{
 //               val, obj ->
 //                  obj.properties['source'] != val
 //            } 
-		type(blank: false , size:0..10, inList:['word','hour','page','minimum'])
+		type(blank: false , size:0..10, inList:['word','editing','hour','page','minimum'])
 		unit(blank: false , size:0..10)
 //        , validator: {val, obj ->
 //            return org.grails.plugins.lookups.Lookup.valueFor("Monetary Unit",
@@ -48,12 +48,13 @@ class Localization implements Comparable , Serializable{
     }
 
     int compareTo(obj) {
-       target.compareTo(obj.target)
+       "${source}${target}${type}".compareTo("${obj.source}${obj.target}${obj.type}")
     }
 
     float income(){
         //def er = new ExchangeRate()
-        ExchangeRate.exchange(price * amount , unit)
+        def er = ExchangeRate.exchange(price * amount , unit)
+        er ? er : 0
     }
 
 

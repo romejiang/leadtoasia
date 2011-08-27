@@ -1,18 +1,18 @@
 <head>
 	<meta name="layout" content="main" />
-	<title>Edit User</title>
+	<title>修改用户</title>
 </head>
 
 <body>
 
 	<div class="nav">
-		<span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
-		<span class="menuButton"><g:link class="list" action="list">User List</g:link></span>
-		<span class="menuButton"><g:link class="create" action="create">New User</g:link></span>
+		<span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">主页</a></span>
+		<span class="menuButton"><g:link class="list" action="list">用户列表</g:link></span>
+		<span class="menuButton"><g:link class="create" action="create">新用户</g:link></span>
 	</div>
 
 	<div class="body">
-		<h1>Edit User</h1>
+		<h1>修改用户</h1>
 		<g:if test="${flash.message}">
 		<div class="message">${flash.message}</div>
 		</g:if>
@@ -35,28 +35,28 @@
 				<tbody>
 
 					<tr class="prop">
-						<td valign="top" class="name"><label for="username">Login Name:</label></td>
+						<td valign="top" class="name"><label for="username">登录名：</label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'username','errors')}">
 							<input type="text" id="username" name="username" value="${person.username?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
-						<td valign="top" class="name"><label for="userRealName">Full Name:</label></td>
+						<td valign="top" class="name"><label for="userRealName">真实名称：</label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'userRealName','errors')}">
 							<input type="text" id="userRealName" name="userRealName" value="${person.userRealName?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
-						<td valign="top" class="name"><label for="passwd">Password:</label></td>
+						<td valign="top" class="name"><label for="passwd">密码：</label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'passwd','errors')}">
 							<input type="password" id="passwd" name="passwd" value="${person.passwd?.encodeAsHTML()}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
-						<td valign="top" class="name"><label for="enabled">Enabled:</label></td>
+						<td valign="top" class="name"><label for="enabled">已启用：</label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'enabled','errors')}">
 							<g:checkBox name="enabled" value="${person.enabled}"/>
 						</td>
@@ -70,28 +70,28 @@
 					</tr>
 
 					<tr class="prop">
-						<td valign="top" class="name"><label for="emailShow">Show Email:</label></td>
+						<td valign="top" class="name"><label for="emailShow">显示邮件：</label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'emailShow','errors')}">
 							<g:checkBox name="emailShow" value="${person.emailShow}"/>
 						</td>
 					</tr>
 
 					<tr class="prop">
-						<td valign="top" class="name"><label for="fullTime">Full-Time:</label></td>
+						<td valign="top" class="name"><label for="fullTime">全职员工：</label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'fullTime','errors')}">
 							<g:checkBox name="fullTime" value="${person.fullTime}"/>
 						</td>
 					</tr>
 
                        <tr class="prop">
-						<td valign="top" class="name"><label for="useSoft">Use Soft :</label></td>
+						<td valign="top" class="name"><label for="useSoft">是否使用软件：</label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'useSoft','errors')}">
 							<g:checkBox name="useSoft" value="${person.useSoft}"/>
 						</td>
 					</tr>
 
                     <tr class="prop">
-						<td valign="top" class="name"><label for="level">level:</label></td>
+						<td valign="top" class="name"><label for="level">等级：</label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'level','errors')}">
                             <g:select name="level" from="${(0..5)}" value="${person.level}"  />
 						</td>
@@ -112,35 +112,43 @@
 			</tr>
 
 			<tr class='prop'>
-				<td valign='top' class='name'><label for='description'>Description:</label></td>
+				<td valign='top' class='name'><label for='description'>详细描述：</label></td>
 				<td valign='top' class='value ${hasErrors(bean:person,field:'description','errors')}'>
 					<textarea name="description" rows="50" cols="8">${person?.description}</textarea>
 				</td>
 			</tr>
 
                     <tr class="prop">
-						<td valign="top" class="name" align="left">Industry :</td>
+						<td valign="top" class="name" align="left">擅长行业 :</td>
 					 
                         <td align="left">
+                        
                         <g:each in="${Industry.list()}">
- 						<g:checkBox name="${it}"  />${it.encodeAsHTML()}
+                        <g:set var="checked" value="false"> </g:set>
+                            <g:each in="${person?.industrys}" var="ind">
+                                <g:if test="${ind.id == it.id }">
+                                    <g:set var="checked" value="true"> </g:set>
+                                </g:if>
+                            </g:each>
+ 						<g:checkBox name="industrys" value="${it.id}" checked="${checked}" />${it.encodeAsHTML()}<br>
                         </g:each>
                         </td>
 					</tr>
 
+                    <g:ifAnyGranted role="ROLE_ADMIN">  
 					<tr class="prop">
-						<td valign="top" class="name"><label for="authorities">Roles:</label></td>
+						<td valign="top" class="name"><label for="authorities">角色：</label></td>
 						<td valign="top" class="value ${hasErrors(bean:person,field:'authorities','errors')}">
 							<ul>
 							<g:each var="entry" in="${roleMap}">
 								<li>${entry.key.authority.encodeAsHTML()}
 									<g:checkBox name="${entry.key.authority}" value="${entry.value}"/>
 								</li>
-							</g:each>
+                             </g:each> 
 							</ul>
 						</td>
 					</tr>
-
+                    </g:ifAnyGranted>  
 				</tbody>
 				</table>
 			</div>

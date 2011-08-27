@@ -11,11 +11,11 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">主页</a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-            <h1>Review</h1>
+            <h1>查看</h1>
              <g:render template="navigate_cn" model="['number':3]" />
       
             <g:form action="quote" method="post" >
@@ -57,7 +57,7 @@
                             <td valign="top" >${fieldValue(bean: projectInstance, field: "state")}</td>
                             
                       
-                            <td valign="top" >Customer Project No</td>
+                            <td valign="top" ><g:message code="project.fromNo.label" default="Customer Project No" /></td>
                             
                             <td valign="top" >${projectInstance?.fromNo} </td>
                             
@@ -70,7 +70,7 @@
                             <td valign="top" >${fieldValue(bean: projectInstance, field: "content")}</td>
                             
                       
-                            <td valign="top" ><g:message code="project.user.label" default="Manager" /></td>
+                            <td valign="top" ><g:message code="project.manager.label" default="Manager" /></td>
                             
                             <td valign="top" ><g:link controller="user" action="show" id="${projectInstance?.manager?.id}">${projectInstance?.manager.encodeAsHTML()}</g:link></td>
                             
@@ -83,9 +83,9 @@
                             <td valign="top" >${fieldValue(bean: projectInstance, field: "sales")}</td>
                             
                       
-                            <td valign="top" > </td>
+                            <td valign="top" ><g:message code="project.industry.label" default="Industry" /> </td>
                             
-                            <td valign="top" >   </td>
+                            <td valign="top" >   ${fieldValue(bean: projectInstance, field: "industry")}</td>
                             
                         </tr>  
                     
@@ -103,7 +103,7 @@
                                     <li>${m?.encodeAsHTML()}
                                     </g:if>
                                 </g:each>
-                                    <li>Total: ${matchCount}
+                                    <li>总计： ${matchCount}
                                 </ul>
                             </td>
                             

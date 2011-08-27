@@ -8,12 +8,13 @@ $(function(){
 	}
 	// 计算一下总价格
 	function sumTotal(){
-		sumWord();
+		//sumWord();
 		var price = parseFloat($("#rate").val());
 		var amount = parseFloat($("#wordcount").val());
 	  
 		$("#total").val(getResult(price * amount , 2));
 	}
+
 	function getResult(num,n){ 
 		return Math.round(num*Math.pow(10,n))/Math.pow(10,n); 
 	} 
@@ -21,14 +22,15 @@ $(function(){
 	function sumWord(){
 		var matchwordcount = $(".matchwordcount");
 		var sumword = 0
-		$.each( $(".matchs"), function(i, n){
+		$.each( $(".discount"), function(i, n){
 			sumword += parseFloat(n.value)  * parseFloat(matchwordcount[i].innerHTML);
 		}); 
 		$("#wordcount").val(sumword/100);
 	}
 //====================================
 	$("#calculate").click(sumTotal);
-	$(".matchs").change(sumTotal);
+	$("#sum").click(sumWord);
+	$(".discount").change(sumTotal);
 
 	$("#type").change(function (){
 		if ($(this).val() == 'word')
@@ -69,7 +71,4 @@ $(function(){
 			$("#spinner").fadeOut(500); 
 		}); 
 	}); 
-
- 
-
 }) 

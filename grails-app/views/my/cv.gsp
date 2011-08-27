@@ -10,7 +10,7 @@
     <body>
      
         <div class="body">
-            <h1>Upload CV</h1>
+            <h1>上传简历</h1>
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -20,10 +20,10 @@
                         
 
 						<tr class="prop">
-                            <td valign="top" class="name">Attachments</td>
+                            <td valign="top" class="name">附件</td>
                             
                             <td valign="top" class="value">
-							Must be the following format:<g:each in="${grailsApplication.config.fileuploader.docs.allowedExtensions}" var="t">${t},</g:each>
+							上传文件必须为以下格式：<g:each in="${grailsApplication.config.fileuploader.docs.allowedExtensions}" var="t">${t},</g:each>
 							<fileuploader:form 	upload="docs" 
 								successAction="uploadcv"
 								successController="my"

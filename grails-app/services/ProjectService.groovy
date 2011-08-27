@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.*
 class ProjectService {
  
     boolean transactional = true
- 
+                   
 
 //    @Transactional(propagation = Propagation.REQUIRES_NEW)
     def finish(flow)  {

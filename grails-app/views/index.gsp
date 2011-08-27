@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Welcome to</title>
+        <title>欢迎使用</title>
 		<meta name="layout" content="main" />
 	 
     </head>

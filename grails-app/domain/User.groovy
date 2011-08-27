@@ -4,7 +4,7 @@ import com.lucastex.grails.fileuploader.UFile
  * User domain class.
  */
 class User implements Serializable{
-	static transients = ['pass']
+	static transients = ['pass' , 'string']
 	static hasMany = [authorities: Role , quote: Pricing  , attachments :UFile ,mails: Email , industrys : Industry]
     SortedSet  quote
 	static belongsTo = Role
@@ -54,6 +54,11 @@ class User implements Serializable{
         level(size: 0..5)
 	  
 	}
+
+	String getString(){
+		"${userRealName} ${fullTime?'':'@'} [${industrys.join(',')}]"
+	}
+
 	String toString(){
 		"${userRealName} ${fullTime?'':'@'}"
 	}

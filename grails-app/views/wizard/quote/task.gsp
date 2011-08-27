@@ -16,11 +16,11 @@
     </head>
     <body>
         <div class="nav">
-            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">Home</a></span>
+            <span class="menuButton"><a class="home" href="${createLink(uri: '/')}">主页</a></span>
             <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></span>
         </div>
         <div class="body">
-           <h1>Task</h1>
+           <h1>任务</h1>
              <g:render template="navigate_cn" model="['number':2]" />
              
             <g:form action="quote" method="post" >
@@ -28,8 +28,8 @@
             <input type="hidden" name="matchCount" id="matchCount" value="${matchCount}">
             <input type="hidden" name="cid" id="cid" value="${projectInstance?.customer?.id}">
                 <div class="buttons">
-                    <span class="button"><g:submitButton name="previous" class="previous" value="previous" /></span>
-                    <span class="button"><g:submitButton name="next" class="next" value="next" /></span>
+                     <span class="button"><g:submitButton name="previous" class="previous" value="${message(code: 'default.wizard.prev', default: '上一步')}" /></span>
+                    <span class="button"><g:submitButton name="next" class="next" value="${message(code: 'default.wizard.next', default: '下一步')}" /></span>
                </div>
 
                  <div class="dialog">
@@ -46,7 +46,7 @@
                                  </td>
                                 <td valign="top" colspan=2 >
                              
-                                 <input type="button" name="addLocalization" class="addLocalization" id="addLocalization" value="Add Localization"  />
+                                 <input type="button" name="addLocalization" class="addLocalization" id="addLocalization" value="${message(code: 'default.wizard.addLocalization', default: 'Add Localization')}"  />
                                 </td>
                             </tr>
                             <g:each in="${localizationInstanceList}" var="localizationInstance" status="i">
@@ -65,7 +65,7 @@
                                 </td>
                                 <td valign="top" > 
 <g:select name="type" class="taskType" index="${i}" from="${localizationInstance.constraints.type.inList}" value="${localizationInstance.type}"
-          noSelection="['':'-Choose your age-']"/>
+          noSelection="['':' - 选择结算方式 - ']"/>
                                 </td>
                        
                                 <td valign="top" >
@@ -89,13 +89,13 @@
                     </table>
                 </div>
                 <div class="buttons">
-                    <span class="button"><g:submitButton name="previous" class="previous" value="上一步" /></span>
-                    <span class="button"><g:submitButton name="next" class="next" value="下一步" /></span>
+                    <span class="button"><g:submitButton name="previous" class="previous" value="${message(code: 'default.wizard.prev', default: '上一步')}" /></span>
+                    <span class="button"><g:submitButton name="next" class="next" value="${message(code: 'default.wizard.next', default: '下一步')}" /></span>
                     </div>
             </g:form>
         </div>
 
-        <div id="dialog-select" class="hide" title="select localization">
+        <div id="dialog-select" class="hide" title="${message(code: 'default.wizard.selectlocalization', default: 'select localization')}">
         <ul  style="text-align:left">
         <g:each in="${localizationInstanceList}" var="localizationInstance" status="i">
             <li><input type="checkbox" name="selectLocalization" class="selectLocalization" ${localizationInstance.price ? 'checked' : ''} value="${localizationInstance.target.replace(' ','')}">${localizationInstance.target} 

@@ -20,6 +20,7 @@ class Project implements Serializable{
     String content
 //	项目交付日期，
     Date deadline  = new Date() + 1
+    Date finishedDate  
     Date invoiceDate  
 
     Boolean global = true
@@ -45,6 +46,7 @@ class Project implements Serializable{
 			  return val.after(obj.start)
 			})
         invoiceDate(nullable: true)
+        finishedDate(nullable: true)
         state(blank: false , inList:['quote','open','processing','finished','invoice','paid','cancel'])
  
 		content(blank: true, size:0..255) 
@@ -77,6 +79,34 @@ class Project implements Serializable{
 
     int totalMatchs(){
         matchs?.sum{   it.total()   }
+    }
+//  收入
+    float income(){
+        //def er = new ExchangeRate()
+//        ExchangeRate.exchange(price * amount , unit)
+    
+        def result = 0.0
+        if (task) {
+           result += task?.sum{   it.income()}    }
+        if (dtp) {
+             def dtptotal = dtp?.sum{ it.income()  } 
+             result += (dtptotal?dtptotal:0)
+        }
+        return  Math.round(result*100)/100.0
+       
+    }
+
+//  支出
+    float expenses(){
+//        task?.sum{it.expenses()} +  dtp?.sum{it.expenses()}
+        def result = 0.0
+        if (task) {
+           result += task?.sum{it.expenses()} 
+        }
+        if (dtp) {
+           result +=  dtp?.sum{it.expenses()}
+        }
+        return  Math.round(result*100)/100.0
     }
 
     boolean compareToTask(obj){

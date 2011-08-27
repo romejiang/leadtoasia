@@ -18,8 +18,27 @@ class UserController {
 	def list = {
 	 
 		params.max = 20
+        params.order = "desc"
+        params.sort = "id"
+
+         if (authenticateService.ifAllGranted("ROLE_ADMIN")) {
+             
+                  return [personList: User.list(params) , total: User.count()]
+            }else if (authenticateService.ifAllGranted("ROLE_VENDOR_MANAGER")) {
 	 
-		[personList: User.list(params) , total: User.count()]
+		    return [personList :User.withCriteria() {
+                            authorities{
+                                eq("authority" , "ROLE_USER")
+                            }
+                            order("id", "desc")
+                        }, 
+                        total: User.withCriteria() {
+                            authorities{
+                                eq("authority" , "ROLE_USER")
+                            }
+                            count("projectNo")
+                        }]
+        }
 	}
 
     def search = {
@@ -165,6 +184,22 @@ class UserController {
             person.email = person.mails.toList()[0].mail
             log.info person.mails
         }
+
+        if (params.industrys) {
+            if (params.industrys in String) {
+                params.industrys = [params.industrys]
+            }
+
+            person?.industrys?.toList().each {
+                person.industrys.remove(it)
+            } 
+
+            params.industrys.each{
+                person.addToIndustrys(Industry.get(it))
+            } 
+        }
+
+
 		if (person.save()) {
 			Role.findAll().each { it.removeFromPeople(person) }
 			addRoles(person)
@@ -197,6 +232,23 @@ class UserController {
             person.email = person.mails.toList()[0].mail
             log.info person.mails
         }
+
+
+        if (params.industrys) {
+            if (params.industrys in String) {
+                params.industrys = [params.industrys]
+            }
+
+            person?.industrys?.toList().each {
+                person.industrys.remove(it)
+            } 
+
+            params.industrys.each{
+                person.addToIndustrys(Industry.get(it))
+            } 
+        }
+
+
 		if (person.save()) {
 			addRoles(person)
 			redirect action: show, id: person.id

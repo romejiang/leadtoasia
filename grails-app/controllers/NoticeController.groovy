@@ -7,7 +7,7 @@ class NoticeController {
     }
 
     def list = {
-        params.max = Math.min(params.max ? params.int('max') : 10, 100)
+        params.max = Math.min(params.max ? params.int('max') : 20, 100)
         [noticeInstanceList: Notice.list(params), noticeInstanceTotal: Notice.count()]
     }
 

@@ -57,7 +57,7 @@
                                     <label for="serviceType"><g:message code="projectOrder.serviceType.label" default="Service Type" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'serviceType', 'errors')}"> 
-									<input type="hidden" name="serviceType" value="DTP">DTP
+									<input type="hidden" name="serviceType" value="DTP">桌面排版
                                 </td>
                             </tr>
       
@@ -106,7 +106,7 @@
                                     <label for="paymentTerms"><g:message code="projectOrder.paymentTerms.label" default="Payment Terms" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'paymentTerms', 'errors')}">
-                                    <g:textField name="paymentTerms" maxlength="250" value="${projectOrderInstance?.paymentTerms}" /> days after invoice
+                                    <g:textField name="paymentTerms" maxlength="250" value="${projectOrderInstance?.paymentTerms}" /> 天（提交发票后）
                                 </td>
                             </tr>
                         
@@ -147,7 +147,7 @@
             </g:form>
 <textarea id="jtemplate" style="display:none">
 <select name="vendor.id" id="vendor.id" class="userSelected" >
-<option value="" >- Choose Vendor -</option>
+<option value="" >- 选择译者 -</option>
 {#foreach $T as n} 
 <option value="{$T.n.id}" >{$T.n.username} {#if $T.n.fullTime} &#60; {#else} &#62; {#/if} </option>
 {#/for}  

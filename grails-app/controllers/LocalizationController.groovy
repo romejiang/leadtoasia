@@ -36,11 +36,12 @@ class LocalizationController {
         if (project) {
             //localizationInstance.project = Project.get(params.pid) 
             def duplicate = false
-            if (params.parentType == "task") {
-                duplicate = project.compareToTask(localizationInstance)
-            }else if(params.parentType == "dtp"){
-                duplicate = project.compareToDtp(localizationInstance)
-            }
+//            不在判断任务是否有重复的
+//            if (params.parentType == "task") {
+//                duplicate = project.compareToTask(localizationInstance)
+//            }else if(params.parentType == "dtp"){
+//                duplicate = project.compareToDtp(localizationInstance)
+//            }
             if (duplicate) {
                     flash.message = "${localizationInstance} localization duplicate"
             }else{
@@ -115,11 +116,12 @@ class LocalizationController {
         def localizationInstance = Localization.get(params.id)
        
         if (localizationInstance) {
-            if (localizationInstance.projectOrder ) {
-                flash.message = "PO is exist. so not delete."
-                return redirect(action: "show", id: params.id, params : [pid : params.pid,parentType:params.parentType])
-            }
+//            if (localizationInstance.projectOrder ) {
+//                flash.message = "PO is exist. so not delete."
+//                return redirect(action: "show", id: params.id, params : [pid : params.pid,parentType:params.parentType])
+//            }
             try {
+                
                 def project = Project.get(params.pid)
                 if ("task" == params.parentType) {
                     project.removeFromTask(localizationInstance)
@@ -127,9 +129,13 @@ class LocalizationController {
                     project.removeFromDtp(localizationInstance)
                 }
                 project.save(flush: true)
-                localizationInstance.delete(flush: true)
-                
-                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'localization.label', default: 'Localization'), params.id])}"
+
+                def projectOrder =  localizationInstance?.projectOrder 
+//                localizationInstance?.projectOrder =null 
+//                localizationInstance.delete(flush: true)
+
+                projectOrder.delete(flush: true)
+                flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'localization.label', default: 'Localization'), localizationInstance])}"
                 redirect(controller: 'project' , action: "show", id: params.pid)
             }
             catch (org.springframework.dao.DataIntegrityViolationException e) {

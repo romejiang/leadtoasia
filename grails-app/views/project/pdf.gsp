@@ -64,17 +64,17 @@ E-mail:${projectInstance?.customer?.mails}<br/>
   
 <table width="680" align="center" border="1">
   <tr>
-    <th>Description </th>
-    <th>Quantity </th>
-    <th>Unit Price</th>
-    <th>Net Amount</th>
+    <th>项目表述 </th>
+    <th>字数 </th>
+    <th>单价</th>
+    <th>小计</th>
   </tr>
   <g:set var="total" value="${0}" />
   <g:set var="unit" value="" />
 <g:each in="${projectInstance?.task}" status="i" var="localizationInstance">
 
   <tr>
-    <td>${localizationInstance?.source} into ${localizationInstance?.target}</td>
+    <td>${localizationInstance?.source} 翻译为 ${localizationInstance?.target}</td>
     <td>
 	<g:set var="totalwords" value="${0}" />
 	<g:if test="${localizationInstance.type == 'word'}">
@@ -83,7 +83,7 @@ E-mail:${projectInstance?.customer?.mails}<br/>
 				<li>${m.encodeAsHTML()}</li>   
 		<g:set var="totalwords" value="${totalwords + m.discount * m.wordcount/100}" />
 		</g:each></ul>
-        Total : ${totalwords} words
+       总计： ${totalwords} 字/小时
 	</g:if>
 	<g:if test="${localizationInstance.type == 'hour'}">
 		<g:set var="totalwords" value="${localizationInstance?.projectOrder?.wordcount}" />
@@ -110,7 +110,7 @@ E-mail:${projectInstance?.customer?.mails}<br/>
 
    </g:each>
   <tr>
-    <td colspan="3">Total amount: </td>
+    <td colspan="3">总计金额：</td>
     <td>${new java.text.DecimalFormat("#0.00").format(total)}${unit}</td>
   </tr>
 </table>

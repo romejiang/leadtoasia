@@ -18,7 +18,7 @@
                 <table>
                     <tbody>
                         <tr class="prop">
-                            <td valign="top" class="name">Source And Target</td>
+                            <td valign="top" class="name">源语言和目标语言</td>
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
@@ -80,27 +80,27 @@
                             
                         </tr>
 						<tr class="prop">
-                            <td valign="top" class="name">Mail</td>
+                            <td valign="top" class="name">邮件</td>
                             
                             <td valign="top" class="value">${projectOrderInstance?.project?.manager?.email}</td>
                             
                         </tr>
 
 						<tr class="prop">
-                            <td valign="top" class="name">Tel</td>
+                            <td valign="top" class="name">电话</td>
                             
                             <td valign="top" class="value">${projectOrderInstance?.project?.manager?.tel}</td>
                             
                         </tr>
 						<tr class="prop">
-                            <td valign="top" class="name">Fax</td>
+                            <td valign="top" class="name">传真</td>
                             
                             <td valign="top" class="value">${projectOrderInstance?.project?.manager?.fax}</td>
                             
                         </tr>
 
                         <tr class="prop">
-                            <td valign="top" class="name">Project Attachments</td>
+                            <td valign="top" class="name">源文件</td>
                             
                             <td valign="top" class="value"> 
 								<ul>
@@ -117,13 +117,13 @@
                         </tr>
 
 						<tr class="prop">
-                            <td valign="top" class="name">PO Attachments</td>
+                            <td valign="top" class="name">完成文件</td>
                             
                             <td valign="top" class="value">
                             <div class="warning">
-                            Warning:<br>
-                           Must be the following format : <g:each in="${grailsApplication.config.fileuploader.docs.allowedExtensions}" var="t">${t}, </g:each>
-                           <br>Max file size is ${new java.text.DecimalFormat("#0").format(grailsApplication.config.fileuploader.docs.maxSize /1000 / 1024)} Mb
+                           注意：<br>
+                           上传文件必须为以下格式的文件： <g:each in="${grailsApplication.config.fileuploader.docs.allowedExtensions}" var="t">${t}, </g:each>
+                           <br>文件大小上限为 ${new java.text.DecimalFormat("#0").format(grailsApplication.config.fileuploader.docs.maxSize /1000 / 1024)} Mb
                            </div>
                            <fileuploader:form 	upload="docs" 
 								successAction="upload"
@@ -153,7 +153,8 @@
                  <g:form>
                     <g:hiddenField name="id" value="${projectOrderInstance?.id}" />
 				  
-                    <span class="button"><g:actionSubmit class="edit" action="finished" value="Submit"  onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+                    <span class="button"><g:actionSubmit class="edit" action="finished" value="Submit" 
+                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
                  </g:form>
             </div>
         </div>

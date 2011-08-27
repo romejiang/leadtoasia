@@ -1,41 +1,42 @@
 <head>
 	<meta name="layout" content="main" />
-	<title>User List</title>
+	<title>用户列表</title>
 </head>
 
 <body>
 
 	<div class="nav">
-		<span class="menuButton"><a class="home" href="${createLinkTo(dir:'')}">Home</a></span>
-		<span class="menuButton"><g:link class="create" action="create">New User</g:link></span>
-	</div>
+	 </div>
 
 	<div class="body">
-		<h1>User List</h1>
+		<h1>用户列表</h1>
 		<g:if test="${flash.message}">
 		<div class="message">${flash.message}</div>
 		</g:if>
         <div class="search"><form method=post action="search">
+           <g:ifAnyGranted role="ROLE_ADMIN">
+
          <g:select id="role" name='role' value="${role}" from='${Role.list()}'
-        optionKey="id" optionValue="description" noSelection="${['':'Select Role']}"></g:select>
+        optionKey="id" optionValue="description" noSelection="${['':' - 选择权限组 - ']}"></g:select>
+        </g:ifAnyGranted>  
+       
         <g:select id="source" name='source' value="${source}" from='${org.grails.plugins.lookups.Lookup.codeList("Language")}'
-        optionKey="code" optionValue="value" noSelection="${['':'Select Source Language']}"></g:select>
+        optionKey="code" optionValue="value" noSelection="${['':' - 选择源语言 - ']}"></g:select>
         <g:select id="target" name='target' value="${target}" from='${org.grails.plugins.lookups.Lookup.codeList("Language")}'
-        optionKey="code" optionValue="value" noSelection="${['':'Select Target Language']}"></g:select>
+        optionKey="code" optionValue="value" noSelection="${['':' - 选择目标语言 - ']}"></g:select>
         <input type="text" name="keyword" title="keyword" value="${keyword}">
         &nbsp;<input type="submit" value="search">
         </form></div>
 		<div class="list">
 			<table>
 			<thead>
-				<tr> 
- 					<g:sortableColumn property="username" title="Login Name" />
- 					<g:sortableColumn property="userRealName" title="Full Name" />
+  					<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Login Name')}" />
+ 					<g:sortableColumn property="userRealName" title="${message(code: 'user.userRealName.label', default: 'Full Name')}" />
 
-					<g:sortableColumn property="email" title="Email" />
+					<g:sortableColumn property="email" title="${message(code: 'user.email.label', default: 'Email')}" />
 		 
-					<g:sortableColumn property="fullTime" title="fullTime" />
-					<g:sortableColumn property="enabled" title="Enabled" />
+					<g:sortableColumn property="fullTime" title="${message(code: 'user.fullTime.label', default: 'fullTime')}" />
+					<g:sortableColumn property="enabled" title="${message(code: 'user.enabled.label', default: 'Enabled')}" />
 					<th></th>
 				</tr>
 			</thead>
@@ -55,8 +56,8 @@
 					<td>${person.fullTime?"full-time":"part-time"}</td>
 					<td><g:link  action="switchUser" id="${person.id}">${person.enabled?"disable" : "enable"}</g:link></td>
 					<td>
-								<g:link controller="pricing" action="create" params="[pid : person.id,parentType:'user']">Add </g:link><br>
-								<g:link controller="pricing" action="list" params="[pid : person.id,parentType:'user']">Manage </g:link>
+								<g:link controller="pricing" action="create" params="[pid : person.id,parentType:'user']">添加语言 </g:link><br>
+								<g:link controller="pricing" action="list" params="[pid : person.id,parentType:'user']">管理 </g:link>
 					</td>
 				</tr>
 			</g:each>

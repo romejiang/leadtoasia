@@ -121,7 +121,7 @@ war {
         "WEB-INF/lib",
         "images",
         "js",
-        "css"
+       "css"
     ]
 }    
 

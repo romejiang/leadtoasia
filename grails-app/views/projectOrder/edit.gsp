@@ -55,7 +55,7 @@
                                     <g:set var="totalwords" value="${0}" />
 
 									 <g:each in="${projectOrderInstance?.matchs}" var="m">
-                                     ${m.wordcount} words Match ${m.match}, so <input type="text" name="matchs" value="${m.discount}" class="matchs" size="4">% discount
+                                     ${m.wordcount} words Match ${m.match}, so <input type="text" name="discount" value="${m.discount}" class="discount" size="4">% discount
                                      <input type="hidden" name="matchid" value="${m.id}">
                                       <div class="matchdiscount" style="display: none">${m.discount}</div>
                                       <div class="matchwordcount" style="display: none">${m.wordcount}</div>
@@ -121,7 +121,9 @@
                                   <label for="total"><g:message code="projectOrder.total.label" default="Total" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectOrderInstance, field: 'total', 'errors')}">
-                                    <g:textField name="total" value="${fieldValue(bean: projectOrderInstance, field: 'total')}" /><input type="button" id="calculate" value="calculate">
+                                    <g:textField name="total" value="${fieldValue(bean: projectOrderInstance, field: 'total')}" />
+                                    <input type="button" id="sum" value="计算总字数">
+                                    <input type="button" id="calculate" value="计算总价">
                                 </td>
                             </tr>
                         
