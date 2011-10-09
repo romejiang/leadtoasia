@@ -71,7 +71,7 @@
                 </table>
             </div>
             <div class="buttons">
-              <g:ifAnyGranted role="ROLE_MANAGER,ROLE_ADMIN">
+              <g:ifAnyGranted role="ROLE_MANAGER,ROLE_ADMIN,ROLE_SALES_DIRECTOR">
                 <g:form>
                     <g:hiddenField name="id" value="${localizationInstance?.id}" />
                     <g:hiddenField name="parentType" value="${params.parentType}" />

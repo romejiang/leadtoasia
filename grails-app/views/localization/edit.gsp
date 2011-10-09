@@ -87,7 +87,7 @@ ${it.radio}:${it.label}&nbsp;
                     </table>
                 </div>
                 <div class="buttons">
-                <g:ifAnyGranted role="ROLE_MANAGER,ROLE_ADMIN">
+                <g:ifAnyGranted role="ROLE_MANAGER,ROLE_ADMIN,ROLE_SALES_DIRECTOR">
                     <span class="button"><g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" /></span>
                     <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
                 </g:ifAnyGranted>
