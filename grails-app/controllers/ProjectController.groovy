@@ -83,35 +83,50 @@ def sales = {
 //                        }]
 
 //[1: '本周' , 2:'本月' , 3: '季度' ,4:'全年',5:'所有']
-    Calendar   calendar   =   Calendar.getInstance(); 
-    calendar.set(Calendar.HOUR_OF_DAY ,23)
-    calendar.set(Calendar.MINUTE ,59)
-    Date end = calendar.getTime();
-    Date start = end
-
-    calendar.set(Calendar.HOUR_OF_DAY ,0)
-    calendar.set(Calendar.MINUTE ,0)
-    if (params.datetime) {
-        if (params.int("datetime") == 1) {
-            calendar.set(Calendar.DAY_OF_WEEK,   Calendar.SUNDAY);
-            start = calendar.getTime();
-        }else if(params.int("datetime") == 2){
-            calendar.set(Calendar.DAY_OF_MONTH,   1);
-            start = calendar.getTime();
-        }else if(params.int("datetime") == 3){
-            def m = calendar.get(Calendar.MONTH)
-            def qr = (m/3) as int 
-//            println "${m} ${qr}"
-            calendar.set(Calendar.MONTH ,   qr * 3);
-            calendar.set(Calendar.DAY_OF_MONTH,   1);
-            start = calendar.getTime();
-        }else if(params.int("datetime") == 4){
-            calendar.set(Calendar.DAY_OF_YEAR,   1);
-            start = calendar.getTime();
-        } 
-
-        flash.message =  "从${start.format('yyyy-MM-dd HH:mm')} 到  ${end.format('yyyy-MM-dd HH:mm')}的项目。"
+//    Calendar   calendar   =   Calendar.getInstance(); 
+//    calendar.set(Calendar.HOUR_OF_DAY ,23)
+//    calendar.set(Calendar.MINUTE ,59)
+//    Date end = calendar.getTime();
+//    Date start = end
+//
+//    calendar.set(Calendar.HOUR_OF_DAY ,0)
+//    calendar.set(Calendar.MINUTE ,0)
+//    if (params.datetime) {
+//        if (params.int("datetime") == 1) {
+//            calendar.set(Calendar.DAY_OF_WEEK,   Calendar.SUNDAY);
+//            start = calendar.getTime();
+//        }else if(params.int("datetime") == 2){
+//            calendar.set(Calendar.DAY_OF_MONTH,   1);
+//            start = calendar.getTime();
+//        }else if(params.int("datetime") == 3){
+//            def m = calendar.get(Calendar.MONTH)
+//            def qr = (m/3) as int 
+//
+//            calendar.set(Calendar.MONTH ,   qr * 3);
+//            calendar.set(Calendar.DAY_OF_MONTH,   1);
+//            start = calendar.getTime();
+//        }else if(params.int("datetime") == 4){
+//            calendar.set(Calendar.DAY_OF_YEAR,   1);
+//            start = calendar.getTime();
+//        }  
+//        flash.message =  "从${start.format('yyyy-MM-dd HH:mm')} 到  ${end.format('yyyy-MM-dd HH:mm')}的项目。"
+//    }
+    Date end  
+    Date start  
+    def message = '' 
+    if (params.datetime && params.startTime && params.endTime) {
+        start = Date.parse( "yyyy-M-d HH:mm:ss", params.startTime)
+        end = Date.parse( "yyyy-M-d HH:mm:ss", params.endTime)
+        message =  "从[${params.startTime}]到[${ params.endTime}]"
     }
+    if (params.sale) { 
+        message += "${User.get(params.sale.toLong()).userRealName} "
+    }
+    if (params.state) {
+        def state = ['quote' : '报价中', 'processing' : '进行中' ,'finished' : '已完成' , 'invoice' : '等待付款','paid' : '已付款' ,'cancel' : '取消项目' ]
+        message += "${state[params.state]}"
+    }
+    flash.message = message + "的项目。"
 //          System.out.println(calendar.get(Calendar.WEEK_OF_YEAR));   //获取是一年的第几周  
 //          calendar.set(Calendar.DAY_OF_WEEK,   Calendar.MONDAY);   //将日历翻到这周的周一  
 //          System.out.println(calendar.getTime());  
@@ -163,8 +178,7 @@ def sales = {
 
         render(view: "list", model: [projectInstanceList:  results,   projectInstanceTotal:  total ,
              sale: params.sale ,
-             state : params.state ,
-             datetime : params.datetime])
+             state : params.state ])
 }
 // 管理员和PM用的搜素项目
     def search = {
@@ -202,6 +216,46 @@ def sales = {
         render(view: "list", model: [projectInstanceList:  results,   projectInstanceTotal:  total ,
             keyword: params.keyword , client: params.client ])
     }
+
+
+
+// 管理员和PM用的搜素项目
+    def searchBySales = {
+        params.max = 100
+        def results = Project.withCriteria {
+            and{
+                eq("sales" , authenticateService.userDomain())
+                if (params.client) {
+                    customer{
+                        eq('id', params.client.toLong())
+                    }  
+                }
+                if (params.keyword) {
+                    ilike('content' , '%' +params.keyword+ '%')
+                } 
+            }
+            order("start", "desc")
+
+        }
+
+        def total = Project.withCriteria {
+            and{
+                eq("sales" , authenticateService.userDomain())
+                if (params.role && params.role != '') {
+                    customer{
+                        eq('id', params.client.toLong())
+                    }  
+                }
+                if (params.keyword) {
+                    ilike('content' , '%' +params.keyword+ '%') 
+                } 
+            }
+            count('id')
+        }
+        render(view: "list", model: [projectInstanceList:  results,   projectInstanceTotal:  total ,
+            keyword: params.keyword , client: params.client ])
+    }
+
 
     def create = {
         def projectInstance = new Project()
@@ -511,7 +565,7 @@ def sales = {
         def project = Project.get(params.id)
 
         if (params.wordcount && project) {
-                println params.wordcount
+//                println params.wordcount
                 project?.matchs?.each{match ->
                     match.wordcount = params.int("wordcount")
                     match.save();
@@ -615,5 +669,19 @@ def sales = {
         }else{
             render("")
         } 
-    } 
+    }
+    
+    def clients = {
+        def list = Customer.listOrderByName(order : 'asc')
+
+        def result = new StringBuffer()
+        result.append("var projects = [")
+        list.each{
+            result.append("{value: '" + it.id + "',")
+            result.append("label: '" + it.name + "'},")
+        }
+        result.append("];")
+
+        render(text: result.toString() , contentType:"text/json" , encoding:"UTF-8")
+    }
 }

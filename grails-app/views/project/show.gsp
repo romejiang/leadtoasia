@@ -88,13 +88,14 @@
                             <td valign="top"  class="name"><g:message code="project.matchs.label" default="Matchs" /></td>
                             
                             <td valign="top" style="text-align: left;" >
-                            <g:ifAnyGranted role="ROLE_USER,ROLE_MANAGER,ROLE_ADMIN">
+                            <g:ifAnyGranted role="ROLE_USER,ROLE_MANAGER,ROLE_ADMIN,ROLE_SALES_DIRECTOR">
                                 <g:link controller="match" action="create" params="[pid : projectInstance.id,parentType:'project']">添加匹配率</g:link>
 								 </g:ifAnyGranted>
                                 <ul>
                                 <g:each in="${projectInstance.matchs}" var="m">
                                     <g:ifAnyGranted role="ROLE_USER,ROLE_MANAGER,ROLE_ADMIN">  
-                                    <li><g:link controller="match" action="show" id="${m.id}"  params="['project.id' : projectInstance.id,parentType:'project']">${m?.encodeAsHTML()}</g:link></li>                                 </g:ifAnyGranted>
+                                    <li><g:link controller="match" action="show" id="${m.id}"  params="['project.id' : projectInstance.id,parentType:'project']">${m?.encodeAsHTML()}</g:link></li>
+                                    </g:ifAnyGranted>
                                     <g:ifAnyGranted role="ROLE_SALES_DIRECTOR,ROLE_SALES">  
                                     <li>${m?.encodeAsHTML()}</li>
                                     </g:ifAnyGranted>

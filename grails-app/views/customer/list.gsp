@@ -24,7 +24,7 @@
             </form>
              </g:ifAnyGranted>
             <g:ifAnyGranted role="ROLE_SALES_DIRECTOR">销售人员：
-                <g:each in="${User.list()?.findAll(){it.authorities.contains(Role.findByAuthority('ROLE_SALES'))}}" var="user">
+                <g:each in="${User.list()?.findAll(){it.authorities.contains(Role.findByAuthority('ROLE_SALES')) && it.enabled}}" var="user">
                     <g:link  action="list" params="[userid: user.id]">${user.userRealName}</g:link>&nbsp; |&nbsp;
                 </g:each>
             </g:ifAnyGranted>

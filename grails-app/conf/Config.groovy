@@ -120,7 +120,7 @@ war {
     exclude.dirs = [
         "WEB-INF/lib",
         "images",
-        "js",
+        //"js",
        "css"
     ]
 }    

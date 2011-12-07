@@ -128,7 +128,7 @@
                                     <label for="start"><g:message code="project.start.label" default="Start" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'start', 'errors')}">
-                                    <g:formatDate date="${projectInstance?.start}" />
+                                    <g:formatDate date="${projectInstance?.start}" formatName="default.datetime.format"/>
                                 </td>
                             </tr>
 							

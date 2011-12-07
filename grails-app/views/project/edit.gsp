@@ -53,16 +53,30 @@
                                   <label for="customer"><g:message code="project.customer.label" default="Customer" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'customer', 'errors')}">
-                                     ${projectInstance?.customer}
+                                <g:ifAllGranted role="ROLE_SALES"> 
+
+                                    <g:ifNotGranted role="ROLE_SALES_DIRECTOR">  
+                                        <g:select name="customer.id" from="${Customer.findAllByRegistrant(User.get(userId))}" optionKey="id" value="${projectInstance?.customer?.id}" noSelection="${['':'请选择...']}" />
+                                     </g:ifNotGranted>
+
+                                     <g:ifAllGranted role="ROLE_SALES_DIRECTOR">  
+                                        <g:select name="customer.id" from="${Customer.findAllByRegistrantInList(User.findAll()?.findAll(){it.authorities.contains(Role.findByAuthority('ROLE_SALES'))})}" optionKey="id" value="${projectInstance?.customer?.id}"   noSelection="${['':'请选择...']}" />
+                                     </g:ifAllGranted>
+                                 </g:ifAllGranted>
+                                 
+                                  
+                                 <g:ifAnyGranted role="ROLE_MANAGER,ROLE_ADMIN"> 
+                                    <g:select name="customer.id" from="${Customer.find()}" optionKey="id" value="${projectInstance?.customer?.id}"  noSelection="${['':'请选择...']}"  />
+                                 </g:ifAnyGranted>
                                 </td>
-                            </tr>
-                        
+                            </tr> 
+
                             <tr class="prop">
                                 <td valign="top" class="name">
                                   <label for="start"><g:message code="project.start.label" default="Start" /></label>
                                 </td>
-                                <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'start', 'errors')}">
-                                    <g:formatDate date="${projectInstance.start}" />
+                                <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'start', 'errors')}"> 
+                                    <g:datePicker name="start" precision="hour" value="${projectInstance?.start}"  />
                                 </td>
                             </tr>
                         
@@ -71,7 +85,7 @@
                                   <label for="deadline"><g:message code="project.deadline.label" default="Deadline" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: projectInstance, field: 'deadline', 'errors')}">
-                                    <g:datePicker name="deadline" precision="day" value="${projectInstance?.deadline}"  />
+                                    <g:datePicker name="deadline" precision="hour" value="${projectInstance?.deadline}"  />
                                 </td>
                             </tr>
                         

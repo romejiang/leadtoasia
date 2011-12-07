@@ -276,7 +276,7 @@ class WizardController {
 
                  flash.projectId = flow?.projectInstance?.id
 
-                 println flash.projectId + "============"
+//                 println flash.projectId + "============"
 
                 redirect(controller:"project", action:"show", id : flash.projectId)
             }.to "finish"

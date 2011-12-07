@@ -6,6 +6,11 @@
         <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'project.label', default: 'Project')}" />
         <title><g:message code="default.list.label" args="[entityName]" /></title>
+        <link rel="stylesheet" href="${resource(dir:'css',file:'cupertino/jquery-ui-1.8.custom.css')}" />
+        <g:javascript src="jquery/jquery-ui-1.8.custom.min.js"/>
+  
+        <script type="text/javascript" src="${createLink(action:'clients')}"></script>
+        <g:javascript src="projectSales.js" ></g:javascript>
     </head>
     <body>
         <div class="nav">
@@ -20,30 +25,45 @@
       
            <g:ifAnyGranted role="ROLE_ADMIN,ROLE_MANAGER"> 
                 <form method=post action="search">
-                <g:select id="client" name='client' value="${client}" from='${Customer.list()}'
-                optionKey="id" optionValue="name" noSelection="${['':' - 选择客户 - ']}"></g:select>
-
+                <a href="javascript:" id="client-pop" >选择客户</a>
+                <input type="text" name="select-client" id="select-client" > 
+                <input type="hidden" id="client"  name="client" />  
+                 项目关键字：
                 <input type="text" name="keyword" title="keyword" value="${keyword}">
                 &nbsp;<input type="submit" value="search">
                 </form>
              </g:ifAnyGranted>
+
+        <g:ifNotGranted role="ROLE_SALES_DIRECTOR">
+                     <g:ifAllGranted role="ROLE_SALES"> 
+                        <form method=post action="searchBySales"> 
+                        <a href="javascript:" id="client-pop" >选择客户：</a>
+                        <input type="text" name="select-client" id="select-client" > 
+                        <input type="hidden" id="client"  name="client" />  
+                        项目关键字：
+                        <input type="text" name="keyword" title="keyword" value="${keyword}">
+                        &nbsp;<input type="submit" value="search">
+                        </form>
+                     </g:ifAllGranted>
+        </g:ifNotGranted>
+
             <g:ifAnyGranted role="ROLE_SALES_DIRECTOR">销售人员：
                 
-                <form method=post action="sales">
-                
-
+                <form method=post action="sales">  
                  <g:select id="datetime" name='datetime' value="${datetime}" 
-                from="${[1: '本周' , 2:'本月' , 3: '季度' ,4:'全年']}"
+                from="${[2:'按月' , 3: '按季度' ,4:'按年']}"
                 optionKey="key" optionValue="value"
-                noSelection="${['':' - 选择日期 - ']}"></g:select>
- 
+                noSelection="${['':' - 选择日期类型 - ']}"></g:select>
+                <select name="datepack" id="datepack"></select>
+                <g:hiddenField name="startTime" id="startTime" />
+                <g:hiddenField name="endTime" id="endTime"  />
                 <g:select id="state" name='state' value="${state}" 
                 from="${['quote' : '报价中', 'processing' : '进行中' ,'finished' : '已完成' , 'invoice' : '等待付款','paid' : '已付款' ,'cancel' : '取消项目' ]}"
                 optionKey="key" optionValue="value"
                 noSelection="${['':' - 选择状态 - ']}"></g:select>
 
                 <g:select id="sale" name='sale' value="${sale}" 
-                from="${User.list()?.findAll(){it.authorities.contains(Role.findByAuthority('ROLE_SALES'))}}"
+                from="${User.list()?.findAll(){it.authorities.contains(Role.findByAuthority('ROLE_SALES')) && it.enabled}}"
                 optionKey="id" optionValue="userRealName" noSelection="${['':' - 选择销售人员 - ']}"></g:select>
 
                 &nbsp;<input type="submit" value="search">
@@ -143,5 +163,6 @@
                 <g:paginate total="${projectInstanceTotal}" />
             </div>
         </div>
+ 
     </body>
 </html>
